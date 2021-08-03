@@ -27,6 +27,7 @@ final class LaunchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        moveToHomeViewController()
     }
     
     private func configureView() {
@@ -45,5 +46,17 @@ final class LaunchScreenViewController: UIViewController {
             activityIndicator.widthAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 0.2),
             activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)
         ])
+    }
+    
+    private func moveToHomeViewController() {
+        guard let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeViewController") else {
+            return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+            homeViewController.modalTransitionStyle = .crossDissolve
+            homeViewController.modalPresentationStyle = .fullScreen
+            self.present(homeViewController, animated: true)
+        }
     }
 }
