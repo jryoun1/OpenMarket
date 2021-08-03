@@ -14,7 +14,16 @@ final class LaunchScreenViewController: UIViewController {
         imageView.image = UIImage(named: "logo")
         return imageView
     }()
-
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .systemRed
+        activityIndicator.style = .large
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
