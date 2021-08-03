@@ -59,4 +59,9 @@ final class LaunchScreenViewController: UIViewController {
             self.present(homeViewController, animated: true)
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        activityIndicator.stopAnimating()
+    }
 }
