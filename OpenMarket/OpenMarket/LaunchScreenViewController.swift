@@ -8,6 +8,12 @@
 import UIKit
 
 final class LaunchScreenViewController: UIViewController {
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "logo")
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
