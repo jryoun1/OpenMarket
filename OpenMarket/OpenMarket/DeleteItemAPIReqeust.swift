@@ -8,5 +8,16 @@
 import Foundation
 
 struct DeleteItemAPIReqeust: APIRequest {
-
+    func makeRequest(from data: ItemToDeletion) throws -> URLRequest {
+        guard var components = URLComponents(string: OpenMarketAPI.baseURL) else {
+            throw // error
+        }
+        components.path += "item/\(data.id)"
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "\(HTTPMethod.DELETE)"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(data)
+        
+        return request
+    }
 }
