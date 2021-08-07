@@ -7,5 +7,12 @@
 import Foundation
 
 struct GetItemListAPIRequest: APIRequest {
-    
+    func makeRequest(from page: Int) throws -> URLRequest {
+        guard var components = URLComponents(string: OpenMarketAPI.baseURL) else {
+            throw // error
+        }
+        components.path += "items/\(page)"
+        
+        return URLRequest(url: components.url!)
+    }
 }
