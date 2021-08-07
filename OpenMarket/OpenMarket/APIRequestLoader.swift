@@ -17,4 +17,5 @@ protocol APIRequest {
 
 final class APIRequestLoader<T: APIRequest> {
     let apiRequest: T
+    let urlSession: URLSession
 }
