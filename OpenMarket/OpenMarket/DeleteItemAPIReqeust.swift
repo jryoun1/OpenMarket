@@ -20,4 +20,8 @@ struct DeleteItemAPIReqeust: APIRequest {
         
         return request
     }
+    
+    func parseResponse(data: Data) throws -> ItemDeleted {
+        return try JSONDecoder().decode(ItemDeleted.self, from: data)
+    }
 }
