@@ -9,7 +9,7 @@ import Foundation
 struct GetItemListAPIRequest: APIRequest {
     func makeRequest(from page: Int) throws -> URLRequest {
         guard var components = URLComponents(string: OpenMarketAPI.baseURL) else {
-            throw // error
+            throw OpenMarketError.failToMakeURL
         }
         components.path += "items/\(page)"
         

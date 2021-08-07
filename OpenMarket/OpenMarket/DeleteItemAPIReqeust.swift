@@ -10,7 +10,7 @@ import Foundation
 struct DeleteItemAPIReqeust: APIRequest {
     func makeRequest(from data: ItemToDeletion) throws -> URLRequest {
         guard var components = URLComponents(string: OpenMarketAPI.baseURL) else {
-            throw // error
+            throw OpenMarketError.failToMakeURL
         }
         components.path += "item/\(data.id)"
         var request = URLRequest(url: components.url!)

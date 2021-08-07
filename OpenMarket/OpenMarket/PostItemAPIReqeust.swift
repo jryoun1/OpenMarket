@@ -12,7 +12,7 @@ struct PostItemAPIReqeust: APIRequest {
     
     func makeRequest(from data: ItemToUpload) throws -> URLRequest {
         guard let components = URLComponents(string: OpenMarketAPI.baseURL) else {
-            throw //error
+            throw OpenMarketError.failToMakeURL
         }
         var request = URLRequest(url: components.url!)
         request.httpMethod = "\(HTTPMethod.POST)"
