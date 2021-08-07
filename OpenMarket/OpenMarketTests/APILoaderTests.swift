@@ -10,7 +10,7 @@ import XCTest
 
 final class APILoaderTests: XCTestCase {
     var loader: APIRequestLoader<GetItemAPIRequest>!
-
+    
     override func setUpWithError() throws {
         let request = GetItemAPIRequest()
         let configuration = URLSessionConfiguration.ephemeral
@@ -18,6 +18,10 @@ final class APILoaderTests: XCTestCase {
         let urlSession = URLSession(configuration: configuration)
         
         loader = APIRequestLoader(apiReqeust: request, urlSession: urlSession)
+    }
+    
+    override func tearDownWithError() throws {
+        loader = nil
     }
 }
 
