@@ -10,6 +10,18 @@ import Foundation
 struct PostItemAPIReqeust: APIRequest {
     private let boundary: String = UUID().uuidString
     
+    func makeRequest(from data: ItemToUpload) throws -> URLRequest {
+        guard let components = URLComponents(string: OpenMarketAPI.baseURL) else {
+            throw //error
+        }
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "\(HTTPMethod.POST)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try makePostReqeustBody(from: data)
+        
+        return request
+    }
+    
     private func makePostReqeustBody(from data: ItemToUpload) throws -> Data {
         var body = Data()
         for (key, value) in data.parameters {
