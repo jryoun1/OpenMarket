@@ -65,4 +65,8 @@ struct PatchItemAPIRequest: APIRequest {
         
         return body
     }
+    
+    func parseResponse(data: Data) throws -> Item {
+        return try JSONDecoder().decode(Item.self, from: data)
+    }
 }
