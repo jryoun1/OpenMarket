@@ -15,4 +15,8 @@ struct GetItemListAPIRequest: APIRequest {
         
         return URLRequest(url: components.url!)
     }
+    
+    func parseResponse(data: Data) throws -> ItemList {
+        return try JSONDecoder().decode(ItemList.self, from: data)
+    }
 }
