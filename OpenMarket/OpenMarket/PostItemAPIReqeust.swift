@@ -8,5 +8,5 @@
 import Foundation
 
 struct PostItemAPIReqeust: APIRequest {
-
+    private let boundary: String = UUID().uuidString
 }
