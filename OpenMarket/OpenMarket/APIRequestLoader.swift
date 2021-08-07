@@ -25,32 +25,32 @@ final class APIRequestLoader<T: APIRequest> {
     }
     
     func loadAPIReqeust(requestData: T.RequestDataType,
-                        completion: @escaping (T.ResponseDataType?, Error?) -> Void) {
+                        completion: @escaping (T.ResponseDataType?, OpenMarketError?) -> Void) {
         do {
             let urlRequest = try apiRequest.makeRequest(from: requestData)
             urlSession.dataTask(with: urlRequest) { data, response, error in
                 if let _ = error {
-                    return completion(nil, error)
+                    return completion(nil, .failToNetworkCommunication)
                 }
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
-                    return completion(nil, error)
+                    return completion(nil, .failToNetworkCommunication)
                 }
                 
                 guard let data = data else {
-                    return completion(nil, error)
+                    return completion(nil, .failUnwrappingData)
                 }
                 
                 do {
                     let parseResponse = try self.apiRequest.parseResponse(data: data)
                     completion(parseResponse, nil)
                 } catch {
-                    completion(nil, error)
+                    completion(nil, .failDecodeData)
                 }
             }.resume()
         } catch {
-            return completion(nil, error)
+            return completion(nil, .failToMakeURLRequest)
         }
     }
 }
