@@ -14,3 +14,7 @@ protocol APIRequest {
     func makeRequest(from data: RequestDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResponseDataType
 }
+
+final class APIRequestLoader<T: APIRequest> {
+    
+}
