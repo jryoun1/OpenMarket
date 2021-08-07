@@ -21,4 +21,17 @@ struct ItemToUpload: Encodable {
         case title, descriptions, price, currency, stock, images
         case discountedPrice = "discounted_price"
     }
+    
+    var parameters: [String: Any] {
+        [
+            "title": title,
+            "descriptions": descriptions,
+            "price": price,
+            "currency": currency,
+            "stock": stock,
+            "discounted_price": discountedPrice,
+            "images": images,
+            "password": password
+        ]
+    }
 }
