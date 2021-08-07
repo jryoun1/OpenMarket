@@ -21,4 +21,19 @@ struct PatchItemAPIRequest: APIRequest {
         }
         return body
     }
+    
+    private func createHttpBodyWithoutData(key: String, value: Any) throws -> Data {
+        var body = Data()
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+        if let data = value as? String {
+            body.append(data)
+        }
+        else if let data = value as? Int {
+            body.append(String(data))
+        }
+        body.append("\r\n")
+        
+        return body
+    }
 }
