@@ -5,6 +5,8 @@
 //  Created by Yeon on 2021/08/04.
 //
 
+import Foundation
+
 struct ItemToUpload: Encodable {
     let title: String?
     let descriptions: String?
@@ -12,7 +14,7 @@ struct ItemToUpload: Encodable {
     let currency: String?
     let stock: Int?
     let discountedPrice: Int?
-    let images: [String]?
+    let images: [Data]?
     let password: String
     
     enum CodingKeys: String, CodingKey {
