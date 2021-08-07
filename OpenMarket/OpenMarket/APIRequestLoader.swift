@@ -18,4 +18,9 @@ protocol APIRequest {
 final class APIRequestLoader<T: APIRequest> {
     let apiRequest: T
     let urlSession: URLSession
+    
+    init(apiReqeust: T, urlSession: URLSession = .shared) {
+        self.apiRequest = apiReqeust
+        self.urlSession = urlSession
+    }
 }
