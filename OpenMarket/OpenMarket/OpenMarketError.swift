@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+enum OpenMarketError: Error {
+    case failToNetworkCommunication
+    case failToMakeURL
+    case failDecodeData
+    case failGetData
+    case failPostData
+    case failPatchData
+    case failDeleteData
+    case unknown
+}
