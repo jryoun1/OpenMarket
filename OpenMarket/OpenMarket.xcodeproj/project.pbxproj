@@ -131,6 +131,14 @@
 			path = APIRequest;
 			sourceTree = "<group>";
 		};
+		2666EB7326BE72790046D14F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2666EB6B26BE49520046D14F /* Data+Append.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		26C5FE6E26B905D500A80210 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +162,7 @@
 		26C5FE7926B905D500A80210 /* OpenMarket */ = {
 			isa = PBXGroup;
 			children = (
+				2666EB7326BE72790046D14F /* Extension */,
 				2666EB7126BE71EA0046D14F /* Network */,
 				26C5FEAA26B911A500A80210 /* Model */,
 				26C5FE7A26B905D500A80210 /* AppDelegate.swift */,
@@ -164,7 +173,6 @@
 				26C5FE8526B905D600A80210 /* LaunchScreen.storyboard */,
 				26C5FE8826B905D600A80210 /* Info.plist */,
 				26205ACB26BAC6FA00EA3054 /* OpenMarketError.swift */,
-				2666EB6B26BE49520046D14F /* Data+Append.swift */,
 			);
 			path = OpenMarket;
 			sourceTree = "<group>";
