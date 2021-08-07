@@ -9,8 +9,10 @@ import Foundation
 
 enum OpenMarketError: Error {
     case failToNetworkCommunication
+    case failToMakeURLRequest
     case failToMakeURL
     case failDecodeData
+    case failUnwrappingData
     case failGetData
     case failPostData
     case failPatchData
@@ -23,10 +25,14 @@ extension OpenMarketError: LocalizedError {
         switch self {
         case .failToNetworkCommunication:
             return "네트워크 통신을 실패하였습니다."
+        case .failToMakeURLRequest:
+            return "옳바른 URLRequest를 생성하는데 실패하였습니다."
         case .failToMakeURL:
             return "옳바른 URL을 생성하는데 실패하였습니다."
         case .failDecodeData:
             return "데이터 디코딩에 실패하였습니다."
+        case .failUnwrappingData:
+            return "데이터를 추출하는데 실패하였습니다."
         case .failGetData:
             return "데이터를 읽어오는데 실패하였습니다."
         case .failPostData:
