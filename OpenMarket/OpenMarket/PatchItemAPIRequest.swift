@@ -8,5 +8,5 @@
 import Foundation
 
 struct PatchItemAPIRequest: APIRequest {
-    
+    private let boundary: String = UUID().uuidString
 }
