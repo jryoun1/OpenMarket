@@ -122,6 +122,44 @@ final class APILoaderTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func testNetworkPostData() {
+        let postItemAPIRequest = PostItemAPIReqeust()
+        postLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
+        
+        guard let airPodMaxImage1 = UIImage(named: "AirPodMax1"),
+              let airPodMaxImage2 = UIImage(named: "AirPodMax2") else {
+            return
+        }
+        
+        guard let airPodMaxImageData1 = UIImageToDataType(image: airPodMaxImage1),
+              let airPodMaxImageData2 = UIImageToDataType(image: airPodMaxImage2) else {
+            return
+        }
+        
+        var imageData: [Data] = []
+        imageData.append(airPodMaxImageData1)
+        imageData.append(airPodMaxImageData2)
+        
+        let postItem = ItemToUpload(title: "Macbook",
+                                    descriptions: "Mackbook pro 2019 16인치",
+                                    price: 3650000,
+                                    currency: "KRW",
+                                    stock: 1000,
+                                    discountedPrice: 3300000,
+                                    images: imageData,
+                                    password: "asdf1234")
+        
+        let expectation = XCTestExpectation(description: "response")
+        postLoader.loadAPIReqeust(requestData: postItem) { item, error in
+            XCTAssertEqual(item?.title, "Macbook")
+            XCTAssertEqual(item?.descriptions, "Mackbook pro 2019 16인치")
+            XCTAssertEqual(item?.price, 3650000)
+            XCTAssertEqual(item?.stock, 1000)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5)
+    }
+    
     private func UIImageToDataType(image: UIImage) -> Data? {
         guard let data = image.jpegData(compressionQuality: 0.8) else {
             return nil
