@@ -17,29 +17,29 @@ struct PatchItemAPIRequest: APIRequest {
         var request = URLRequest(url: components.url!)
         request.httpMethod = "\(HTTPMethod.PATCH)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try makePostReqeustBody(from: data)
+        request.httpBody = makePatchReqeustBody(from: data)
         
         return request
     }
     
-    private func makePostReqeustBody(from data: ItemToUpload) throws -> Data {
+    private func makePatchReqeustBody(from data: ItemToUpload) -> Data {
         var body = Data()
         for (key, value) in data.parameters {
             if case Optional<Any>.none = value {
                 continue
             }
             if let data = value as? [Data] {
-                body.append(try createHttpBodyWithData(key: key, value: data))
+                body.append(createHttpBodyWithData(key: key, value: data))
             }
             else {
-                body.append(try createHttpBodyWithoutData(key: key, value: value))
+                body.append(createHttpBodyWithoutData(key: key, value: value))
             }
         }
         body.append("--\(boundary)--\r\n")
         return body
     }
     
-    private func createHttpBodyWithData(key: String, value: [Data]) throws -> Data {
+    private func createHttpBodyWithData(key: String, value: [Data]) -> Data {
         var body = Data()
         for image in value {
             body.append("--\(boundary)\r\n")
@@ -51,7 +51,7 @@ struct PatchItemAPIRequest: APIRequest {
         return body
     }
     
-    private func createHttpBodyWithoutData(key: String, value: Any) throws -> Data {
+    private func createHttpBodyWithoutData(key: String, value: Any) -> Data {
         var body = Data()
         body.append("--\(boundary)\r\n")
         body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
