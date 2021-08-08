@@ -8,6 +8,7 @@
 import Foundation
 
 struct PatchItemAPIRequest: APIRequest {
+    let id: Int
     private let boundary: String = UUID().uuidString
     
     func makeRequest(from data: ItemToUpload) throws -> URLRequest {
