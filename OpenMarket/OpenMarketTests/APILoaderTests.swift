@@ -63,6 +63,13 @@ final class APILoaderTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
+    private func UIImageToDataType(image: UIImage) -> Data? {
+        guard let data = image.jpegData(compressionQuality: 0.8) else {
+            return nil
+        }
+        return data
+    }
+    
     override func tearDownWithError() throws {
         loader = nil
     }
