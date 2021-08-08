@@ -51,6 +51,18 @@ final class APILoaderTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func testNetworkGetData() {
+        let getAPIRequest = GetItemAPIRequest()
+        loader = APIRequestLoader(apiReqeust: getAPIRequest)
+        
+        let expectation = XCTestExpectation(description: "response")
+        loader.loadAPIReqeust(requestData: 1) { item, error in
+            XCTAssertEqual(item?.id, 1)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5)
+    }
+    
     override func tearDownWithError() throws {
         loader = nil
     }
