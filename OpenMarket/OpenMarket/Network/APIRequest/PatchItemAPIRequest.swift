@@ -12,9 +12,10 @@ struct PatchItemAPIRequest: APIRequest {
     private let boundary: String = UUID().uuidString
     
     func makeRequest(from data: ItemToUpload) throws -> URLRequest {
-        guard let components = URLComponents(string: OpenMarketAPI.baseURL) else {
+        guard var components = URLComponents(string: OpenMarketAPI.baseURL) else {
             throw OpenMarketError.failToMakeURL
         }
+        components.path += "item/\(id)"
         var request = URLRequest(url: components.url!)
         request.httpMethod = "\(HTTPMethod.PATCH)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
