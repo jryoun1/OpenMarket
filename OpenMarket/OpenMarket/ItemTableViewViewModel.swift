@@ -8,5 +8,5 @@
 import UIKit
 
 struct ItemTableViewViewModel {
-    
+    var itemList: Observable<[ItemTableViewCellViewModel]> = Observable([])
 }
