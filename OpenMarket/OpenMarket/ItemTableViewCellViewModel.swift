@@ -8,5 +8,5 @@
 import Foundation
 
 struct ItemTableViewCellViewModel {
-
+    private let item: Item
 }
