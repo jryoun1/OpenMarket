@@ -15,4 +15,8 @@ final class Observable<T> {
             listener?(value)
         }
     }
+    
+    init(_ value: T?) {
+        self.value = value
+    }
 }
