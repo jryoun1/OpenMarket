@@ -38,4 +38,11 @@ struct ItemTableViewCellViewModel {
             return "수량을 표시하는데 문제가 발생했습니다."
         }
     }
+    
+    var image: String {
+        if let imageURL = self.item.thumbnails.first {
+            return imageURL
+        }
+        return "default"
+    }
 }
