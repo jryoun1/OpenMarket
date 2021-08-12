@@ -16,4 +16,14 @@ struct ItemTableViewCellViewModel {
         }
         return "가격을 표시하는데 문제가 발생했습니다."
     }
+    
+    var discountedPrice: String? {
+        if let discountedPrice = self.item.discountedPrice,
+           let discountedPriceWithComma = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: discountedPrice)) {
+            return "\(self.item.currency) \(discountedPriceWithComma)"
+        }
+        else {
+            return nil
+        }
+    }
 }
