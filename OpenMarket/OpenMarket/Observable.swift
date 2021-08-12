@@ -19,4 +19,9 @@ final class Observable<T> {
     init(_ value: T?) {
         self.value = value
     }
+    
+    func bind(_ listener: @escaping Listener) {
+        listener(value)
+        self.listener = listener
+    }
 }
