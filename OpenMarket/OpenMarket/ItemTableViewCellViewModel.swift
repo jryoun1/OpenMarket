@@ -45,4 +45,8 @@ struct ItemTableViewCellViewModel {
         }
         return "default"
     }
+    
+    init(_ item: Item) {
+        self.item = item
+    }
 }
