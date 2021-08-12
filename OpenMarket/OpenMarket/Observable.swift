@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+final class Observable<T> {
+
+}
