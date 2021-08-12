@@ -10,3 +10,10 @@ import UIKit
 struct ItemTableViewViewModel {
     var itemList: Observable<[ItemTableViewCellViewModel]> = Observable([])
 }
+
+//MARK:- TableView Configuration Property
+extension ItemTableViewViewModel {
+    var numberOfSections: Int {
+        return 1
+    }
+}
