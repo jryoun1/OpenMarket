@@ -26,4 +26,16 @@ struct ItemTableViewCellViewModel {
             return nil
         }
     }
+    
+    var stock: String {
+        if self.item.stock <= 0 {
+            return "품절"
+        }
+        else {
+            if let stock = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: self.item.stock)) {
+                return stock
+            }
+            return "수량을 표시하는데 문제가 발생했습니다."
+        }
+    }
 }
