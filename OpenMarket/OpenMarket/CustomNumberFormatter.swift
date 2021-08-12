@@ -8,5 +8,10 @@
 import Foundation
 
 struct CustomNumberFormatter {
-    
+    static let commaFormatter: NumberFormatter = {
+        let numberFomatter = NumberFormatter()
+        numberFomatter.numberStyle = .decimal
+        
+        return numberFomatter
+    }()
 }
