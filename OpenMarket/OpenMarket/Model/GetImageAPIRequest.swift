@@ -8,5 +8,11 @@
 import UIKit
 
 struct GetImageAPIRequest: APIRequest {
-    
+    func makeRequest(from imageURL: String) throws -> URLRequest {
+        guard let url = URL(string: imageURL) else {
+            throw OpenMarketError.failToMakeURL
+        }
+        
+        return URLRequest(url: url)
+    }
 }
