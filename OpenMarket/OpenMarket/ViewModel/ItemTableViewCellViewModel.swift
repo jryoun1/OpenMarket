@@ -10,6 +10,10 @@ import Foundation
 struct ItemTableViewCellViewModel {
     private let item: Item
     
+    var title: String {
+        return self.item.title
+    }
+    
     var price: String {
         if let price = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: self.item.price)) {
             return "\(self.item.currency) \(price)"
