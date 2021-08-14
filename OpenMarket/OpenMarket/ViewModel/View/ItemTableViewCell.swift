@@ -8,6 +8,7 @@
 import UIKit
 
 final class ItemTableViewCell: UITableViewCell {
+    static let identifier = "ItemTableViewCell"
     @IBOutlet private var itemImageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var stockLabel: UILabel!
