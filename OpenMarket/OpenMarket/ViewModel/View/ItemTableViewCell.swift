@@ -7,17 +7,11 @@
 
 import UIKit
 
-class ItemTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+final class ItemTableViewCell: UITableViewCell {
+    @IBOutlet private var itemImageView: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var stockLabel: UILabel!
+    @IBOutlet private var priceLabel: UILabel!
+    @IBOutlet private var discountedPriceLabel: UILabel!
+    @IBOutlet private var horizontalStackView: UIStackView!
 }
