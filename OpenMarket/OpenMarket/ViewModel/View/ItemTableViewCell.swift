@@ -65,4 +65,14 @@ final class ItemTableViewCell: UITableViewCell {
         
         return attributedString
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemImageView.image = nil
+        titleLabel.text = nil
+        stockLabel.text = nil
+        priceLabel.attributedText = nil
+        discountedPriceLabel.text = nil
+        discountedPriceLabel.isHidden = true
+    }
 }
