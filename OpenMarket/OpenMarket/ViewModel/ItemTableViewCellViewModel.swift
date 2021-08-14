@@ -14,11 +14,11 @@ struct ItemTableViewCellViewModel {
         return self.item.title
     }
     
-    var price: String {
+    var price: String? {
         if let price = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: self.item.price)) {
             return "\(self.item.currency) \(price)"
         }
-        return "가격을 표시하는데 문제가 발생했습니다."
+        return nil
     }
     
     var discountedPrice: String? {
@@ -31,23 +31,23 @@ struct ItemTableViewCellViewModel {
         }
     }
     
-    var stock: String {
+    var stock: String? {
         if self.item.stock <= 0 {
             return "품절"
         }
         else {
             if let stock = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: self.item.stock)) {
-                return stock
+                return "잔여수량: \(stock)"
             }
-            return "수량을 표시하는데 문제가 발생했습니다."
+            return nil
         }
     }
     
-    var image: String {
+    var imageURL: String? {
         if let imageURL = self.item.thumbnails.first {
             return imageURL
         }
-        return "default"
+        return nil
     }
     
     init(_ item: Item) {
