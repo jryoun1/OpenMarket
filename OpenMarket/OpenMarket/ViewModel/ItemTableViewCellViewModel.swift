@@ -43,11 +43,11 @@ struct ItemTableViewCellViewModel {
         }
     }
     
-    var image: String {
+    var imageURL: String? {
         if let imageURL = self.item.thumbnails.first {
             return imageURL
         }
-        return "default"
+        return nil
     }
     
     init(_ item: Item) {
