@@ -168,6 +168,7 @@
 		2666EB7226BE720F0046D14F /* APIRequest */ = {
 			isa = PBXGroup;
 			children = (
+				2603605C26C518A7002ADE85 /* GetImageAPIRequest.swift */,
 				26205AC326BABFE300EA3054 /* GetItemAPIRequest.swift */,
 				26205AC526BAC24F00EA3054 /* GetItemListAPIRequest.swift */,
 				2666EB6526BD52BD0046D14F /* PostItemAPIReqeust.swift */,
@@ -262,7 +263,6 @@
 				26C5FEB326B9A44400A80210 /* ItemToUpload.swift */,
 				26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */,
 				2666EB6F26BE6AB90046D14F /* ItemDeleted.swift */,
-				2603605C26C518A7002ADE85 /* GetImageAPIRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
