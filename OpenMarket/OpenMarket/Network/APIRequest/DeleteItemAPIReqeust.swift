@@ -21,7 +21,7 @@ struct DeleteItemAPIReqeust: APIRequest {
         return request
     }
     
-    func parseResponse(data: Data) throws -> ItemDeleted {
-        return try JSONDecoder().decode(ItemDeleted.self, from: data)
+    func parseResponse(data: Data) throws -> DeletedItem {
+        return try JSONDecoder().decode(DeletedItem.self, from: data)
     }
 }

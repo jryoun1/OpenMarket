@@ -18,7 +18,7 @@
 		2666EB6A26BE399B0046D14F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6926BE399B0046D14F /* HTTPMethod.swift */; };
 		2666EB6C26BE49520046D14F /* Data+Append.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6B26BE49520046D14F /* Data+Append.swift */; };
 		2666EB6E26BE5E540046D14F /* PatchItemAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6D26BE5E540046D14F /* PatchItemAPIRequest.swift */; };
-		2666EB7026BE6AB90046D14F /* ItemDeleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6F26BE6AB90046D14F /* ItemDeleted.swift */; };
+		2666EB7026BE6AB90046D14F /* DeletedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6F26BE6AB90046D14F /* DeletedItem.swift */; };
 		26C5FE7B26B905D500A80210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7A26B905D500A80210 /* AppDelegate.swift */; };
 		26C5FE7D26B905D500A80210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7C26B905D500A80210 /* SceneDelegate.swift */; };
 		26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */; };
@@ -27,9 +27,9 @@
 		26C5FE8726B905D600A80210 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26C5FE8526B905D600A80210 /* LaunchScreen.storyboard */; };
 		26C5FE9226B905D600A80210 /* OpenMarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE9126B905D600A80210 /* OpenMarketTests.swift */; };
 		26C5FE9D26B905D600A80210 /* OpenMarketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE9C26B905D600A80210 /* OpenMarketUITests.swift */; };
-		26C5FEB226B972E700A80210 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB126B972E700A80210 /* HomeViewController.swift */; };
 		26C5FEAC26B911B700A80210 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEAB26B911B700A80210 /* ItemList.swift */; };
 		26C5FEAE26B911F400A80210 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEAD26B911F400A80210 /* Item.swift */; };
+		26C5FEB226B972E700A80210 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB126B972E700A80210 /* HomeViewController.swift */; };
 		26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB326B9A44400A80210 /* ItemToUpload.swift */; };
 		26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +63,7 @@
 		2666EB6926BE399B0046D14F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		2666EB6B26BE49520046D14F /* Data+Append.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Append.swift"; sourceTree = "<group>"; };
 		2666EB6D26BE5E540046D14F /* PatchItemAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchItemAPIRequest.swift; sourceTree = "<group>"; };
-		2666EB6F26BE6AB90046D14F /* ItemDeleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDeleted.swift; sourceTree = "<group>"; };
+		2666EB6F26BE6AB90046D14F /* DeletedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedItem.swift; sourceTree = "<group>"; };
 		26C5FE7726B905D500A80210 /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C5FE7A26B905D500A80210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26C5FE7C26B905D500A80210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,9 +78,9 @@
 		26C5FE9826B905D600A80210 /* OpenMarketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenMarketUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C5FE9C26B905D600A80210 /* OpenMarketUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarketUITests.swift; sourceTree = "<group>"; };
 		26C5FE9E26B905D600A80210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26C5FEB126B972E700A80210 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		26C5FEAB26B911B700A80210 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		26C5FEAD26B911F400A80210 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		26C5FEB126B972E700A80210 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		26C5FEB326B9A44400A80210 /* ItemToUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToUpload.swift; sourceTree = "<group>"; };
 		26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDeletion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,7 +214,7 @@
 				26C5FEAD26B911F400A80210 /* Item.swift */,
 				26C5FEB326B9A44400A80210 /* ItemToUpload.swift */,
 				26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */,
-				2666EB6F26BE6AB90046D14F /* ItemDeleted.swift */,
+				2666EB6F26BE6AB90046D14F /* DeletedItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,13 +352,13 @@
 				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
 				26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */,
 				26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */,
-				2666EB7026BE6AB90046D14F /* ItemDeleted.swift in Sources */,
+				2666EB7026BE6AB90046D14F /* DeletedItem.swift in Sources */,
 				2666EB6026BAEB2C0046D14F /* OpenMarketAPI.swift in Sources */,
 				26C5FEAE26B911F400A80210 /* Item.swift in Sources */,
 				26205AC626BAC24F00EA3054 /* GetItemListAPIRequest.swift in Sources */,
 				26205ACC26BAC6FA00EA3054 /* OpenMarketError.swift in Sources */,
 				26C5FEAC26B911B700A80210 /* ItemList.swift in Sources */,
-				26C5FE7F26B905D500A80210 /* ViewController.swift in Sources */,
+				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
 				2666EB6E26BE5E540046D14F /* PatchItemAPIRequest.swift in Sources */,
 				2666EB6A26BE399B0046D14F /* HTTPMethod.swift in Sources */,
 				2666EB6C26BE49520046D14F /* Data+Append.swift in Sources */,

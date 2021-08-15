@@ -1,10 +1,10 @@
 //
-//  ItemDeleted.swift
+//  DeletedItem.swift
 //  OpenMarket
 //
 //  Created by Yeon on 2021/08/07.
 //
 
-struct ItemDeleted: Decodable {
+struct DeletedItem: Decodable {
     let id: Int
 }
