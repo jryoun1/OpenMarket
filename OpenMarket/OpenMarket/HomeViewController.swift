@@ -18,6 +18,11 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
+    }
+    
+    private func configureNavigationBar() {
+        configureSegmentControl()
     }
     
     //MARK:- SegmentControl
