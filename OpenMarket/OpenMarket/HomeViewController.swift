@@ -41,4 +41,15 @@ final class HomeViewController: UIViewController {
         segmentedControl.sendActions(for: .valueChanged)
         navigationItem.titleView = segmentedControl
     }
+    
+    @objc private func segmentChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            itemTableView.reloadData()
+        case 1:
+            itemTableView.isHidden = true
+        default:
+            return
+        }
+    }
 }
