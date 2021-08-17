@@ -19,6 +19,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
+        configureItemTableView()
     }
     
     private func configureNavigationBar() {
@@ -57,5 +58,18 @@ final class HomeViewController: UIViewController {
         default:
             return
         }
+    }
+    
+    private func configureItemTableView() {
+        view.addSubview(itemTableView)
+        itemTableView.delegate = self
+        itemTableView.dataSource = self
+        
+        NSLayoutConstraint.activate([
+            itemTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            itemTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            itemTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            itemTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }
