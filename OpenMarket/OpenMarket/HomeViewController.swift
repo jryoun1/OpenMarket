@@ -80,4 +80,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return itemTableViewViewModel.numberOfSections
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itemTableViewViewModel.itemList.value?.count ?? 0
+    }
 }
