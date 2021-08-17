@@ -8,6 +8,7 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    private var itemTableViewViewModel = ItemTableViewViewModel()
     private var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
