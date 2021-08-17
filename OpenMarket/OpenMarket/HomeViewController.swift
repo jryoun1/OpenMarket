@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let nib = UINib(nibName: ItemTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: ItemTableViewCell.identifier)
+        tableView.register(ItemTableViewFooterView.self, forHeaderFooterViewReuseIdentifier: ItemTableViewFooterView.identifier)
         return tableView
     }()
     
@@ -95,6 +96,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:  ItemTableViewFooterView.identifier) as? ItemTableViewFooterView else {
+            return UIView()
+        }
+        
+        footerView.contentView.backgroundColor = .white
+        
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
