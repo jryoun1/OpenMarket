@@ -84,4 +84,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemTableViewViewModel.itemList.value?.count ?? 0
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ItemTableViewCell.identifier, for: indexPath) as? ItemTableViewCell else {
+            return ItemTableViewCell()
+        }
+        
+        if let item = self.itemTableViewViewModel.itemList.value?[indexPath.row] {
+            cell.configureCell(with: item)
+        }
+        
+        return cell
+    }
 }
