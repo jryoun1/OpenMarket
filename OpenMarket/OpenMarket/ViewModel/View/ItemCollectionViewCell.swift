@@ -7,11 +7,6 @@
 
 import UIKit
 
-class ItemCollectionViewCell: UICollectionViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+final class ItemCollectionViewCell: UICollectionViewCell {
+    static let identifier = "ItemCollectionViewCell"
 }
