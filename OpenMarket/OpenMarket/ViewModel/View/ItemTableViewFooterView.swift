@@ -36,4 +36,8 @@ final class ItemTableViewFooterView: UITableViewHeaderFooterView {
             loadingIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
+    
+    func startLoading() {
+        loadingIndicator.startAnimating()
+    }
 }
