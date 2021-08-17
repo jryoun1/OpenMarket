@@ -40,4 +40,8 @@ final class ItemTableViewFooterView: UITableViewHeaderFooterView {
     func startLoading() {
         loadingIndicator.startAnimating()
     }
+    
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+    }
 }
