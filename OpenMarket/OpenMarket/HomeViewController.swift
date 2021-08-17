@@ -50,6 +50,7 @@ final class HomeViewController: UIViewController {
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            itemTableView.isHidden = false
             itemTableView.reloadData()
         case 1:
             itemTableView.isHidden = true
