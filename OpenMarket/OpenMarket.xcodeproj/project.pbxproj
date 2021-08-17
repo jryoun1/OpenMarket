@@ -11,6 +11,7 @@
 		2603605926C50D99002ADE85 /* CustomNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603605826C50D99002ADE85 /* CustomNumberFormatter.swift */; };
 		2603605B26C51712002ADE85 /* UIImageView+GetImageFromServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603605A26C51712002ADE85 /* UIImageView+GetImageFromServer.swift */; };
 		2603605D26C518A7002ADE85 /* GetImageAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603605C26C518A7002ADE85 /* GetImageAPIRequest.swift */; };
+		2603606226CBD614002ADE85 /* ItemTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603606126CBD614002ADE85 /* ItemTableViewFooterView.swift */; };
 		26205AC426BABFE300EA3054 /* GetItemAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC326BABFE300EA3054 /* GetItemAPIRequest.swift */; };
 		26205AC626BAC24F00EA3054 /* GetItemListAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC526BAC24F00EA3054 /* GetItemListAPIRequest.swift */; };
 		26205AC826BAC2DB00EA3054 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC726BAC2DB00EA3054 /* APIRequestLoader.swift */; };
@@ -64,6 +65,7 @@
 		2603605826C50D99002ADE85 /* CustomNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNumberFormatter.swift; sourceTree = "<group>"; };
 		2603605A26C51712002ADE85 /* UIImageView+GetImageFromServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+GetImageFromServer.swift"; sourceTree = "<group>"; };
 		2603605C26C518A7002ADE85 /* GetImageAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImageAPIRequest.swift; sourceTree = "<group>"; };
+		2603606126CBD614002ADE85 /* ItemTableViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewFooterView.swift; sourceTree = "<group>"; };
 		26205AC326BABFE300EA3054 /* GetItemAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemAPIRequest.swift; sourceTree = "<group>"; };
 		26205AC526BAC24F00EA3054 /* GetItemListAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemListAPIRequest.swift; sourceTree = "<group>"; };
 		26205AC726BAC2DB00EA3054 /* APIRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestLoader.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				268C52A726C0F1720096D80D /* ItemTableViewCell.swift */,
 				268C52A826C0F1720096D80D /* ItemTableViewCell.xib */,
+				2603606126CBD614002ADE85 /* ItemTableViewFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
 				26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */,
 				26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */,
+				2603606226CBD614002ADE85 /* ItemTableViewFooterView.swift in Sources */,
 				2666EB7026BE6AB90046D14F /* ItemDeleted.swift in Sources */,
 				2666EB6026BAEB2C0046D14F /* OpenMarketAPI.swift in Sources */,
 				26C5FEAE26B911F400A80210 /* Item.swift in Sources */,
