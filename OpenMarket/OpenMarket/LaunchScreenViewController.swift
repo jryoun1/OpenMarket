@@ -53,10 +53,11 @@ final class LaunchScreenViewController: UIViewController {
             return
         }
         
+        let navigationController = UINavigationController(rootViewController: homeViewController)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
-            homeViewController.modalTransitionStyle = .crossDissolve
-            homeViewController.modalPresentationStyle = .fullScreen
-            self.present(homeViewController, animated: true)
+            navigationController.modalTransitionStyle = .crossDissolve
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
