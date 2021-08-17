@@ -25,12 +25,12 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Airpod Max2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gK-bV-Izj">
-                        <rect key="frame" x="80" y="10" width="117.5" height="24.5"/>
+                        <rect key="frame" x="80" y="10" width="102.5" height="24.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Y9-3u-f1H">
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Y9-3u-f1H">
                         <rect key="frame" x="80" y="49.5" width="206.5" height="20.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KRW 750,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQe-2v-ifb">
@@ -58,7 +58,7 @@
                     <constraint firstItem="0oC-J0-7TQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="05l-QQ-oGC"/>
                     <constraint firstItem="pWr-2T-lTV" firstAttribute="centerY" secondItem="4gK-bV-Izj" secondAttribute="centerY" id="1hg-91-7fJ"/>
                     <constraint firstItem="4gK-bV-Izj" firstAttribute="leading" secondItem="0oC-J0-7TQ" secondAttribute="trailing" constant="10" id="5jN-Mc-A1L"/>
-                    <constraint firstItem="pWr-2T-lTV" firstAttribute="leading" secondItem="4gK-bV-Izj" secondAttribute="trailing" id="5o3-Hn-67g"/>
+                    <constraint firstItem="pWr-2T-lTV" firstAttribute="leading" secondItem="4gK-bV-Izj" secondAttribute="trailing" constant="15" id="5o3-Hn-67g"/>
                     <constraint firstItem="0Y9-3u-f1H" firstAttribute="leading" secondItem="0oC-J0-7TQ" secondAttribute="trailing" constant="10" id="G73-RW-xa1"/>
                     <constraint firstItem="0Y9-3u-f1H" firstAttribute="top" relation="lessThanOrEqual" secondItem="4gK-bV-Izj" secondAttribute="bottom" constant="15" id="IKp-On-RK3"/>
                     <constraint firstAttribute="bottom" secondItem="0Y9-3u-f1H" secondAttribute="bottom" constant="10" id="Lrf-g5-7wx"/>
