@@ -136,3 +136,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return 80
     }
 }
+
+//MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return itemTableViewViewModel.numberOfSections
+    }
+}
