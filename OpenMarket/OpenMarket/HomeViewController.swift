@@ -142,4 +142,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemTableViewViewModel.numberOfSections
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemTableViewViewModel.itemList.value?.count ?? 0
+    }
 }
