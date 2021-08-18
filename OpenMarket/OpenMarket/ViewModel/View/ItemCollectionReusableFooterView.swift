@@ -36,4 +36,8 @@ final class ItemCollectionReusableFooterView: UICollectionReusableView {
             loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+    
+    func startLoading() {
+        loadingIndicator.startAnimating()
+    }
 }
