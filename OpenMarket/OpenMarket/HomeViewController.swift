@@ -33,6 +33,7 @@ final class HomeViewController: UIViewController {
         configureNavigationBar()
         configureItemTableView()
         configureItemCollectionView()
+        bindViewModel()
     }
     
     private func configureNavigationBar() {
@@ -100,6 +101,14 @@ final class HomeViewController: UIViewController {
             itemCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func bindViewModel() {
+        itemListViewModel.itemList.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.checkIsHiddenAndReloadData()
+            }
+        }
     }
     
     private func checkIsHiddenAndReloadData() {
