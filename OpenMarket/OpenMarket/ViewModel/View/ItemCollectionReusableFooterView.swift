@@ -16,4 +16,12 @@ final class ItemCollectionReusableFooterView: UICollectionReusableView {
         indicator.style = .medium
         return indicator
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 }
