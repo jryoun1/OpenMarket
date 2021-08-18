@@ -40,4 +40,8 @@ final class ItemCollectionReusableFooterView: UICollectionReusableView {
     func startLoading() {
         loadingIndicator.startAnimating()
     }
+    
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+    }
 }
