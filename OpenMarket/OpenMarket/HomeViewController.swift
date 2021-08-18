@@ -148,7 +148,7 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    //MARK:- FetchData and Paing
+    //MARK:- FetchData
     private func fetchData(page: Int) {
         let getItemListAPIRequest = GetItemListAPIRequest()
         apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
@@ -171,6 +171,23 @@ final class HomeViewController: UIViewController {
                 checkIsHiddenAndControlLoadingIndicator(state: .stop)
                 checkIsHiddenAndReloadData()
             }
+        }
+    }
+}
+
+//MARK:- Paging
+extension HomeViewController {
+    private func beginPaging() {
+        isPaging = true
+        
+        DispatchQueue.main.async {
+            self.checkIsHiddenAndControlLoadingIndicator(state: .start)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.currentPage += 1
+            self.fetchData(page: self.currentPage)
+            self.isPaging = false
         }
     }
 }
