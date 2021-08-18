@@ -19,9 +19,21 @@ final class ItemCollectionReusableFooterView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureFooterView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func configureFooterView() {
+        addSubview(loadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicator.widthAnchor.constraint(equalToConstant: 30),
+            loadingIndicator.heightAnchor.constraint(equalTo: loadingIndicator.widthAnchor),
+            loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
 }
