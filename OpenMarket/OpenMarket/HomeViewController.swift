@@ -82,6 +82,7 @@ final class HomeViewController: UIViewController {
         }
     }
     
+    //MARK:- Configure TableView, CollectionView
     private func configureItemTableView() {
         view.addSubview(itemTableView)
         itemTableView.delegate = self
@@ -108,6 +109,7 @@ final class HomeViewController: UIViewController {
         ])
     }
     
+    //MARK:- bindViewModel
     private func bindViewModel() {
         itemListViewModel.itemList.bind { [weak self] _ in
             DispatchQueue.main.async {
