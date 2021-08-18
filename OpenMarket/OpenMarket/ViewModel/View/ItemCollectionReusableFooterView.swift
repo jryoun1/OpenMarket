@@ -7,6 +7,6 @@
 
 import UIKit
 
-class ItemCollectionReusableFooterView: UICollectionReusableView {
-        
+final class ItemCollectionReusableFooterView: UICollectionReusableView {
+    static let identifier = "ItemCollectionReusableFooterView"
 }
