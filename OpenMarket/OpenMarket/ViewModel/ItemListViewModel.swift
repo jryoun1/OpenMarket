@@ -8,7 +8,7 @@
 import UIKit
 
 struct ItemListViewModel {
-    var itemList: Observable<[ItemTableViewCellViewModel]> = Observable([])
+    var itemList: Observable<[ItemListCellViewModel]> = Observable([])
 }
 
 //MARK:- TableView Configuration Property
