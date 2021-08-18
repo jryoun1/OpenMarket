@@ -8,6 +8,10 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    private var currentPage: Int = 1
+    private var isPaging: Bool = false
+    private var hasNextPage: Bool = false
+    private var apiRequestLoader: APIRequestLoader<GetItemListAPIRequest>!
     private var itemListViewModel = ItemListViewModel()
     private var itemTableView: UITableView = {
         let tableView = UITableView()
@@ -34,6 +38,7 @@ final class HomeViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
+        fetchData(page: currentPage)
     }
     
     private func configureNavigationBar() {
@@ -118,6 +123,83 @@ final class HomeViewController: UIViewController {
         
         if self.itemCollectionView.isHidden == false {
             self.itemCollectionView.reloadData()
+        }
+    }
+    
+    private func checkIsHiddenAndControlLoadingIndicator(state: LoadingIndicatorState) {
+        if self.itemTableView.isHidden == false,
+           let footerView = self.itemTableView.footerView(forSection: 0) as? ItemTableViewFooterView {
+            switch state {
+            case .start:
+                footerView.startLoading()
+            case .stop:
+                footerView.stopLoading()
+            }
+        }
+        
+        if self.itemCollectionView.isHidden == false,
+           let footerView = self.itemCollectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter).first as? ItemCollectionReusableFooterView {
+            switch state {
+            case .start:
+                footerView.startLoading()
+            case .stop:
+                footerView.stopLoading()
+            }
+        }
+    }
+    
+    //MARK:- FetchData
+    private func fetchData(page: Int) {
+        let getItemListAPIRequest = GetItemListAPIRequest()
+        apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
+        
+        apiRequestLoader.loadAPIReqeust(requestData: page) { [self] itemList, error in
+            guard let itemList = itemList, itemList.items.count > 0 else {
+                self.hasNextPage = false
+                DispatchQueue.main.async {
+                    checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                }
+                return
+            }
+            
+            self.hasNextPage = true
+            _ = itemList.items.compactMap({ item in
+                self.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
+            })
+            
+            DispatchQueue.main.async {
+                checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                checkIsHiddenAndReloadData()
+            }
+        }
+    }
+}
+
+//MARK:- Paging
+extension HomeViewController {
+    private func beginPaging() {
+        isPaging = true
+        
+        DispatchQueue.main.async {
+            self.checkIsHiddenAndControlLoadingIndicator(state: .start)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.currentPage += 1
+            self.fetchData(page: self.currentPage)
+            self.isPaging = false
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset_y = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if contentOffset_y > contentHeight - height {
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
         }
     }
 }
