@@ -190,6 +190,18 @@ extension HomeViewController {
             self.isPaging = false
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset_y = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if contentOffset_y > contentHeight - height {
+            if isPaging == false && hasNextPage {
+                beginPaging()
+            }
+        }
+    }
 }
 
 //MARK:- TableView Delegate, Datasource
