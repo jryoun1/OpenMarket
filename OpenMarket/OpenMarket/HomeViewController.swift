@@ -38,6 +38,7 @@ final class HomeViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
+        fetchData(page: currentPage)
     }
     
     private func configureNavigationBar() {
@@ -143,6 +144,32 @@ final class HomeViewController: UIViewController {
                 footerView.startLoading()
             case .stop:
                 footerView.stopLoading()
+            }
+        }
+    }
+    
+    //MARK:- FetchData and Paing
+    private func fetchData(page: Int) {
+        let getItemListAPIRequest = GetItemListAPIRequest()
+        apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
+        
+        apiRequestLoader.loadAPIReqeust(requestData: page) { [self] itemList, error in
+            guard let itemList = itemList, itemList.items.count > 0 else {
+                self.hasNextPage = false
+                DispatchQueue.main.async {
+                    checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                }
+                return
+            }
+            
+            self.hasNextPage = true
+            _ = itemList.items.compactMap({ item in
+                self.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
+            })
+            
+            DispatchQueue.main.async {
+                checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                checkIsHiddenAndReloadData()
             }
         }
     }
