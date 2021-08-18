@@ -8,6 +8,7 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    private var currentPage: Int = 1
     private var itemListViewModel = ItemListViewModel()
     private var itemTableView: UITableView = {
         let tableView = UITableView()
