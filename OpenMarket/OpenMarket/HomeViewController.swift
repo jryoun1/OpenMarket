@@ -32,6 +32,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureItemTableView()
+        configureItemCollectionView()
     }
     
     private func configureNavigationBar() {
@@ -82,6 +83,19 @@ final class HomeViewController: UIViewController {
             itemTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             itemTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             itemTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func configureItemCollectionView() {
+        view.addSubview(itemCollectionView)
+        itemCollectionView.delegate = self
+        itemCollectionView.dataSource = self
+        
+        NSLayoutConstraint.activate([
+            itemCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            itemCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            itemCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
