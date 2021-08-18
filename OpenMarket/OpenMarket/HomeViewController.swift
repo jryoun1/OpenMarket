@@ -101,6 +101,16 @@ final class HomeViewController: UIViewController {
             itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    private func checkIsHiddenAndReloadData() {
+        if self.itemTableView.isHidden == false {
+            self.itemTableView.reloadData()
+        }
+        
+        if self.itemCollectionView.isHidden == false {
+            self.itemCollectionView.reloadData()
+        }
+    }
 }
 
 //MARK:- TableView Delegate, Datasource
