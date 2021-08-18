@@ -146,4 +146,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemTableViewViewModel.itemList.value?.count ?? 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        if let item = self.itemTableViewViewModel.itemList.value?[indexPath.row] {
+            cell.configureCell(with: item)
+        }
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.systemGray.cgColor
+        cell.layer.cornerRadius = 10
+        
+        return cell
+    }
 }
