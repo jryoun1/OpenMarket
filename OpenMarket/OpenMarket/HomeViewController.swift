@@ -10,6 +10,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     private var currentPage: Int = 1
     private var isPaging: Bool = false
+    private var hasNextPage: Bool = false
     private var itemListViewModel = ItemListViewModel()
     private var itemTableView: UITableView = {
         let tableView = UITableView()
