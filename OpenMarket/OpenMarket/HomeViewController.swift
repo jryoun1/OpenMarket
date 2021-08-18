@@ -8,7 +8,7 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-    private var itemTableViewViewModel = ItemTableViewViewModel()
+    private var itemListViewModel = ItemListViewModel()
     private var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,11 +106,11 @@ final class HomeViewController: UIViewController {
 //MARK:- TableView Delegate, Datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return itemTableViewViewModel.numberOfSections
+        return itemListViewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemTableViewViewModel.itemList.value?.count ?? 0
+        return itemListViewModel.itemList.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,7 +118,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return ItemTableViewCell()
         }
         
-        if let item = self.itemTableViewViewModel.itemList.value?[indexPath.row] {
+        if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
             cell.configureCell(with: item)
         }
         
@@ -143,11 +143,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return itemTableViewViewModel.numberOfSections
+        return itemListViewModel.numberOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemTableViewViewModel.itemList.value?.count ?? 0
+        return itemListViewModel.itemList.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -155,7 +155,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         
-        if let item = self.itemTableViewViewModel.itemList.value?[indexPath.row] {
+        if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
             cell.configureCell(with: item)
         }
         cell.layer.borderWidth = 1
