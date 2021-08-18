@@ -124,6 +124,28 @@ final class HomeViewController: UIViewController {
             self.itemCollectionView.reloadData()
         }
     }
+    
+    private func checkIsHiddenAndControlLoadingIndicator(state: LoadingIndicatorState) {
+        if self.itemTableView.isHidden == false,
+           let footerView = self.itemTableView.footerView(forSection: 0) as? ItemTableViewFooterView {
+            switch state {
+            case .start:
+                footerView.startLoading()
+            case .stop:
+                footerView.stopLoading()
+            }
+        }
+        
+        if self.itemCollectionView.isHidden == false,
+           let footerView = self.itemCollectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter).first as? ItemCollectionReusableFooterView {
+            switch state {
+            case .start:
+                footerView.startLoading()
+            case .stop:
+                footerView.stopLoading()
+            }
+        }
+    }
 }
 
 //MARK:- TableView Delegate, Datasource
