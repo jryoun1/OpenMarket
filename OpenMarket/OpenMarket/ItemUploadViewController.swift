@@ -8,7 +8,7 @@
 import UIKit
 
 final class ItemUploadViewController: UIViewController {
-
+    static let identifier = "ItemUploadViewController"
     override func viewDidLoad() {
         super.viewDidLoad()
     }
