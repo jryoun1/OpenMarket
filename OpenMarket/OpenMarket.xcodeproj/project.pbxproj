@@ -16,6 +16,7 @@
 		2603606626CC1118002ADE85 /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2603606426CC1118002ADE85 /* ItemCollectionViewCell.xib */; };
 		2603606826CD45DC002ADE85 /* ItemCollectionReusableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603606726CD45DC002ADE85 /* ItemCollectionReusableFooterView.swift */; };
 		2603606C26CD73CC002ADE85 /* LoadingIndicatorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603606B26CD73CC002ADE85 /* LoadingIndicatorState.swift */; };
+		2603606E26CF9B6D002ADE85 /* ItemUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */; };
 		26205AC426BABFE300EA3054 /* GetItemAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC326BABFE300EA3054 /* GetItemAPIRequest.swift */; };
 		26205AC626BAC24F00EA3054 /* GetItemListAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC526BAC24F00EA3054 /* GetItemListAPIRequest.swift */; };
 		26205AC826BAC2DB00EA3054 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26205AC726BAC2DB00EA3054 /* APIRequestLoader.swift */; };
@@ -74,6 +75,7 @@
 		2603606426CC1118002ADE85 /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		2603606726CD45DC002ADE85 /* ItemCollectionReusableFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionReusableFooterView.swift; sourceTree = "<group>"; };
 		2603606B26CD73CC002ADE85 /* LoadingIndicatorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorState.swift; sourceTree = "<group>"; };
+		2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemUploadViewController.swift; sourceTree = "<group>"; };
 		26205AC326BABFE300EA3054 /* GetItemAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemAPIRequest.swift; sourceTree = "<group>"; };
 		26205AC526BAC24F00EA3054 /* GetItemListAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetItemListAPIRequest.swift; sourceTree = "<group>"; };
 		26205AC726BAC2DB00EA3054 /* APIRequestLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestLoader.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				26C5FEAA26B911A500A80210 /* Model */,
 				26C5FE7A26B905D500A80210 /* AppDelegate.swift */,
 				26C5FE7C26B905D500A80210 /* SceneDelegate.swift */,
+				2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */,
 				26C5FEB126B972E700A80210 /* HomeViewController.swift */,
 				26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */,
 				26C5FE8026B905D500A80210 /* Main.storyboard */,
@@ -426,6 +429,7 @@
 				26205AC626BAC24F00EA3054 /* GetItemListAPIRequest.swift in Sources */,
 				26205ACC26BAC6FA00EA3054 /* OpenMarketError.swift in Sources */,
 				26C5FEAC26B911B700A80210 /* ItemList.swift in Sources */,
+				2603606E26CF9B6D002ADE85 /* ItemUploadViewController.swift in Sources */,
 				2603606526CC1118002ADE85 /* ItemCollectionViewCell.swift in Sources */,
 				2603605D26C518A7002ADE85 /* GetImageAPIRequest.swift in Sources */,
 				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
