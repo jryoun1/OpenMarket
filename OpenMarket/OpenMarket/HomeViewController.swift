@@ -13,6 +13,7 @@ final class HomeViewController: UIViewController {
     private var hasNextPage: Bool = false
     private var apiRequestLoader: APIRequestLoader<GetItemListAPIRequest>!
     private var itemListViewModel = ItemListViewModel()
+    
     private var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +47,7 @@ final class HomeViewController: UIViewController {
         configureNavigationBarRightButton()
     }
     
+    //MARK:- NavigationBar Button
     private func configureNavigationBarRightButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(moveToItemUploadViewController))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.systemBlue
