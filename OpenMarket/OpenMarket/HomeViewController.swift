@@ -43,6 +43,20 @@ final class HomeViewController: UIViewController {
     
     private func configureNavigationBar() {
         configureSegmentControl()
+        configureNavigationBarRightButton()
+    }
+    
+    private func configureNavigationBarRightButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(moveToItemUploadViewController))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.systemBlue
+    }
+    
+    @objc private func moveToItemUploadViewController() {
+        guard let itemUploadViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemUploadViewController.identifier) as? ItemUploadViewController else {
+            return
+        }
+        
+        self.navigationController?.pushViewController(itemUploadViewController, animated: true)
     }
     
     //MARK:- SegmentControl
