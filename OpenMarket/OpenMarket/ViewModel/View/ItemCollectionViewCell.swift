@@ -16,7 +16,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet private var discountedPriceLabel: UILabel!
     @IBOutlet private var verticalStackView: UIStackView!
     
-    func configureCell(with viewModel: ItemTableViewCellViewModel) {
+    func configureCell(with viewModel: ItemListCellViewModel) {
         titleLabel.text = viewModel.title
         titleLabel.font = .preferredFont(forTextStyle: .headline)
         
