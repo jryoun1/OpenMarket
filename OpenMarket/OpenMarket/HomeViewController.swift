@@ -39,6 +39,20 @@ final class HomeViewController: UIViewController {
         case stop
     }
     
+    private enum SegmentControlType: Int, CustomStringConvertible {
+        case LIST = 0
+        case GRID = 1
+        
+        var description: String {
+            switch self {
+            case .LIST:
+                return "LIST"
+            case .GRID:
+                return "GRID"
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
@@ -69,7 +83,7 @@ final class HomeViewController: UIViewController {
     
     //MARK:- SegmentControl
     private func configureSegmentControl() {
-        let titles = ["LIST", "GRID"]
+        let titles = ["\(SegmentControlType.LIST)", "\(SegmentControlType.GRID)"]
         let segmentedControl: UISegmentedControl = UISegmentedControl(items: titles)
         segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
         segmentedControl.backgroundColor = UIColor.white
@@ -91,11 +105,11 @@ final class HomeViewController: UIViewController {
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0:
+        case SegmentControlType.LIST.rawValue:
             itemCollectionView.isHidden = true
             itemTableView.isHidden = false
             itemTableView.reloadData()
-        case 1:
+        case SegmentControlType.GRID.rawValue:
             itemTableView.isHidden = true
             itemCollectionView.isHidden = false
             itemCollectionView.reloadData()
