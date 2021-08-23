@@ -33,6 +33,12 @@ final class HomeViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK:- enum
+    private enum LoadingIndicatorState {
+        case start
+        case stop
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
