@@ -8,4 +8,5 @@
 enum ItemListViewString {
     static let soldOut = "품절"
     static let errorMessage = "오류가 발생했습니다."
+    static let remainingQuantity = "잔여수량:"
 }
