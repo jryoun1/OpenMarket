@@ -191,23 +191,23 @@ final class HomeViewController: UIViewController {
         let getItemListAPIRequest = GetItemListAPIRequest()
         apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
         
-        apiRequestLoader.loadAPIReqeust(requestData: page) { [self] itemList, error in
+        apiRequestLoader.loadAPIReqeust(requestData: page) { [weak self] itemList, error in
             guard let itemList = itemList, itemList.items.count > 0 else {
-                self.hasNextPage = false
+                self?.hasNextPage = false
                 DispatchQueue.main.async {
-                    checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                    self?.checkIsHiddenAndControlLoadingIndicator(state: .stop)
                 }
                 return
             }
             
-            self.hasNextPage = true
+            self?.hasNextPage = true
             _ = itemList.items.compactMap({ item in
-                self.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
+                self?.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
             })
             
             DispatchQueue.main.async {
-                checkIsHiddenAndControlLoadingIndicator(state: .stop)
-                checkIsHiddenAndReloadData()
+                self?.checkIsHiddenAndControlLoadingIndicator(state: .stop)
+                self?.checkIsHiddenAndReloadData()
             }
         }
     }
