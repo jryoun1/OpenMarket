@@ -28,7 +28,7 @@ final class ItemTableViewCell: UITableViewCell {
         }
         
         if let stockString = viewModel.stock {
-            if stockString == "품절" {
+            if stockString == ItemListViewString.soldOut {
                 stockLabel.textColor = .systemOrange
             }
             else {
@@ -37,7 +37,7 @@ final class ItemTableViewCell: UITableViewCell {
             stockLabel.text = stockString
         }
         else {
-            stockLabel.text = "오류가 발생했습니다."
+            stockLabel.text = ItemListViewString.errorMessage
         }
         
         if let priceString = viewModel.price {
@@ -55,7 +55,7 @@ final class ItemTableViewCell: UITableViewCell {
             }
         }
         else {
-            priceLabel.text = "오류가 발생하였습니다."
+            priceLabel.text = ItemListViewString.errorMessage
         }
     }
     
