@@ -43,7 +43,7 @@
 		26C5FE9D26B905D600A80210 /* OpenMarketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE9C26B905D600A80210 /* OpenMarketUITests.swift */; };
 		26C5FEAC26B911B700A80210 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEAB26B911B700A80210 /* ItemList.swift */; };
 		26C5FEAE26B911F400A80210 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEAD26B911F400A80210 /* Item.swift */; };
-		26C5FEB226B972E700A80210 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB126B972E700A80210 /* HomeViewController.swift */; };
+		26C5FEB226B972E700A80210 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB126B972E700A80210 /* ItemListViewController.swift */; };
 		26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB326B9A44400A80210 /* ItemToUpload.swift */; };
 		26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */; };
 /* End PBXBuildFile section */
@@ -108,7 +108,7 @@
 		26C5FE9E26B905D600A80210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26C5FEAB26B911B700A80210 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		26C5FEAD26B911F400A80210 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		26C5FEB126B972E700A80210 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		26C5FEB126B972E700A80210 /* ItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		26C5FEB326B9A44400A80210 /* ItemToUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToUpload.swift; sourceTree = "<group>"; };
 		26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToDeletion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,7 +244,7 @@
 				26C5FE7A26B905D500A80210 /* AppDelegate.swift */,
 				26C5FE7C26B905D500A80210 /* SceneDelegate.swift */,
 				2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */,
-				26C5FEB126B972E700A80210 /* HomeViewController.swift */,
+				26C5FEB126B972E700A80210 /* ItemListViewController.swift */,
 				26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */,
 				26C5FE8026B905D500A80210 /* Main.storyboard */,
 				26C5FE8326B905D600A80210 /* Assets.xcassets */,
@@ -445,7 +445,7 @@
 				268C52A926C0F1720096D80D /* ItemTableViewCell.swift in Sources */,
 				268C52A426C0E4C30096D80D /* ItemListViewModel.swift in Sources */,
 				26C5FE7D26B905D500A80210 /* SceneDelegate.swift in Sources */,
-				26C5FEB226B972E700A80210 /* HomeViewController.swift in Sources */,
+				26C5FEB226B972E700A80210 /* ItemListViewController.swift in Sources */,
 				2603605926C50D99002ADE85 /* CustomNumberFormatter.swift in Sources */,
 				26205AC426BABFE300EA3054 /* GetItemAPIRequest.swift in Sources */,
 				26205AC826BAC2DB00EA3054 /* APIRequestLoader.swift in Sources */,

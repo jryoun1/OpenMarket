@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ItemListViewController.swift
 //  OpenMarket
 //
 //  Created by Yeon on 2021/08/03.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
+final class ItemListViewController: UIViewController {
     private var itemListViewModel = ItemListViewModel()
     
     private var itemTableView: UITableView = {
@@ -184,7 +184,7 @@ final class HomeViewController: UIViewController {
 }
 
 //MARK:- Paging
-extension HomeViewController {
+extension ItemListViewController {
     private func beginPaging() {
         itemListViewModel.isPaging = true
         
@@ -214,7 +214,7 @@ extension HomeViewController {
 }
 
 //MARK:- TableView Delegate, Datasource
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return itemListViewModel.numberOfSections
     }
@@ -255,7 +255,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ItemListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemListViewModel.numberOfSections
     }
