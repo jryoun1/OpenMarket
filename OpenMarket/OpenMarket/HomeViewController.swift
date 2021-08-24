@@ -8,10 +8,6 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-    private var currentPage: Int = 1
-    private var isPaging: Bool = false
-    private var hasNextPage: Bool = false
-    private var apiRequestLoader: APIRequestLoader<GetItemListAPIRequest>!
     private var itemListViewModel = ItemListViewModel()
     
     private var itemTableView: UITableView = {
@@ -59,7 +55,7 @@ final class HomeViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
-        fetchData(page: currentPage)
+        itemListViewModel.fetchData(page: itemListViewModel.currentPage)
     }
     
     private func configureNavigationBar() {
@@ -185,47 +181,22 @@ final class HomeViewController: UIViewController {
             }
         }
     }
-    
-    //MARK:- FetchData
-    private func fetchData(page: Int) {
-        let getItemListAPIRequest = GetItemListAPIRequest()
-        apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
-        
-        apiRequestLoader.loadAPIReqeust(requestData: page) { [weak self] itemList, error in
-            guard let itemList = itemList, itemList.items.count > 0 else {
-                self?.hasNextPage = false
-                DispatchQueue.main.async {
-                    self?.checkIsHiddenAndControlLoadingIndicator(state: .stop)
-                }
-                return
-            }
-            
-            self?.hasNextPage = true
-            _ = itemList.items.compactMap({ item in
-                self?.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
-            })
-            
-            DispatchQueue.main.async {
-                self?.checkIsHiddenAndControlLoadingIndicator(state: .stop)
-                self?.checkIsHiddenAndReloadData()
-            }
-        }
-    }
 }
 
 //MARK:- Paging
 extension HomeViewController {
     private func beginPaging() {
-        isPaging = true
+        itemListViewModel.isPaging = true
         
         DispatchQueue.main.async {
             self.checkIsHiddenAndControlLoadingIndicator(state: .start)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.currentPage += 1
-            self.fetchData(page: self.currentPage)
-            self.isPaging = false
+            self.itemListViewModel.currentPage += 1
+            self.itemListViewModel.fetchData(page: self.itemListViewModel.currentPage)
+            self.itemListViewModel.isPaging = false
+            self.checkIsHiddenAndControlLoadingIndicator(state: .stop)
         }
     }
     
@@ -235,7 +206,7 @@ extension HomeViewController {
         let height = scrollView.frame.height
         
         if contentOffset_y > contentHeight - height {
-            if isPaging == false && hasNextPage {
+            if itemListViewModel.isPaging == false && itemListViewModel.hasNextPage {
                 beginPaging()
             }
         }
