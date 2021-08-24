@@ -28,19 +28,18 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         }
         
         if let stockString = viewModel.stock {
+            stockLabel.textColor = .systemGray
+            stockLabel.text = stockString
+            
             if stockString == ItemListViewString.soldOut {
                 stockLabel.textColor = .systemOrange
             }
-            else {
-                stockLabel.textColor = .systemGray
-            }
-            stockLabel.text = stockString
-        }
-        else {
-            stockLabel.text = ItemListViewString.errorMessage
         }
         
         if let priceString = viewModel.price {
+            priceLabel.textColor = .systemGray
+            priceLabel.attributedText = NSAttributedString(string: priceString)
+            
             if let discountedPriceString = viewModel.discountedPrice {
                 discountedPriceLabel.isHidden = false
                 priceLabel.textColor = .systemRed
@@ -49,13 +48,6 @@ final class ItemCollectionViewCell: UICollectionViewCell {
                 discountedPriceLabel.textColor = .systemGray
                 discountedPriceLabel.text = discountedPriceString
             }
-            else {
-                priceLabel.textColor = .systemGray
-                priceLabel.attributedText = NSAttributedString(string: priceString)
-            }
-        }
-        else {
-            priceLabel.text = ItemListViewString.errorMessage
         }
     }
     
