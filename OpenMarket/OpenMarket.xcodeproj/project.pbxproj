@@ -25,6 +25,8 @@
 		26625BCE26D67FBF00544F31 /* ItemUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BCD26D67FBF00544F31 /* ItemUploadViewModel.swift */; };
 		26625BD326D688C500544F31 /* ItemUploadCollectionReusableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BD126D688C500544F31 /* ItemUploadCollectionReusableHeaderView.swift */; };
 		26625BD426D688C500544F31 /* ItemUploadCollectionReusableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26625BD226D688C500544F31 /* ItemUploadCollectionReusableHeaderView.xib */; };
+		26625BD726D6A6EA00544F31 /* ItemUploadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26625BD526D6A6EA00544F31 /* ItemUploadCollectionViewCell.swift */; };
+		26625BD826D6A6EA00544F31 /* ItemUploadCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26625BD626D6A6EA00544F31 /* ItemUploadCollectionViewCell.xib */; };
 		2666EB6026BAEB2C0046D14F /* OpenMarketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB5F26BAEB2C0046D14F /* OpenMarketAPI.swift */; };
 		2666EB6426BD4FE90046D14F /* DeleteItemAPIReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6326BD4FE90046D14F /* DeleteItemAPIReqeust.swift */; };
 		2666EB6626BD52BD0046D14F /* PostItemAPIReqeust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6526BD52BD0046D14F /* PostItemAPIReqeust.swift */; };
@@ -90,6 +92,8 @@
 		26625BCD26D67FBF00544F31 /* ItemUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemUploadViewModel.swift; sourceTree = "<group>"; };
 		26625BD126D688C500544F31 /* ItemUploadCollectionReusableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemUploadCollectionReusableHeaderView.swift; sourceTree = "<group>"; };
 		26625BD226D688C500544F31 /* ItemUploadCollectionReusableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemUploadCollectionReusableHeaderView.xib; sourceTree = "<group>"; };
+		26625BD526D6A6EA00544F31 /* ItemUploadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemUploadCollectionViewCell.swift; sourceTree = "<group>"; };
+		26625BD626D6A6EA00544F31 /* ItemUploadCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemUploadCollectionViewCell.xib; sourceTree = "<group>"; };
 		2666EB5F26BAEB2C0046D14F /* OpenMarketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarketAPI.swift; sourceTree = "<group>"; };
 		2666EB6326BD4FE90046D14F /* DeleteItemAPIReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteItemAPIReqeust.swift; sourceTree = "<group>"; };
 		2666EB6526BD52BD0046D14F /* PostItemAPIReqeust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItemAPIReqeust.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			children = (
 				26625BD126D688C500544F31 /* ItemUploadCollectionReusableHeaderView.swift */,
 				26625BD226D688C500544F31 /* ItemUploadCollectionReusableHeaderView.xib */,
+				26625BD526D6A6EA00544F31 /* ItemUploadCollectionViewCell.swift */,
+				26625BD626D6A6EA00544F31 /* ItemUploadCollectionViewCell.xib */,
 			);
 			path = UploadView;
 			sourceTree = "<group>";
@@ -458,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26625BD826D6A6EA00544F31 /* ItemUploadCollectionViewCell.xib in Resources */,
 				26625BD426D688C500544F31 /* ItemUploadCollectionReusableHeaderView.xib in Resources */,
 				268C52AA26C0F1720096D80D /* ItemTableViewCell.xib in Resources */,
 				26C5FE8726B905D600A80210 /* LaunchScreen.storyboard in Resources */,
@@ -622,6 +629,7 @@
 				26C5FE7D26B905D500A80210 /* SceneDelegate.swift in Sources */,
 				26C5FEB226B972E700A80210 /* ItemListViewController.swift in Sources */,
 				2603605926C50D99002ADE85 /* CustomNumberFormatter.swift in Sources */,
+				26625BD726D6A6EA00544F31 /* ItemUploadCollectionViewCell.swift in Sources */,
 				26205AC426BABFE300EA3054 /* GetItemAPIRequest.swift in Sources */,
 				26625BD326D688C500544F31 /* ItemUploadCollectionReusableHeaderView.swift in Sources */,
 				26205AC826BAC2DB00EA3054 /* APIRequestLoader.swift in Sources */,
