@@ -22,5 +22,11 @@ final class ItemUploadViewController: UIViewController {
     static let identifier = "ItemUploadViewController"
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureImageCollectionView()
+    }
+    
+    private func configureImageCollectionView() {
+        imageCollectionView.delegate = self
+        imageCollectionView.dataSource = self
     }
 }
