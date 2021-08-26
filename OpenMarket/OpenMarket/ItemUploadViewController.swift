@@ -25,6 +25,7 @@ final class ItemUploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureImageCollectionView()
+        bindViewModel()
     }
     
     private func configureImageCollectionView() {
@@ -35,5 +36,13 @@ final class ItemUploadViewController: UIViewController {
         imageCollectionView.register(headerViewNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier)
         let nib = UINib(nibName: ItemUploadCollectionViewCell.identifier, bundle: nil)
         imageCollectionView.register(nib, forCellWithReuseIdentifier: ItemUploadCollectionViewCell.identifier)
+    }
+    
+    private func bindViewModel() {
+        itemUploadViewModel.selectedImages.bind({ [weak self] _ in
+            DispatchQueue.main.async {
+                self?.imageCollectionView.reloadData()
+            }
+        })
     }
 }
