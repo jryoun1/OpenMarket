@@ -52,4 +52,8 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemUploadViewModel.numberOfSections
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemUploadViewModel.selectedImages.value?.count ?? 0
+    }
 }
