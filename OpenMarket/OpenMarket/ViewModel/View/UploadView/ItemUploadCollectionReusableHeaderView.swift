@@ -9,16 +9,23 @@ import UIKit
 import Photos
 import BSImagePicker
 
+protocol SelectedImageForUpload: AnyObject {
+    func didPickupImage(images: [UIImage])
+}
+
+
 final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     static let identifier = "ItemUploadCollectionReusableHeaderView"
     @IBOutlet private var imageAddButton: UIButton!
     @IBOutlet private var imageCountLabel: UILabel!
     private var selectedAssets: [PHAsset] = []
     private var userSelectedImages: [UIImage] = []
+    weak var selectedImageForUpload: SelectedImageForUpload?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
+        selectedImageForUpload = self
     }
     
     private func configureLayout() {
@@ -42,6 +49,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                                                         self.selectedAssets.append(assets[i])
                                                     }
                                                     self.convertAssetToImages()
+                                                    self.selectedImageForUpload?.didPickupImage(images: self.userSelectedImages)
                                                   })
     }
     
@@ -66,6 +74,13 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                 self.userSelectedImages.append(newImage! as UIImage)
             }
         }
+    }
+}
+
+//MARK:- SelectedImageForUpload protocol
+extension ItemUploadCollectionReusableHeaderView: SelectedImageForUpload {
+    func didPickupImage(images: [UIImage]) {
+        //
     }
 }
 
