@@ -80,6 +80,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier, for: indexPath) as? ItemUploadCollectionReusableHeaderView else {
                 return UICollectionReusableView()
             }
+            headerView.updateSelectedImagesDelegate = self
             headerView.configure(data: itemUploadViewModel.selectedImages.value?.count ?? 0)
             
             return headerView
@@ -96,5 +97,12 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
 extension ItemUploadViewController: DeleteImage {
     func delete(index: Int) {
         _ = itemUploadViewModel.selectedImages.value?.remove(at: index)
+    }
+}
+
+//MARK:- UpdateSelectedImages protocol
+extension ItemUploadViewController: UpdateSelectedImages {
+    func update(images: [UIImage]) {
+        _ = itemUploadViewModel.selectedImages.value?.append(contentsOf: images)
     }
 }
