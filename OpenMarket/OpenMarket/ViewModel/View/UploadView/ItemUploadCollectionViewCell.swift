@@ -15,4 +15,8 @@ final class ItemUploadCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func configure(image: UIImage) {
+        itemImageView.image = image
+    }
 }
