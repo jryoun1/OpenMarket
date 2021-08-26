@@ -7,11 +7,10 @@
 
 import UIKit
 
-class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
-
+final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
+    static let identifier = "ItemUploadCollectionReusableHeaderView"
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
 }
