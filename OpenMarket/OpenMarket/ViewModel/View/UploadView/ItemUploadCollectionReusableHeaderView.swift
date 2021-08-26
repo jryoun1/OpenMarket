@@ -37,4 +37,19 @@ extension UIWindow {
             return UIApplication.shared.keyWindow
         }
     }
+    
+    public func getCurrentViewController(from viewController: UIViewController?) -> UIViewController? {
+        if let navigationController = viewController as? UINavigationController {
+            return self.getCurrentViewController(from: navigationController.visibleViewController)
+        }
+        else if let tabBarController = viewController as? UITabBarController {
+            return self.getCurrentViewController(from: tabBarController.selectedViewController)
+        }
+        else {
+            guard let currentViewController = viewController?.presentedViewController else {
+                return viewController
+            }
+            return self.getCurrentViewController(from: currentViewController)
+        }
+    }
 }
