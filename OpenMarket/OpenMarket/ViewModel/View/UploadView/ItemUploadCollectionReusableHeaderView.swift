@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Photos
+import BSImagePicker
 
 final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     static let identifier = "ItemUploadCollectionReusableHeaderView"
     @IBOutlet private var imageAddButton: UIButton!
     @IBOutlet private var imageCountLabel: UILabel!
+    private var selectedAssets: [PHAsset] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
