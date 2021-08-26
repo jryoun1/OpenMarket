@@ -19,4 +19,8 @@ final class ItemUploadCollectionViewCell: UICollectionViewCell {
     func configure(image: UIImage) {
         itemImageView.image = image
     }
+    
+    override func prepareForReuse() {
+        itemImageView.image = nil
+    }
 }
