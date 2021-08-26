@@ -13,6 +13,9 @@ protocol SelectedImageForUpload: AnyObject {
     func didPickupImage(images: [UIImage])
 }
 
+protocol UpdateSelectedImages: AnyObject {
+    func update(images: [UIImage])
+}
 
 final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     static let identifier = "ItemUploadCollectionReusableHeaderView"
@@ -21,6 +24,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     private var selectedAssets: [PHAsset] = []
     private var userSelectedImages: [UIImage] = []
     weak var selectedImageForUpload: SelectedImageForUpload?
+    weak var updateSelectedImagesDelegate: UpdateSelectedImages?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,7 +84,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
 //MARK:- SelectedImageForUpload protocol
 extension ItemUploadCollectionReusableHeaderView: SelectedImageForUpload {
     func didPickupImage(images: [UIImage]) {
-        //
+        self.updateSelectedImagesDelegate?.update(images: images)
     }
 }
 
