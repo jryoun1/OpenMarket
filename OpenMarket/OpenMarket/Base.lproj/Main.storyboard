@@ -57,17 +57,17 @@
                                                 <rect key="frame" x="10" y="0.0" width="394" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="DCl-bd-XKr"/>
+                                                    <constraint firstAttribute="height" constant="100" id="DCl-bd-XKr"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EZW-s3-Cbf">
                                                     <size key="itemSize" width="128" height="128"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="headerReferenceSize" width="50" height="50"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="xZA-UV-TcH">
-                                                        <rect key="frame" x="0.0" y="11" width="128" height="128"/>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ItemUploadCollectionViewCell" id="xZA-UV-TcH" customClass="ItemCollectionViewCell" customModule="OpenMarket" customModuleProvider="target">
+                                                        <rect key="frame" x="50" y="11" width="128" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZVW-4D-o5y">
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -75,6 +75,10 @@
                                                         </collectionViewCellContentView>
                                                     </collectionViewCell>
                                                 </cells>
+                                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ItemUploadCollectionReusableHeaderView" id="XKg-V5-IVK" customClass="ItemUploadCollectionReusableHeaderView" customModule="OpenMarket" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionReusableView>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-0w-6my" userLabel="Line View">
                                                 <rect key="frame" x="10" y="151" width="394" height="1"/>

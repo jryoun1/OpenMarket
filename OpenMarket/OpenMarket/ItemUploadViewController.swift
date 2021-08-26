@@ -20,6 +20,7 @@ final class ItemUploadViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     static let identifier = "ItemUploadViewController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureImageCollectionView()
@@ -28,5 +29,10 @@ final class ItemUploadViewController: UIViewController {
     private func configureImageCollectionView() {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
+        
+        let headerViewNib = UINib(nibName: ItemUploadCollectionReusableHeaderView.identifier, bundle: nil)
+        imageCollectionView.register(headerViewNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier)
+        let nib = UINib(nibName: ItemUploadCollectionViewCell.identifier, bundle: nil)
+        imageCollectionView.register(nib, forCellWithReuseIdentifier: ItemUploadCollectionViewCell.identifier)
     }
 }
