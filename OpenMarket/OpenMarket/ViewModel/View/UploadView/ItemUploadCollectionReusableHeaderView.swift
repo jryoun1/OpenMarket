@@ -14,6 +14,12 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        configureLayout()
     }
     
+    private func configureLayout() {
+        imageAddButton.layer.borderWidth = 1.0
+        imageAddButton.layer.cornerRadius = 10.0
+        imageAddButton.layer.borderColor = UIColor.black.cgColor
+    }
 }
