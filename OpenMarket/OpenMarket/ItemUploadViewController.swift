@@ -46,3 +46,10 @@ final class ItemUploadViewController: UIViewController {
         })
     }
 }
+
+//MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
+extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return itemUploadViewModel.numberOfSections
+    }
+}
