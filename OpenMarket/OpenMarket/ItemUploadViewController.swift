@@ -20,6 +20,7 @@ final class ItemUploadViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     static let identifier = "ItemUploadViewController"
+    private var itemUploadViewModel = ItemUploadViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
