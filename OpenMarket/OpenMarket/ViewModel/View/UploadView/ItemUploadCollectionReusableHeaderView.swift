@@ -23,6 +23,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     @IBOutlet private var imageCountLabel: UILabel!
     private var selectedAssets: [PHAsset] = []
     private var userSelectedImages: [UIImage] = []
+    private let limitNumberOfImages: Int = 5
     weak var selectImagesForUploadDelegate: SelectImagesForUpload?
     weak var updateSelectedImagesDelegate: UpdateSelectedImages?
     
@@ -40,7 +41,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     
     @IBAction private func touchUpImageAddButton(_ sender: UIButton) {
         let imagePicker = ImagePickerController()
-        imagePicker.settings.selection.max = 5
+        imagePicker.settings.selection.max = limitNumberOfImages
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
         
         let currentViewController = UIWindow.key?.currentViewController
@@ -78,6 +79,14 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                 self.userSelectedImages.append(newImage! as UIImage)
             }
         }
+    }
+    
+    func configure(data: Int) {
+        imageCountLabel.textColor = .black
+        if data > limitNumberOfImages {
+            imageCountLabel.textColor = .systemRed
+        }
+        imageCountLabel.text = "(\(data)/\(limitNumberOfImages))"
     }
 }
 

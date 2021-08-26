@@ -18,7 +18,7 @@
                     <rect key="frame" x="10" y="10" width="80" height="60"/>
                     <state key="normal" image="PhotoLibaray"/>
                     <connections>
-                        <action selector="chooseImageFromLibrary:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="K7u-Ge-NmT"/>
+                        <action selector="touchUpImageAddButton:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="K7u-Ge-NmT"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(0/5)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axp-Cj-hkx">
