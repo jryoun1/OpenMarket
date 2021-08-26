@@ -7,11 +7,10 @@
 
 import UIKit
 
-class ItemUploadCollectionViewCell: UICollectionViewCell {
-
+final class ItemUploadCollectionViewCell: UICollectionViewCell {
+    static let identifier = "ItemUploadCollectionViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
 }
