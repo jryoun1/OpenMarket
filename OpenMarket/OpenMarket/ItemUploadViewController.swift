@@ -61,6 +61,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemUploadCollectionViewCell.identifier, for: indexPath) as? ItemUploadCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.deleteImageDelegate = self
         
         if let image = itemUploadViewModel.selectedImages.value?[indexPath.row] {
             cell.tag = indexPath.row
@@ -68,5 +69,12 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         
         return cell
+    }
+}
+
+//MARK:- DeleteImage protocol
+extension ItemUploadViewController: DeleteImage {
+    func delete(index: Int) {
+        _ = itemUploadViewModel.selectedImages.value?.remove(at: index)
     }
 }
