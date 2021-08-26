@@ -75,6 +75,18 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
         return CGSize(width: 80, height: 80)
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier, for: indexPath) as? ItemUploadCollectionReusableHeaderView else {
+                return UICollectionReusableView()
+            }
+            headerView.configure(data: itemUploadViewModel.selectedImages.value?.count ?? 0)
+            
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
