@@ -14,6 +14,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     @IBOutlet private var imageAddButton: UIButton!
     @IBOutlet private var imageCountLabel: UILabel!
     private var selectedAssets: [PHAsset] = []
+    private var userSelectedImages: [UIImage] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
