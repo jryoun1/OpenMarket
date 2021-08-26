@@ -9,7 +9,7 @@ import UIKit
 import Photos
 import BSImagePicker
 
-protocol SelectedImageForUpload: AnyObject {
+protocol SelectImagesForUpload: AnyObject {
     func didPickupImage(images: [UIImage])
 }
 
@@ -23,13 +23,13 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     @IBOutlet private var imageCountLabel: UILabel!
     private var selectedAssets: [PHAsset] = []
     private var userSelectedImages: [UIImage] = []
-    weak var selectedImageForUpload: SelectedImageForUpload?
+    weak var selectImagesForUploadDelegate: SelectImagesForUpload?
     weak var updateSelectedImagesDelegate: UpdateSelectedImages?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
-        selectedImageForUpload = self
+        selectImagesForUploadDelegate = self
     }
     
     private func configureLayout() {
@@ -53,7 +53,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                                                         self.selectedAssets.append(assets[i])
                                                     }
                                                     self.convertAssetToImages()
-                                                    self.selectedImageForUpload?.didPickupImage(images: self.userSelectedImages)
+                                                    self.selectImagesForUploadDelegate?.didPickupImage(images: self.userSelectedImages)
                                                   })
     }
     
@@ -82,7 +82,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
 }
 
 //MARK:- SelectedImageForUpload protocol
-extension ItemUploadCollectionReusableHeaderView: SelectedImageForUpload {
+extension ItemUploadCollectionReusableHeaderView: SelectImagesForUpload {
     func didPickupImage(images: [UIImage]) {
         self.updateSelectedImagesDelegate?.update(images: images)
     }
