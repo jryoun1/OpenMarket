@@ -26,8 +26,26 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
         imageAddButton.layer.cornerRadius = 10.0
         imageAddButton.layer.borderColor = UIColor.black.cgColor
     }
+    
+    @IBAction private func touchUpImageAddButton(_ sender: UIButton) {
+        let imagePicker = ImagePickerController()
+        imagePicker.settings.selection.max = 5
+        imagePicker.settings.fetch.assets.supportedMediaTypes = [.image]
+        
+        let currentViewController = UIWindow.key?.currentViewController
+        currentViewController?.presentImagePicker(imagePicker,
+                                                  select: { (asset) in
+                                                  }, deselect: { (asset) in
+                                                  }, cancel: { (assets) in
+                                                  }, finish: { (assets) in
+                                                    for i in 0..<assets.count {
+                                                        self.selectedAssets.append(assets[i])
+                                                    }
+                                                  })
+    }
 }
 
+//MARK:- UIWindow extension
 extension UIWindow {
     static var key: UIWindow? {
         if #available(iOS 13, *) {
