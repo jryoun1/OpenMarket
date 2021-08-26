@@ -38,6 +38,10 @@ extension UIWindow {
         }
     }
     
+    public var currentViewController: UIViewController? {
+        return self.getCurrentViewController(from: self.rootViewController)
+    }
+    
     public func getCurrentViewController(from viewController: UIViewController?) -> UIViewController? {
         if let navigationController = viewController as? UINavigationController {
             return self.getCurrentViewController(from: navigationController.visibleViewController)
