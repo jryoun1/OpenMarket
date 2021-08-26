@@ -56,4 +56,17 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemUploadViewModel.selectedImages.value?.count ?? 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemUploadCollectionViewCell.identifier, for: indexPath) as? ItemUploadCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        if let image = itemUploadViewModel.selectedImages.value?[indexPath.row] {
+            cell.tag = indexPath.row
+            cell.configure(image: image)
+        }
+        
+        return cell
+    }
 }
