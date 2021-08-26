@@ -9,6 +9,8 @@ import UIKit
 
 final class ItemUploadCollectionViewCell: UICollectionViewCell {
     static let identifier = "ItemUploadCollectionViewCell"
+    @IBOutlet private weak var itemImageView: UIImageView!
+    @IBOutlet private weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
