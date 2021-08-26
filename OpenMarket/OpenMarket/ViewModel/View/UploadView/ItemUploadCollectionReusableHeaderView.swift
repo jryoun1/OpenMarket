@@ -41,7 +41,31 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                                                     for i in 0..<assets.count {
                                                         self.selectedAssets.append(assets[i])
                                                     }
+                                                    self.convertAssetToImages()
                                                   })
+    }
+    
+    private func convertAssetToImages() {
+        if selectedAssets.count != 0 {
+            for i in 0..<selectedAssets.count {
+                let imageManager = PHImageManager.default()
+                let option = PHImageRequestOptions()
+                option.isSynchronous = true
+                var thumbnail = UIImage()
+                
+                imageManager.requestImage(for: selectedAssets[i],
+                                          targetSize: CGSize(width: UIScreen.main.bounds.width, height: 200),
+                                          contentMode: .aspectFit,
+                                          options: option) { (result, info) in
+                    thumbnail = result!
+                }
+                
+                let data = thumbnail.jpegData(compressionQuality: 1)
+                let newImage = UIImage(data: data!)
+                
+                self.userSelectedImages.append(newImage! as UIImage)
+            }
+        }
     }
 }
 
