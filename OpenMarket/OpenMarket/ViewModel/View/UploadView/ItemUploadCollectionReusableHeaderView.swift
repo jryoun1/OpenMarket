@@ -88,6 +88,12 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
         }
         imageCountLabel.text = "(\(data)/\(limitNumberOfImages))"
     }
+    
+    override func prepareForReuse() {
+        selectedAssets.removeAll()
+        userSelectedImages.removeAll()
+        imageCountLabel.text = nil
+    }
 }
 
 //MARK:- SelectedImageForUpload protocol
