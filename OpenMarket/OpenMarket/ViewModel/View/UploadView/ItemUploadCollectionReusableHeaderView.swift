@@ -9,6 +9,9 @@ import UIKit
 
 final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     static let identifier = "ItemUploadCollectionReusableHeaderView"
+    @IBOutlet private var imageAddButton: UIButton!
+    @IBOutlet private var imageCountLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
