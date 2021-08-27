@@ -82,6 +82,16 @@ final class ItemUploadViewController: UIViewController {
         passwordCheckTextfield.inputAccessoryView = keyboardToolBar
         descriptionTextView.inputAccessoryView = keyboardToolBar
     }
+    
+    @objc private func didDoneButtonTouchedUp(_ sender: UIBarButtonItem) {
+        titleTextField.resignFirstResponder()
+        stockTextField.resignFirstResponder()
+        priceTextField.resignFirstResponder()
+        discountedPriceTextField.resignFirstResponder()
+        passwordTextfield.resignFirstResponder()
+        passwordCheckTextfield.resignFirstResponder()
+        descriptionTextView.resignFirstResponder()
+    }
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
