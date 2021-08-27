@@ -129,3 +129,10 @@ extension ItemUploadViewController: UpdateSelectedImageData {
         _ = itemUploadViewModel.selectedImageData.value?.append(contentsOf: data)
     }
 }
+
+//MARK:- PickerView
+extension ItemUploadViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+}
