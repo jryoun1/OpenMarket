@@ -24,6 +24,7 @@ final class ItemUploadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureImageCollectionView()
+        configureCurrencyPickerView()
         bindViewModel()
     }
     
@@ -43,6 +44,21 @@ final class ItemUploadViewController: UIViewController {
                 self?.imageCollectionView.reloadData()
             }
         })
+    }
+    
+    //MARK:- PickerView
+    private func configureCurrencyPickerView() {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        currencyTextField.inputView = pickerView
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(systemItem: .flexibleSpace)
+        let selectButton = UIBarButtonItem(title: ItemUploadViewString.selectButton, style: .plain, target: self, action: #selector(didSelectButtonTouchedUp(_:)))
+        toolBar.setItems([flexibleSpace, selectButton], animated: true)
+        currencyTextField.inputAccessoryView = toolBar
     }
 }
 
