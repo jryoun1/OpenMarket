@@ -60,6 +60,10 @@ final class ItemUploadViewController: UIViewController {
         toolBar.setItems([flexibleSpace, selectButton], animated: true)
         currencyTextField.inputAccessoryView = toolBar
     }
+    
+    @objc private func didSelectButtonTouchedUp(_ sender: UIPickerView) {
+        currencyTextField.resignFirstResponder()
+    }
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
