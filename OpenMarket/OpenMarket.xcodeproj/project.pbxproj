@@ -38,6 +38,7 @@
 		268C52A626C0EB420096D80D /* ItemListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C52A526C0EB420096D80D /* ItemListCellViewModel.swift */; };
 		268C52A926C0F1720096D80D /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C52A726C0F1720096D80D /* ItemTableViewCell.swift */; };
 		268C52AA26C0F1720096D80D /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268C52A826C0F1720096D80D /* ItemTableViewCell.xib */; };
+		26A7199D26D91E3500EE9816 /* ISO4217_CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A7199C26D91E3500EE9816 /* ISO4217_CurrencyCode.swift */; };
 		26C5FE7B26B905D500A80210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7A26B905D500A80210 /* AppDelegate.swift */; };
 		26C5FE7D26B905D500A80210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7C26B905D500A80210 /* SceneDelegate.swift */; };
 		26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */; };
@@ -105,6 +106,7 @@
 		268C52A526C0EB420096D80D /* ItemListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCellViewModel.swift; sourceTree = "<group>"; };
 		268C52A726C0F1720096D80D /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		268C52A826C0F1720096D80D /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		26A7199C26D91E3500EE9816 /* ISO4217_CurrencyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO4217_CurrencyCode.swift; sourceTree = "<group>"; };
 		26C5FE7726B905D500A80210 /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C5FE7A26B905D500A80210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26C5FE7C26B905D500A80210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				2603605826C50D99002ADE85 /* CustomNumberFormatter.swift */,
 				2629ED0C26D487D600B69654 /* ItemListViewString.swift */,
+				26A7199C26D91E3500EE9816 /* ISO4217_CurrencyCode.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -611,10 +614,10 @@
 				26205AC626BAC24F00EA3054 /* GetItemListAPIRequest.swift in Sources */,
 				26205ACC26BAC6FA00EA3054 /* OpenMarketError.swift in Sources */,
 				26C5FEAC26B911B700A80210 /* ItemList.swift in Sources */,
+				26A7199D26D91E3500EE9816 /* ISO4217_CurrencyCode.swift in Sources */,
 				2603606E26CF9B6D002ADE85 /* ItemUploadViewController.swift in Sources */,
 				2603606526CC1118002ADE85 /* ItemCollectionViewCell.swift in Sources */,
 				2603605D26C518A7002ADE85 /* GetImageAPIRequest.swift in Sources */,
-				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
 				2629ED0D26D487D600B69654 /* ItemListViewString.swift in Sources */,
 				2603605726C4DF5A002ADE85 /* Observable.swift in Sources */,
 				2666EB6E26BE5E540046D14F /* PatchItemAPIRequest.swift in Sources */,
