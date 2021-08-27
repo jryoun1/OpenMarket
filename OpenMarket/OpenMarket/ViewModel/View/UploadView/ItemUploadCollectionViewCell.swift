@@ -25,8 +25,8 @@ final class ItemUploadCollectionViewCell: UICollectionViewCell {
         deleteImageDelegate?.delete(index: self.tag)
     }
     
-    func configure(image: UIImage) {
-        itemImageView.image = image
+    func configure(data: Data) {
+        itemImageView.image = UIImage(data: data)
     }
     
     override func prepareForReuse() {

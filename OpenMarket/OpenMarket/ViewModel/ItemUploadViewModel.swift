@@ -8,7 +8,7 @@
 import UIKit
 
 final class ItemUploadViewModel {
-    var selectedImages: Observable<[UIImage]> = Observable([])
+    var selectedImageData: Observable<[Data]> = Observable([])
 }
 
 //MARK:- TableView Configuration Property

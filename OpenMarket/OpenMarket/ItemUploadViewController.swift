@@ -39,7 +39,7 @@ final class ItemUploadViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        itemUploadViewModel.selectedImages.bind({ [weak self] _ in
+        itemUploadViewModel.selectedImageData.bind({ [weak self] _ in
             DispatchQueue.main.async {
                 self?.imageCollectionView.reloadData()
             }
@@ -54,7 +54,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemUploadViewModel.selectedImages.value?.count ?? 0
+        return itemUploadViewModel.selectedImageData.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,9 +63,9 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         cell.deleteImageDelegate = self
         
-        if let image = itemUploadViewModel.selectedImages.value?[indexPath.row] {
+        if let data = itemUploadViewModel.selectedImageData.value?[indexPath.row] {
             cell.tag = indexPath.row
-            cell.configure(image: image)
+            cell.configure(data: data)
         }
         
         return cell
@@ -80,8 +80,8 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier, for: indexPath) as? ItemUploadCollectionReusableHeaderView else {
                 return UICollectionReusableView()
             }
-            headerView.updateSelectedImagesDelegate = self
-            headerView.configure(data: itemUploadViewModel.selectedImages.value?.count ?? 0)
+            headerView.updateSelectedImageDataDelegate = self
+            headerView.configure(data: itemUploadViewModel.selectedImageData.value?.count ?? 0)
             
             return headerView
         }
@@ -100,13 +100,13 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
 //MARK:- DeleteImage protocol
 extension ItemUploadViewController: DeleteImage {
     func delete(index: Int) {
-        _ = itemUploadViewModel.selectedImages.value?.remove(at: index)
+        _ = itemUploadViewModel.selectedImageData.value?.remove(at: index)
     }
 }
 
 //MARK:- UpdateSelectedImages protocol
-extension ItemUploadViewController: UpdateSelectedImages {
-    func update(images: [UIImage]) {
-        _ = itemUploadViewModel.selectedImages.value?.append(contentsOf: images)
+extension ItemUploadViewController: UpdateSelectedImageData {
+    func update(data: [Data]) {
+        _ = itemUploadViewModel.selectedImageData.value?.append(contentsOf: data)
     }
 }

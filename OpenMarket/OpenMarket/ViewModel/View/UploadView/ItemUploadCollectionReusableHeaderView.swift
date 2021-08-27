@@ -9,12 +9,12 @@ import UIKit
 import Photos
 import BSImagePicker
 
-protocol SelectImagesForUpload: AnyObject {
-    func didPickupImage(images: [UIImage])
+protocol SelectImageDataForUpload: AnyObject {
+    func didPickupImageData(data: [Data])
 }
 
-protocol UpdateSelectedImages: AnyObject {
-    func update(images: [UIImage])
+protocol UpdateSelectedImageData: AnyObject {
+    func update(data: [Data])
 }
 
 final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
@@ -22,15 +22,15 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     @IBOutlet private var imageAddButton: UIButton!
     @IBOutlet private var imageCountLabel: UILabel!
     private var selectedAssets: [PHAsset] = []
-    private var userSelectedImages: [UIImage] = []
+    private var userSelectedImageData: [Data] = []
     private let limitNumberOfImages: Int = 5
-    weak var selectImagesForUploadDelegate: SelectImagesForUpload?
-    weak var updateSelectedImagesDelegate: UpdateSelectedImages?
+    weak var selectImageDataForUploadDelegate: SelectImageDataForUpload?
+    weak var updateSelectedImageDataDelegate: UpdateSelectedImageData?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
-        selectImagesForUploadDelegate = self
+        selectImageDataForUploadDelegate = self
     }
     
     private func configureLayout() {
@@ -54,7 +54,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                                                         self.selectedAssets.append(assets[i])
                                                     }
                                                     self.convertAssetToImages()
-                                                    self.selectImagesForUploadDelegate?.didPickupImage(images: self.userSelectedImages)
+                                                    self.selectImageDataForUploadDelegate?.didPickupImageData(data: self.userSelectedImageData)
                                                   })
     }
     
@@ -74,9 +74,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                 }
                 
                 let data = thumbnail.jpegData(compressionQuality: 1)
-                let newImage = UIImage(data: data!)
-                
-                self.userSelectedImages.append(newImage! as UIImage)
+                self.userSelectedImageData.append(data! as Data)
             }
         }
     }
@@ -91,15 +89,15 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     
     override func prepareForReuse() {
         selectedAssets.removeAll()
-        userSelectedImages.removeAll()
+        userSelectedImageData.removeAll()
         imageCountLabel.text = nil
     }
 }
 
 //MARK:- SelectedImageForUpload protocol
-extension ItemUploadCollectionReusableHeaderView: SelectImagesForUpload {
-    func didPickupImage(images: [UIImage]) {
-        self.updateSelectedImagesDelegate?.update(images: images)
+extension ItemUploadCollectionReusableHeaderView: SelectImageDataForUpload {
+    func didPickupImageData(data: [Data]) {
+        self.updateSelectedImageDataDelegate?.update(data: data)
     }
 }
 
