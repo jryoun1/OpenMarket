@@ -25,6 +25,7 @@ final class ItemUploadViewController: UIViewController {
         super.viewDidLoad()
         configureImageCollectionView()
         configureCurrencyPickerView()
+        configureKeyboardToolBar()
         bindViewModel()
     }
     
@@ -63,6 +64,23 @@ final class ItemUploadViewController: UIViewController {
     
     @objc private func didSelectButtonTouchedUp(_ sender: UIPickerView) {
         currencyTextField.resignFirstResponder()
+    }
+    
+    //MARK:- KeyBoard
+    private func configureKeyboardToolBar() {
+        let keyboardToolBar = UIToolbar()
+        keyboardToolBar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didDoneButtonTouchedUp(_:)))
+        keyboardToolBar.items = [flexibleSpace, doneButton]
+        
+        titleTextField.inputAccessoryView = keyboardToolBar
+        stockTextField.inputAccessoryView = keyboardToolBar
+        priceTextField.inputAccessoryView = keyboardToolBar
+        discountedPriceTextField.inputAccessoryView = keyboardToolBar
+        passwordTextfield.inputAccessoryView = keyboardToolBar
+        passwordCheckTextfield.inputAccessoryView = keyboardToolBar
+        descriptionTextView.inputAccessoryView = keyboardToolBar
     }
 }
 
