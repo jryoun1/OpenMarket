@@ -23,10 +23,18 @@ final class ItemUploadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureImageCollectionView()
         configureCurrencyPickerView()
         configureKeyboardToolBar()
         bindViewModel()
+    }
+    
+    private func configureNavigationBar() {
+        self.title = ItemUploadViewString.navigationBarTitle
+        
+        let doneButton = UIBarButtonItem(title: ItemUploadViewString.doneButton, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+        self.navigationItem.rightBarButtonItem = doneButton
     }
     
     private func configureImageCollectionView() {
