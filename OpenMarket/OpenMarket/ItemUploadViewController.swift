@@ -208,3 +208,23 @@ extension ItemUploadViewController: UIPickerViewDelegate, UIPickerViewDataSource
         currencyTextField.text = CurrencyCode.list[row].description
     }
 }
+
+//MARK:- UITextFieldDelegate
+extension ItemUploadViewController: UITextFieldDelegate {
+    private func highlightTextField(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemRed.cgColor
+        textField.layer.cornerRadius = 3
+    }
+}
+
+//MARK:- UITextViewDelegate
+extension ItemUploadViewController: UITextViewDelegate {
+    private func highlightTextView(_ textView: UITextView) {
+        textView.resignFirstResponder()
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.systemRed.cgColor
+        textView.layer.cornerRadius = 3
+    }
+}
