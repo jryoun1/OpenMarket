@@ -301,4 +301,11 @@ extension ItemUploadViewController: UITextViewDelegate {
             descriptionTextView.textColor = .systemGray3
         }
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        errorMessageLabel.isHidden = true
+        descriptionTextView.layer.borderWidth = 0
+        
+        descriptionTextViewConfigurePlaceholder()
+    }
 }
