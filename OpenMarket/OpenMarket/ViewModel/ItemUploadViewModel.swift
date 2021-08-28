@@ -115,7 +115,7 @@ final class ItemUploadViewModel {
             isPasswordTextFieldHighLighted.value = true
             return .Incorrect
         }
-        if description == ItemUploadViewString.descriptionPlaceholder {
+        if description == ItemUploadViewString.descriptionPlaceholder || description.isEmpty {
             itemToUploadsInputErrorMessage.value = ItemUploadViewString.descriptionEmptyMessage
             isDescriptionTextViewHighLighted.value = true
             return .Incorrect
