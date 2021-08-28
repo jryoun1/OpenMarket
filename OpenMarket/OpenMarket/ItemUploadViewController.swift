@@ -45,6 +45,40 @@ final class ItemUploadViewController: UIViewController {
                 self?.imageCollectionView.reloadData()
             }
         })
+        
+        itemUploadViewModel.itemToUploadsInputErrorMessage.bind { [weak self] in
+            self?.errorMessageLabel.isHidden = false
+            self?.errorMessageLabel.text = $0
+        }
+        
+        itemUploadViewModel.isTitleTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.titleTextField)!) }
+        }
+        
+        itemUploadViewModel.isCurrencyTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.currencyTextField)!) }
+        }
+        
+        itemUploadViewModel.isPriceTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.priceTextField)!) }
+        }
+        
+        itemUploadViewModel.isStockTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.stockTextField)!) }
+        }
+        
+        itemUploadViewModel.isPasswordTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.passwordTextfield)!) }
+        }
+        
+        itemUploadViewModel.isDescriptionTextViewHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextView((self?.descriptionTextView)!) }
+        }
+        
+        itemUploadViewModel.networkErrorMessage.bind {
+            guard let errorMessage = $0 else { return }
+            //TODO:- Handle if network error occured (e.g. AlertController)
+        }
     }
     
     //MARK:- PickerView
