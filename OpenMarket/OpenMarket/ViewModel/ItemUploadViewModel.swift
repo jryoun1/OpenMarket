@@ -43,6 +43,16 @@ final class ItemUploadViewModel {
             description = itemToUpload.descriptions!
         }
     }
+    
+    func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String) {
+        itemToUpload.title = title
+        itemToUpload.currency = currency
+        itemToUpload.price = price
+        itemToUpload.discountedPrice = discountedPrice
+        itemToUpload.stock = stock
+        itemToUpload.password = password
+        itemToUpload.descriptions = description
+    }
 }
 
 //MARK:- TableView Configuration Property
