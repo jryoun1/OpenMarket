@@ -308,4 +308,10 @@ extension ItemUploadViewController: UITextViewDelegate {
         
         descriptionTextViewConfigurePlaceholder()
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            descriptionTextViewConfigurePlaceholder()
+        }
+    }
 }
