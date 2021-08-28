@@ -46,7 +46,7 @@ final class ItemUploadViewController: UIViewController {
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!)
-            checkIsInputCorrect()
+            checkItemToUploadInput()
             return
         }
         
@@ -58,7 +58,7 @@ final class ItemUploadViewController: UIViewController {
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!)
-            checkIsInputCorrect()
+            checkItemToUploadInput()
             return
         }
         
@@ -69,7 +69,17 @@ final class ItemUploadViewController: UIViewController {
                                                stock: Int(stockText)!,
                                                password: passwordTextfield.text!,
                                                description: descriptionTextView.text!)
-        checkIsInputCorrect()
+        checkItemToUploadInput()
+    }
+    
+    private func checkItemToUploadInput() {
+        switch itemUploadViewModel.checkItemToUploadInput() {
+        case .Correct:
+            itemUploadViewModel.upload()
+            self.navigationController?.popViewController(animated: true)
+        case .Incorrect:
+            return
+        }
     }
     
     private func configureImageCollectionView() {
