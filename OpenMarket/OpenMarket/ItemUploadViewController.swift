@@ -28,6 +28,7 @@ final class ItemUploadViewController: UIViewController {
         configureImageCollectionView()
         configureCurrencyPickerView()
         configureKeyboardToolBar()
+        registerNotificationForKeyboard()
         bindViewModel()
     }
     
@@ -177,6 +178,12 @@ final class ItemUploadViewController: UIViewController {
         discountedPriceTextField.resignFirstResponder()
         passwordTextfield.resignFirstResponder()
         descriptionTextView.resignFirstResponder()
+    }
+    
+    //MARK:- Keyboard view up
+    private func registerNotificationForKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
