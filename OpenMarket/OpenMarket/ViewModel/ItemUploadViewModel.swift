@@ -8,6 +8,7 @@
 import UIKit
 
 final class ItemUploadViewModel {
+    private var apiRequestLoader: APIRequestLoader<PostItemAPIReqeust>!
     var selectedImageData: Observable<[Data]> = Observable([])
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -52,6 +53,34 @@ final class ItemUploadViewModel {
         itemToUpload.stock = stock
         itemToUpload.password = password
         itemToUpload.descriptions = description
+    }
+    
+    func upload() {
+        let postItemAPIRequest = PostItemAPIReqeust()
+        apiRequestLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
+        
+        guard let price = self.price,
+              let stock = self.stock else {
+            return
+        }
+        
+        let itemToUploads = ItemToUpload(title: self.title,
+                                         descriptions: self.description,
+                                         price: price,
+                                         currency: self.currency,
+                                         stock: stock,
+                                         discountedPrice: self.discountedPrice,
+                                         images: self.selectedImageData.value,
+                                         password: self.password)
+        
+        
+        apiRequestLoader.loadAPIReqeust(requestData: itemToUploads) { [weak self] item, error in
+            guard let error = error else {
+                return
+            }
+            
+            self?.networkErrorMessage.value = error.localizedDescription
+        }
     }
 }
 
