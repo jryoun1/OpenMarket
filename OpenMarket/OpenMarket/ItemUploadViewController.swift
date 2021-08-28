@@ -270,6 +270,16 @@ extension ItemUploadViewController: UITextFieldDelegate {
         textField.layer.borderColor = UIColor.systemRed.cgColor
         textField.layer.cornerRadius = 3
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        errorMessageLabel.isHidden = true
+        titleTextField.layer.borderWidth = 0
+        currencyTextField.layer.borderWidth = 0
+        priceTextField.layer.borderWidth = 0
+        discountedPriceTextField.layer.borderWidth = 0
+        stockTextField.layer.borderWidth = 0
+        passwordTextfield.layer.borderWidth = 0
+    }
 }
 
 //MARK:- UITextViewDelegate
