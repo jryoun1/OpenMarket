@@ -8,6 +8,7 @@
 import UIKit
 
 final class ItemUploadViewController: UIViewController {
+    @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var currencyTextField: UITextField!
@@ -15,7 +16,6 @@ final class ItemUploadViewController: UIViewController {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var discountedPriceTextField: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
-    @IBOutlet weak var passwordCheckTextfield: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
     static let identifier = "ItemUploadViewController"
@@ -79,7 +79,6 @@ final class ItemUploadViewController: UIViewController {
         priceTextField.inputAccessoryView = keyboardToolBar
         discountedPriceTextField.inputAccessoryView = keyboardToolBar
         passwordTextfield.inputAccessoryView = keyboardToolBar
-        passwordCheckTextfield.inputAccessoryView = keyboardToolBar
         descriptionTextView.inputAccessoryView = keyboardToolBar
     }
     
@@ -89,7 +88,6 @@ final class ItemUploadViewController: UIViewController {
         priceTextField.resignFirstResponder()
         discountedPriceTextField.resignFirstResponder()
         passwordTextfield.resignFirstResponder()
-        passwordCheckTextfield.resignFirstResponder()
         descriptionTextView.resignFirstResponder()
     }
 }

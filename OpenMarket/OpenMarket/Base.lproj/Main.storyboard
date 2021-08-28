@@ -50,8 +50,14 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="nqG-R5-rSv">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="581"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="561"/>
                                         <subviews>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2g-Vr-AOl">
+                                                <rect key="frame" x="10" y="0.0" width="394" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="x2b-dz-nhE">
                                                 <rect key="frame" x="10" y="0.0" width="394" height="100"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -204,7 +210,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KEo-RV-5Yc" userLabel="비밀번호 스택뷰">
-                                                <rect key="frame" x="10" y="422" width="394" height="95"/>
+                                                <rect key="frame" x="10" y="422" width="394" height="56"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀 번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Skq-yf-uWT" userLabel="비밀 번호">
                                                         <rect key="frame" x="0.0" y="0.0" width="394" height="17"/>
@@ -220,25 +226,17 @@
                                                             <outlet property="delegate" destination="RdJ-aw-2rc" id="n2h-bf-H29"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="한 번 더 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QSI-Cg-3Bw">
-                                                        <rect key="frame" x="0.0" y="61" width="394" height="34"/>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="RdJ-aw-2rc" id="Pks-en-Fxe"/>
-                                                        </connections>
-                                                    </textField>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biU-mr-F8S" userLabel="Line View">
-                                                <rect key="frame" x="10" y="520" width="394" height="1"/>
+                                                <rect key="frame" x="10" y="481" width="394" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="h9Y-26-lKC"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="6zc-U3-q1p" userLabel="상세 설명 스택뷰">
-                                                <rect key="frame" x="10" y="524" width="394" height="57"/>
+                                                <rect key="frame" x="10" y="485" width="394" height="76"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제품 상세 설명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NcH-3d-TCB">
                                                         <rect key="frame" x="0.0" y="0.0" width="394" height="17"/>
@@ -246,8 +244,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="입력해주세요" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SLu-UD-iBA">
-                                                        <rect key="frame" x="0.0" y="22" width="394" height="35"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="게시글 내용을 작성해주세요. (가품 및 판매금지품목은 게시가 제한될 수 있어요.)" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SLu-UD-iBA">
+                                                        <rect key="frame" x="0.0" y="22" width="394" height="54"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="textColor" systemColor="systemGray3Color"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -270,9 +268,11 @@
                                             <constraint firstItem="b3p-lv-X7w" firstAttribute="width" secondItem="tuO-0w-6my" secondAttribute="width" id="M1X-bE-2yO"/>
                                             <constraint firstAttribute="trailing" secondItem="x2b-dz-nhE" secondAttribute="trailing" constant="10" id="MkU-8f-glI"/>
                                             <constraint firstAttribute="trailing" secondItem="lyz-Cc-ZTa" secondAttribute="trailing" constant="10" id="Ohk-Dt-Fu9"/>
+                                            <constraint firstItem="H2g-Vr-AOl" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="XUJ-ZJ-K5A"/>
                                             <constraint firstAttribute="trailing" secondItem="lvu-4J-Pm7" secondAttribute="trailing" constant="10" id="af8-QQ-f3R"/>
                                             <constraint firstAttribute="trailing" secondItem="ASN-YM-hLd" secondAttribute="trailing" constant="10" id="diw-zA-lBt"/>
                                             <constraint firstItem="otp-Us-Omw" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="eAW-Pj-vVp"/>
+                                            <constraint firstItem="biU-mr-F8S" firstAttribute="width" secondItem="tuO-0w-6my" secondAttribute="width" id="eHC-ww-Czu"/>
                                             <constraint firstItem="6zc-U3-q1p" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="f35-vk-Flc"/>
                                             <constraint firstItem="lyz-Cc-ZTa" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="gTy-IC-r1p"/>
                                             <constraint firstItem="ASN-YM-hLd" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="jrh-Ht-RkE"/>
@@ -281,6 +281,7 @@
                                             <constraint firstItem="pkH-OF-Nvx" firstAttribute="width" secondItem="tuO-0w-6my" secondAttribute="width" id="pHT-2y-JJN"/>
                                             <constraint firstItem="ooC-XD-xcb" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="pxk-0C-91n"/>
                                             <constraint firstItem="tuO-0w-6my" firstAttribute="leading" secondItem="nqG-R5-rSv" secondAttribute="leading" constant="10" id="qMe-qD-m00"/>
+                                            <constraint firstAttribute="trailing" secondItem="H2g-Vr-AOl" secondAttribute="trailing" constant="10" id="qrT-Gp-0Ft"/>
                                             <constraint firstItem="h8D-74-udT" firstAttribute="width" secondItem="tuO-0w-6my" secondAttribute="width" id="u04-oX-x70"/>
                                             <constraint firstAttribute="trailing" secondItem="otp-Us-Omw" secondAttribute="trailing" constant="10" id="xk2-1l-MCj"/>
                                         </constraints>
@@ -310,8 +311,8 @@
                         <outlet property="currencyTextField" destination="Pb0-XT-V5F" id="amV-AZ-moA"/>
                         <outlet property="descriptionTextView" destination="SLu-UD-iBA" id="Qfr-rO-exa"/>
                         <outlet property="discountedPriceTextField" destination="FQy-vZ-Fz0" id="GQn-Qp-Uhz"/>
+                        <outlet property="errorMessageLabel" destination="H2g-Vr-AOl" id="srt-aW-xq1"/>
                         <outlet property="imageCollectionView" destination="x2b-dz-nhE" id="BN7-PT-LAz"/>
-                        <outlet property="passwordCheckTextfield" destination="QSI-Cg-3Bw" id="MEb-zi-YeN"/>
                         <outlet property="passwordTextfield" destination="62E-Kx-Piz" id="Np3-hx-pFE"/>
                         <outlet property="priceTextField" destination="UxG-Mf-8KE" id="rRv-wR-0OQ"/>
                         <outlet property="stockTextField" destination="Oxe-Ex-IzP" id="TjH-mI-Czx"/>
@@ -332,6 +333,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
