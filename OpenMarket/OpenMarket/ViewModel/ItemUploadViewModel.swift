@@ -82,6 +82,46 @@ final class ItemUploadViewModel {
             self?.networkErrorMessage.value = error.localizedDescription
         }
     }
+    
+    func checkItemToUploadInput() -> ItemToUploadInputStatus {
+        if let imageCount = selectedImageData.value?.count {
+            if  imageCount < 1 || imageCount > 5 {
+                itemToUploadsInputErrorMessage.value = ItemUploadViewString.imageCountLimitMessage
+                return .Incorrect
+            }
+        }
+        if title.isEmpty {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.titleEmptyMessage
+            isTitleTextFieldHighLighted.value = true
+            return .Incorrect
+        }
+        if currency.isEmpty {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.currencyEmptyMessage
+            isCurrencyTextFieldHighLighted.value = true
+            return .Incorrect
+        }
+        if price == nil {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.priceEmptyMessage
+            isPriceTextFieldHighLighted.value = true
+            return .Incorrect
+        }
+        if stock == nil {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.stockEmptyMessage
+            isStockTextFieldHighLighted.value = true
+            return .Incorrect
+        }
+        if password.isEmpty {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.passwordEmptyMessage
+            isPasswordTextFieldHighLighted.value = true
+            return .Incorrect
+        }
+        if description == ItemUploadViewString.descriptionPlaceholder {
+            itemToUploadsInputErrorMessage.value = ItemUploadViewString.descriptionEmptyMessage
+            isDescriptionTextViewHighLighted.value = true
+            return .Incorrect
+        }
+        return .Correct
+    }
 }
 
 //MARK:- TableView Configuration Property
