@@ -26,6 +26,7 @@ final class ItemListViewController: UIViewController {
         let nib = UINib(nibName: ItemCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         collectionView.register(ItemCollectionReusableFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ItemCollectionReusableFooterView.identifier)
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
     
@@ -240,7 +241,7 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
             return UIView()
         }
         
-        footerView.contentView.backgroundColor = .white
+        footerView.contentView.backgroundColor = itemTableView.backgroundColor
         
         return footerView
     }
