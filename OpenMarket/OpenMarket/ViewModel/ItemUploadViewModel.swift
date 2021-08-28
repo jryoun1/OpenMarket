@@ -18,6 +18,11 @@ final class ItemUploadViewModel {
     var isPasswordTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isDescriptionTextViewHighLighted: Observable<Bool> = Observable(false)
     var networkErrorMessage: Observable<String?> = Observable(nil)
+    
+    enum ItemToUploadInputStatus {
+        case Correct
+        case Incorrect
+    }
 }
 
 //MARK:- TableView Configuration Property
