@@ -32,6 +32,10 @@ final class ItemUploadViewController: UIViewController {
         bindViewModel()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func configureNavigationBar() {
         self.title = ItemUploadViewString.navigationBarTitle
         
