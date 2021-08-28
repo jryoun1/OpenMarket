@@ -290,4 +290,15 @@ extension ItemUploadViewController: UITextViewDelegate {
         textView.layer.borderColor = UIColor.systemRed.cgColor
         textView.layer.cornerRadius = 3
     }
+    
+    private func descriptionTextViewConfigurePlaceholder() {
+        if descriptionTextView.text == ItemUploadViewString.descriptionPlaceholder {
+            descriptionTextView.text = ""
+            descriptionTextView.textColor = .black
+        }
+        else if descriptionTextView.text.isEmpty {
+            descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
+            descriptionTextView.textColor = .systemGray3
+        }
+    }
 }
