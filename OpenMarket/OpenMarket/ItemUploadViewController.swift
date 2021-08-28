@@ -37,6 +37,41 @@ final class ItemUploadViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = doneButton
     }
     
+    @objc private func uploadItemToServer(_ sender: UIBarButtonItem) {
+        guard let priceText = priceTextField.text, !priceText.isEmpty else {
+            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                                   currency: currencyTextField.text!,
+                                                   price: nil,
+                                                   discountedPrice: nil,
+                                                   stock: nil,
+                                                   password: passwordTextfield.text!,
+                                                   description: descriptionTextView.text!)
+            checkIsInputCorrect()
+            return
+        }
+        
+        guard let stockText = stockTextField.text, !stockText.isEmpty else {
+            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                                   currency: currencyTextField.text!,
+                                                   price: Int(priceText)!,
+                                                   discountedPrice: nil,
+                                                   stock: nil,
+                                                   password: passwordTextfield.text!,
+                                                   description: descriptionTextView.text!)
+            checkIsInputCorrect()
+            return
+        }
+        
+        itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                               currency: currencyTextField.text!,
+                                               price: Int(priceText)!,
+                                               discountedPrice: Int(discountedPriceTextField.text!),
+                                               stock: Int(stockText)!,
+                                               password: passwordTextfield.text!,
+                                               description: descriptionTextView.text!)
+        checkIsInputCorrect()
+    }
+    
     private func configureImageCollectionView() {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
