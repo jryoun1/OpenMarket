@@ -8,6 +8,7 @@
 import UIKit
 
 final class ItemUploadViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var titleTextField: UITextField!
