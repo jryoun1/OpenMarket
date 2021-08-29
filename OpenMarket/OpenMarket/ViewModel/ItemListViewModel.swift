@@ -12,7 +12,7 @@ final class ItemListViewModel {
     var currentPage: Int = 1
     var isPaging: Bool = false
     var hasNextPage: Bool = false
-    var itemList: Observable<[ItemListCellViewModel]> = Observable([])
+    var itemList: Observable<[Item]> = Observable([])
     
     func fetchData(page: Int) {
         let getItemListAPIRequest = GetItemListAPIRequest()
@@ -26,7 +26,7 @@ final class ItemListViewModel {
             
             self?.hasNextPage = true
             _ = itemList.items.compactMap({ item in
-                self?.itemList.value?.append(ItemListCellViewModel(item))
+                self?.itemList.value?.append(item)
             })
         }
     }
