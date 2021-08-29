@@ -9,11 +9,11 @@ import UIKit
 import Photos
 import BSImagePicker
 
-protocol SelectImageDataForUpload: AnyObject {
-    func didPickupImageData(data: [Data])
+protocol ImageDataSelectable: AnyObject {
+    func select(data: [Data])
 }
 
-protocol UpdateSelectedImageData: AnyObject {
+protocol SelectedImageDataUpdatable: AnyObject {
     func update(data: [Data])
 }
 
@@ -24,13 +24,13 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     private var selectedAssets: [PHAsset] = []
     private var userSelectedImageData: [Data] = []
     private let limitNumberOfImages: Int = 5
-    weak var selectImageDataForUploadDelegate: SelectImageDataForUpload?
-    weak var updateSelectedImageDataDelegate: UpdateSelectedImageData?
+    weak var imageDataSelectableDelegate: ImageDataSelectable?
+    weak var selectedImageDataUpdatableDelegate: SelectedImageDataUpdatable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureLayout()
-        selectImageDataForUploadDelegate = self
+        imageDataSelectableDelegate = self
     }
     
     private func configureLayout() {
@@ -54,7 +54,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
                                                         self.selectedAssets.append(assets[i])
                                                     }
                                                     self.convertAssetToImages()
-                                                    self.selectImageDataForUploadDelegate?.didPickupImageData(data: self.userSelectedImageData)
+                                                    self.imageDataSelectableDelegate?.select(data: self.userSelectedImageData)
                                                   })
     }
     
@@ -94,10 +94,10 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     }
 }
 
-//MARK:- SelectedImageForUpload protocol
-extension ItemUploadCollectionReusableHeaderView: SelectImageDataForUpload {
-    func didPickupImageData(data: [Data]) {
-        self.updateSelectedImageDataDelegate?.update(data: data)
+//MARK:- ImageDataSelectable protocol
+extension ItemUploadCollectionReusableHeaderView: ImageDataSelectable {
+    func select(data: [Data]) {
+        self.selectedImageDataUpdatableDelegate?.update(data: data)
     }
 }
 

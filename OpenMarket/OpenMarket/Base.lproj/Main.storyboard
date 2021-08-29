@@ -315,6 +315,7 @@
                         <outlet property="imageCollectionView" destination="x2b-dz-nhE" id="BN7-PT-LAz"/>
                         <outlet property="passwordTextfield" destination="62E-Kx-Piz" id="Np3-hx-pFE"/>
                         <outlet property="priceTextField" destination="UxG-Mf-8KE" id="rRv-wR-0OQ"/>
+                        <outlet property="scrollView" destination="zuj-0x-DCC" id="lbZ-gc-5pM"/>
                         <outlet property="stockTextField" destination="Oxe-Ex-IzP" id="TjH-mI-Czx"/>
                         <outlet property="titleTextField" destination="bH1-E5-PZv" id="ux0-qI-bFE"/>
                     </connections>

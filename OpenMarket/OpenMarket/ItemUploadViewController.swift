@@ -8,6 +8,7 @@
 import UIKit
 
 final class ItemUploadViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -26,7 +27,72 @@ final class ItemUploadViewController: UIViewController {
         configureImageCollectionView()
         configureCurrencyPickerView()
         configureKeyboardToolBar()
+        registerNotificationForKeyboard()
         bindViewModel()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func configureNavigationBar(httpMethod: HTTPMethod) {
+        var doneButton: UIBarButtonItem
+        switch httpMethod {
+        case .POST:
+            self.title = ItemUploadViewString.navigationBarPostTitle
+            doneButton = UIBarButtonItem(title: ItemUploadViewString.postDoneButtonTitle, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+        case .PATCH:
+            self.title = ItemUploadViewString.navigationBarPatchTitle
+            doneButton = UIBarButtonItem(title: ItemUploadViewString.patchDoneButtonTitle, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+        default:
+            return
+        }
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc private func uploadItemToServer(_ sender: UIBarButtonItem) {
+        guard let priceText = priceTextField.text, !priceText.isEmpty else {
+            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                                   currency: currencyTextField.text!,
+                                                   price: nil,
+                                                   discountedPrice: nil,
+                                                   stock: nil,
+                                                   password: passwordTextfield.text!,
+                                                   description: descriptionTextView.text!)
+            checkItemToUploadInput()
+            return
+        }
+        
+        guard let stockText = stockTextField.text, !stockText.isEmpty else {
+            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                                   currency: currencyTextField.text!,
+                                                   price: Int(priceText)!,
+                                                   discountedPrice: nil,
+                                                   stock: nil,
+                                                   password: passwordTextfield.text!,
+                                                   description: descriptionTextView.text!)
+            checkItemToUploadInput()
+            return
+        }
+        
+        itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+                                               currency: currencyTextField.text!,
+                                               price: Int(priceText)!,
+                                               discountedPrice: Int(discountedPriceTextField.text!),
+                                               stock: Int(stockText)!,
+                                               password: passwordTextfield.text!,
+                                               description: descriptionTextView.text!)
+        checkItemToUploadInput()
+    }
+    
+    private func checkItemToUploadInput() {
+        switch itemUploadViewModel.checkItemToUploadInput() {
+        case .Correct:
+            itemUploadViewModel.upload()
+            self.navigationController?.popViewController(animated: true)
+        case .Incorrect:
+            return
+        }
     }
     
     private func configureImageCollectionView() {
@@ -45,6 +111,40 @@ final class ItemUploadViewController: UIViewController {
                 self?.imageCollectionView.reloadData()
             }
         })
+        
+        itemUploadViewModel.itemToUploadsInputErrorMessage.bind { [weak self] in
+            self?.errorMessageLabel.isHidden = false
+            self?.errorMessageLabel.text = $0
+        }
+        
+        itemUploadViewModel.isTitleTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.titleTextField)!) }
+        }
+        
+        itemUploadViewModel.isCurrencyTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.currencyTextField)!) }
+        }
+        
+        itemUploadViewModel.isPriceTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.priceTextField)!) }
+        }
+        
+        itemUploadViewModel.isStockTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.stockTextField)!) }
+        }
+        
+        itemUploadViewModel.isPasswordTextFieldHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextField((self?.passwordTextfield)!) }
+        }
+        
+        itemUploadViewModel.isDescriptionTextViewHighLighted.bind { [weak self] in
+            if let bool = $0, bool { self?.highlightTextView((self?.descriptionTextView)!) }
+        }
+        
+        itemUploadViewModel.networkErrorMessage.bind {
+            guard let errorMessage = $0 else { return }
+            //TODO:- Handle if network error occured (e.g. AlertController)
+        }
     }
     
     //MARK:- PickerView
@@ -90,6 +190,29 @@ final class ItemUploadViewController: UIViewController {
         passwordTextfield.resignFirstResponder()
         descriptionTextView.resignFirstResponder()
     }
+    
+    //MARK:- Keyboard view up
+    private func registerNotificationForKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
+        }
+        
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height , right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
@@ -125,7 +248,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ItemUploadCollectionReusableHeaderView.identifier, for: indexPath) as? ItemUploadCollectionReusableHeaderView else {
                 return UICollectionReusableView()
             }
-            headerView.updateSelectedImageDataDelegate = self
+            headerView.selectedImageDataUpdatableDelegate = self
             headerView.configure(data: itemUploadViewModel.selectedImageData.value?.count ?? 0)
             
             return headerView
@@ -149,8 +272,8 @@ extension ItemUploadViewController: DeleteImage {
     }
 }
 
-//MARK:- UpdateSelectedImages protocol
-extension ItemUploadViewController: UpdateSelectedImageData {
+//MARK:- SelectedImageDataUpdatable protocol
+extension ItemUploadViewController: SelectedImageDataUpdatable {
     func update(data: [Data]) {
         _ = itemUploadViewModel.selectedImageData.value?.append(contentsOf: data)
     }
@@ -172,5 +295,59 @@ extension ItemUploadViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         currencyTextField.text = CurrencyCode.list[row].description
+    }
+}
+
+//MARK:- UITextFieldDelegate
+extension ItemUploadViewController: UITextFieldDelegate {
+    private func highlightTextField(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.systemRed.cgColor
+        textField.layer.cornerRadius = 3
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        errorMessageLabel.isHidden = true
+        titleTextField.layer.borderWidth = 0
+        currencyTextField.layer.borderWidth = 0
+        priceTextField.layer.borderWidth = 0
+        discountedPriceTextField.layer.borderWidth = 0
+        stockTextField.layer.borderWidth = 0
+        passwordTextfield.layer.borderWidth = 0
+    }
+}
+
+//MARK:- UITextViewDelegate
+extension ItemUploadViewController: UITextViewDelegate {
+    private func highlightTextView(_ textView: UITextView) {
+        textView.resignFirstResponder()
+        textView.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.systemRed.cgColor
+        textView.layer.cornerRadius = 3
+    }
+    
+    private func descriptionTextViewConfigurePlaceholder() {
+        if descriptionTextView.text == ItemUploadViewString.descriptionPlaceholder {
+            descriptionTextView.text = ""
+            descriptionTextView.textColor = .black
+        }
+        else if descriptionTextView.text.isEmpty {
+            descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
+            descriptionTextView.textColor = .systemGray3
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        errorMessageLabel.isHidden = true
+        descriptionTextView.layer.borderWidth = 0
+        
+        descriptionTextViewConfigurePlaceholder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            descriptionTextViewConfigurePlaceholder()
+        }
     }
 }
