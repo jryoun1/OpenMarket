@@ -282,6 +282,19 @@ extension ItemUploadViewController: SelectedImageDataUpdatable {
     }
 }
 
+//MARK:- UploadViewConfigurable protocol
+extension ItemUploadViewController: UploadViewConfigurable {
+    func configure(item: ItemToUpload?, id: Int?) {
+        if let _ = item, let id = id {
+            self.configureNavigationBar(httpMethod: .PATCH)
+            self.itemUploadViewModel = ItemUploadViewModel(itemToUpload: item, id: id)
+        }
+        else {
+            self.configureNavigationBar(httpMethod: .POST)
+        }
+    }
+}
+
 //MARK:- PickerView
 extension ItemUploadViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
