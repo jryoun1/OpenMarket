@@ -5,10 +5,10 @@
 //  Created by Yeon on 2021/08/07.
 //
 
-enum HTTPMethod: CustomStringConvertible {
+enum HTTPMethod: String, CustomStringConvertible {
     case GET
-    case POST
-    case PATCH
+    case POST = "등록"
+    case PATCH = "수정"
     case DELETE
     
     var description: String {
