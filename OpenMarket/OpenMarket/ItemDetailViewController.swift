@@ -16,6 +16,7 @@ final class ItemDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     static let identifier = "ItemDetailViewController"
+    private var itemDetailViewModel: ItemDetailViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
