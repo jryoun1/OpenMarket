@@ -91,7 +91,7 @@ final class ItemUploadViewController: UIViewController {
     private func checkItemToUploadInput() {
         switch itemUploadViewModel.checkItemToUploadInput() {
         case .Correct:
-            itemUploadViewModel.upload()
+            itemUploadViewModel.post()
             self.navigationController?.popViewController(animated: true)
         case .Incorrect:
             return

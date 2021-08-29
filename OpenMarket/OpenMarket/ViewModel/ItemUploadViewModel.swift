@@ -8,7 +8,6 @@
 import UIKit
 
 final class ItemUploadViewModel {
-    private var apiRequestLoader: APIRequestLoader<PostItemAPIReqeust>!
     var selectedImageData: Observable<[Data]> = Observable([])
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -58,9 +57,9 @@ final class ItemUploadViewModel {
         itemToUpload.images = imageData
     }
     
-    func upload() {
+    func post() {
         let postItemAPIRequest = PostItemAPIReqeust()
-        apiRequestLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
+        let apiRequestLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
         
         guard let price = self.price,
               let stock = self.stock else {
