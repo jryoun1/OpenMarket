@@ -7,6 +7,6 @@
 
 import UIKit
 
-class ItemDetailCollectionViewCell: UICollectionViewCell {
-    
+final class ItemDetailCollectionViewCell: UICollectionViewCell {
+    static let identifier = "ItemDetailCollectionViewCell"
 }
