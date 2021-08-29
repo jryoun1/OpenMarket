@@ -33,7 +33,6 @@
 		2666EB6A26BE399B0046D14F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6926BE399B0046D14F /* HTTPMethod.swift */; };
 		2666EB6C26BE49520046D14F /* Data+Append.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6B26BE49520046D14F /* Data+Append.swift */; };
 		2666EB6E26BE5E540046D14F /* PatchItemAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6D26BE5E540046D14F /* PatchItemAPIRequest.swift */; };
-		2666EB7026BE6AB90046D14F /* DeletedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2666EB6F26BE6AB90046D14F /* DeletedItem.swift */; };
 		268C52A426C0E4C30096D80D /* ItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C52A326C0E4C30096D80D /* ItemListViewModel.swift */; };
 		268C52A626C0EB420096D80D /* ItemListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C52A526C0EB420096D80D /* ItemListCellViewModel.swift */; };
 		268C52A926C0F1720096D80D /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C52A726C0F1720096D80D /* ItemTableViewCell.swift */; };
@@ -101,7 +100,6 @@
 		2666EB6926BE399B0046D14F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		2666EB6B26BE49520046D14F /* Data+Append.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Append.swift"; sourceTree = "<group>"; };
 		2666EB6D26BE5E540046D14F /* PatchItemAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchItemAPIRequest.swift; sourceTree = "<group>"; };
-		2666EB6F26BE6AB90046D14F /* DeletedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedItem.swift; sourceTree = "<group>"; };
 		268C52A326C0E4C30096D80D /* ItemListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListViewModel.swift; sourceTree = "<group>"; };
 		268C52A526C0EB420096D80D /* ItemListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListCellViewModel.swift; sourceTree = "<group>"; };
 		268C52A726C0F1720096D80D /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				26C5FEAD26B911F400A80210 /* Item.swift */,
 				26C5FEB326B9A44400A80210 /* ItemToUpload.swift */,
 				26C5FEB526B9A59B00A80210 /* ItemToDeletion.swift */,
-				2666EB6F26BE6AB90046D14F /* DeletedItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -607,7 +604,6 @@
 				26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */,
 				26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */,
 				26625BCE26D67FBF00544F31 /* ItemUploadViewModel.swift in Sources */,
-				2666EB7026BE6AB90046D14F /* DeletedItem.swift in Sources */,
 				2603606226CBD614002ADE85 /* ItemTableViewFooterView.swift in Sources */,
 				2666EB6026BAEB2C0046D14F /* OpenMarketAPI.swift in Sources */,
 				26C5FEAE26B911F400A80210 /* Item.swift in Sources */,
