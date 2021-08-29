@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol UploadViewConfigurable: AnyObject {
+    func configure(item: ItemToUpload?, id: Int?)
+}
+
 final class ItemListViewController: UIViewController {
+    weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     private var itemListViewModel = ItemListViewModel()
     
     private var itemTableView: UITableView = {
@@ -75,6 +80,8 @@ final class ItemListViewController: UIViewController {
             return
         }
         
+        self.uploadViewConfigurableDelegate = itemUploadViewController
+        self.uploadViewConfigurableDelegate?.configure(item: nil, id: nil)
         self.navigationController?.pushViewController(itemUploadViewController, animated: true)
     }
     
