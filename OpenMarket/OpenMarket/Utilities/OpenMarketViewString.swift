@@ -12,8 +12,10 @@ enum ItemListViewString {
 }
 
 enum ItemUploadViewString {
-    static let navigationBarTitle = "상품 등록"
-    static let doneButton = "완료"
+    static let navigationBarPostTitle = "상품 등록"
+    static let navigationBarPatchTitle = "상품 수정"
+    static let postDoneButtonTitle = "등록"
+    static let patchDoneButtonTitle = "수정"
     static let selectButton = "선택"
     static let imageCountLimitMessage = "이미지를 최소 1개 이상 5개 이하로 선택해주세요."
     static let titleEmptyMessage = "제품명을 입력해주세요"
