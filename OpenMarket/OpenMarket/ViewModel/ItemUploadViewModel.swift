@@ -54,6 +54,16 @@ final class ItemUploadViewModel {
         }
     }
     
+    private var id: Int?
+    private var originTitle = ""
+    private var originCurrency = ""
+    private var originPrice: Int?
+    private var originDiscountedPrice: Int?
+    private var originStock: Int?
+    private var originPassword = ""
+    private var originDescription = ""
+    private var originImageData = [Data]()
+    
     func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String, imageData: [Data]) {
         itemToUpload.title = title
         itemToUpload.currency = currency
