@@ -24,7 +24,6 @@ final class ItemUploadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
         configureImageCollectionView()
         configureCurrencyPickerView()
         configureKeyboardToolBar()
@@ -36,10 +35,18 @@ final class ItemUploadViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func configureNavigationBar() {
-        self.title = ItemUploadViewString.navigationBarTitle
-        
-        let doneButton = UIBarButtonItem(title: ItemUploadViewString.doneButton, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+    private func configureNavigationBar(httpMethod: HTTPMethod) {
+        var doneButton: UIBarButtonItem
+        switch httpMethod {
+        case .POST:
+            self.title = ItemUploadViewString.navigationBarPostTitle
+            doneButton = UIBarButtonItem(title: ItemUploadViewString.postDoneButtonTitle, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+        case .PATCH:
+            self.title = ItemUploadViewString.navigationBarPatchTitle
+            doneButton = UIBarButtonItem(title: ItemUploadViewString.patchDoneButtonTitle, style: .done, target: self, action: #selector(uploadItemToServer(_:)))
+        default:
+            return
+        }
         self.navigationItem.rightBarButtonItem = doneButton
     }
     
