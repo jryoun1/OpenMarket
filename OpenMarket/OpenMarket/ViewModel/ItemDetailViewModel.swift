@@ -61,4 +61,21 @@ final class ItemDetailViewModel {
             }
         }
     }
+    
+    private func downloadImage(url: String) {
+        let imageAPIRequest = GetImageAPIRequest()
+        let apiRequestLoader = APIRequestLoader(apiReqeust: imageAPIRequest)
+        
+        apiRequestLoader.loadAPIReqeust(requestData: url) { [weak self] image, error in
+            if let error = error {
+                self?.errorText.value = error.localizedDescription
+            }
+            
+            guard let image = image else {
+                return
+            }
+            
+            self?.images.value?.append(image)
+        }
+    }
 }
