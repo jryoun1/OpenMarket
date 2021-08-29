@@ -13,7 +13,7 @@ protocol ImageDataSelectable: AnyObject {
     func select(data: [Data])
 }
 
-protocol UpdateSelectedImageData: AnyObject {
+protocol SelectedImageDataUpdatable: AnyObject {
     func update(data: [Data])
 }
 
@@ -25,7 +25,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
     private var userSelectedImageData: [Data] = []
     private let limitNumberOfImages: Int = 5
     weak var imageDataSelectableDelegate: ImageDataSelectable?
-    weak var updateSelectedImageDataDelegate: UpdateSelectedImageData?
+    weak var selectedImageDataUpdatableDelegate: SelectedImageDataUpdatable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -97,7 +97,7 @@ final class ItemUploadCollectionReusableHeaderView: UICollectionReusableView {
 //MARK:- ImageDataSelectable protocol
 extension ItemUploadCollectionReusableHeaderView: ImageDataSelectable {
     func select(data: [Data]) {
-        self.updateSelectedImageDataDelegate?.update(data: data)
+        self.selectedImageDataUpdatableDelegate?.update(data: data)
     }
 }
 
