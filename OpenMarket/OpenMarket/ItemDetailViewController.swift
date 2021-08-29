@@ -77,4 +77,11 @@ final class ItemDetailViewController: UIViewController {
             }
         })
     }
+    
+    private func changeToStrikethroughStyle(string: String) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: string)
+        attributedString.addAttribute(.strikethroughStyle, value: 1, range: NSMakeRange(0, attributedString.length))
+        
+        return attributedString
+    }
 }
