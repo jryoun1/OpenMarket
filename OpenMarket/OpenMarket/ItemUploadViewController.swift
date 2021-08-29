@@ -115,6 +115,41 @@ final class ItemUploadViewController: UIViewController {
             }
         })
         
+        itemUploadViewModel.titleTextFiledtext.bind { [weak self] in
+            self?.titleTextField.text = $0
+        }
+        
+        itemUploadViewModel.currencyTextFiledtext.bind { [weak self] in
+            self?.currencyTextField.text = $0
+        }
+        
+        itemUploadViewModel.priceTextFiledtext.bind { [weak self] in
+            self?.priceTextField.text = $0
+        }
+        
+        itemUploadViewModel.discountedPriceTextFiledtext.bind { [weak self] in
+            self?.discountedPriceTextField.text = $0
+        }
+        
+        itemUploadViewModel.stockTextFieldtext.bind { [weak self] in
+            self?.stockTextField.text = $0
+        }
+        
+        itemUploadViewModel.passwordTextFieldtext.bind { [weak self] in
+            self?.passwordTextfield.text = $0
+        }
+        
+        itemUploadViewModel.descriptiontextTextViewtext.bind { [weak self] in
+            if let description = $0, description.isEmpty {
+                self?.descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
+                self?.descriptionTextView.textColor = .systemGray3
+            }
+            else {
+                self?.descriptionTextView.text = $0
+                self?.descriptionTextView.textColor = .black
+            }
+        }
+        
         itemUploadViewModel.itemToUploadsInputErrorMessage.bind { [weak self] in
             self?.errorMessageLabel.isHidden = false
             self?.errorMessageLabel.text = $0
