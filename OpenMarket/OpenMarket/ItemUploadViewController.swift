@@ -58,7 +58,8 @@ final class ItemUploadViewController: UIViewController {
                                                    discountedPrice: nil,
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
-                                                   description: descriptionTextView.text!)
+                                                   description: descriptionTextView.text!,
+                                                   imageData: itemUploadViewModel.selectedImageData.value ?? [])
             checkItemToUploadInput()
             return
         }
@@ -70,7 +71,8 @@ final class ItemUploadViewController: UIViewController {
                                                    discountedPrice: nil,
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
-                                                   description: descriptionTextView.text!)
+                                                   description: descriptionTextView.text!,
+                                                   imageData: itemUploadViewModel.selectedImageData.value ?? [])
             checkItemToUploadInput()
             return
         }
@@ -81,14 +83,15 @@ final class ItemUploadViewController: UIViewController {
                                                discountedPrice: Int(discountedPriceTextField.text!),
                                                stock: Int(stockText)!,
                                                password: passwordTextfield.text!,
-                                               description: descriptionTextView.text!)
+                                               description: descriptionTextView.text!,
+                                               imageData: itemUploadViewModel.selectedImageData.value ?? [])
         checkItemToUploadInput()
     }
     
     private func checkItemToUploadInput() {
         switch itemUploadViewModel.checkItemToUploadInput() {
         case .Correct:
-            itemUploadViewModel.upload()
+            itemUploadViewModel.post()
             self.navigationController?.popViewController(animated: true)
         case .Incorrect:
             return

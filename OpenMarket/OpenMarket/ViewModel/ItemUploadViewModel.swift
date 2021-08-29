@@ -8,8 +8,15 @@
 import UIKit
 
 final class ItemUploadViewModel {
-    private var apiRequestLoader: APIRequestLoader<PostItemAPIReqeust>!
     var selectedImageData: Observable<[Data]> = Observable([])
+    var titleTextFiledtext: Observable<String> = Observable("")
+    var currencyTextFiledtext: Observable<String> = Observable("")
+    var priceTextFiledtext: Observable<String> = Observable("")
+    var discountedPriceTextFiledtext: Observable<String> = Observable("")
+    var stockTextFieldtext: Observable<String> = Observable("")
+    var passwordTextFieldtext: Observable<String> = Observable("")
+    var descriptiontextTextViewtext: Observable<String> = Observable("")
+    
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isCurrencyTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -32,6 +39,7 @@ final class ItemUploadViewModel {
     private var stock: Int?
     private var password = ""
     private var description = ""
+    private var imageData = [Data]()
     
     private var itemToUpload = ItemToUpload() {
         didSet {
@@ -42,10 +50,42 @@ final class ItemUploadViewModel {
             stock = itemToUpload.stock ?? nil
             password = itemToUpload.password
             description = itemToUpload.descriptions!
+            imageData = itemToUpload.images ?? []
         }
     }
     
-    func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String) {
+    private var id: Int?
+    private var originTitle = ""
+    private var originCurrency = ""
+    private var originPrice: Int?
+    private var originDiscountedPrice: Int?
+    private var originStock: Int?
+    private var originPassword = ""
+    private var originDescription = ""
+    private var originImageData = [Data]()
+    
+    init(itemToUpload: ItemToUpload? = nil, id: Int? = nil) {
+        self.id = id
+        originTitle = itemToUpload?.title ?? ""
+        originCurrency = itemToUpload?.currency ?? ""
+        originPrice = itemToUpload?.price
+        originDiscountedPrice = itemToUpload?.discountedPrice
+        originStock = itemToUpload?.stock
+        originPassword = itemToUpload?.password ?? ""
+        originDescription = itemToUpload?.descriptions ?? ""
+        originImageData = itemToUpload?.images ?? []
+        
+        titleTextFiledtext.value = originTitle
+        currencyTextFiledtext.value = originCurrency
+        priceTextFiledtext.value = originPrice?.description
+        discountedPriceTextFiledtext.value = originDiscountedPrice?.description
+        stockTextFieldtext.value = originStock?.description
+        passwordTextFieldtext.value = originPassword
+        descriptiontextTextViewtext.value = originDescription
+        selectedImageData.value = originImageData
+    }
+    
+    func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String, imageData: [Data]) {
         itemToUpload.title = title
         itemToUpload.currency = currency
         itemToUpload.price = price
@@ -53,11 +93,12 @@ final class ItemUploadViewModel {
         itemToUpload.stock = stock
         itemToUpload.password = password
         itemToUpload.descriptions = description
+        itemToUpload.images = imageData
     }
     
-    func upload() {
+    func post() {
         let postItemAPIRequest = PostItemAPIReqeust()
-        apiRequestLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
+        let apiRequestLoader = APIRequestLoader(apiReqeust: postItemAPIRequest)
         
         guard let price = self.price,
               let stock = self.stock else {
@@ -70,11 +111,65 @@ final class ItemUploadViewModel {
                                          currency: self.currency,
                                          stock: stock,
                                          discountedPrice: self.discountedPrice,
-                                         images: self.selectedImageData.value,
+                                         images: self.imageData,
                                          password: self.password)
         
         
         apiRequestLoader.loadAPIReqeust(requestData: itemToUploads) { [weak self] item, error in
+            guard let error = error else {
+                return
+            }
+            
+            self?.networkErrorMessage.value = error.localizedDescription
+        }
+    }
+    
+    func patch() {
+        guard let id = id else {
+            return
+        }
+        
+        let patchItemAPIRequest = PatchItemAPIRequest(id: id)
+        let apiRequestLoader = APIRequestLoader(apiReqeust: patchItemAPIRequest)
+        
+        var patchImageData: [Data] = []
+        var patchTitle: String? = nil
+        var patchCurrency: String? = nil
+        var patchPrice: Int? = nil
+        var patchDiscountedPrice: Int? = nil
+        var patchStock: Int? = nil
+        var patchDescription: String? = nil
+        
+        if title != originTitle {
+            patchTitle = title
+        }
+        if currency != originCurrency {
+            patchCurrency = currency
+        }
+        if price != originPrice {
+            patchPrice = price
+        }
+        if discountedPrice != originDiscountedPrice {
+            patchDiscountedPrice = discountedPrice
+        }
+        if stock != originStock {
+            patchStock = stock
+        }
+        if description != originDescription {
+            patchDescription = description
+        }
+        if imageData != originImageData {
+            patchImageData = imageData
+        }
+        
+        apiRequestLoader.loadAPIReqeust(requestData: ItemToUpload(title: patchTitle,
+                                                                  descriptions: patchDescription,
+                                                                  price: patchPrice,
+                                                                  currency: patchCurrency,
+                                                                  stock: patchStock,
+                                                                  discountedPrice: patchDiscountedPrice,
+                                                                  images: patchImageData,
+                                                                  password: password)) { [weak self] item, error in
             guard let error = error else {
                 return
             }
