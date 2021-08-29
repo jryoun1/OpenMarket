@@ -9,6 +9,14 @@ import UIKit
 
 final class ItemUploadViewModel {
     var selectedImageData: Observable<[Data]> = Observable([])
+    var titleTextFiledtext: Observable<String> = Observable("")
+    var currencyTextFiledtext: Observable<String> = Observable("")
+    var priceTextFiledtext: Observable<String> = Observable("")
+    var discountedPriceTextFiledtext: Observable<String> = Observable("")
+    var stockTextFieldtext: Observable<String> = Observable("")
+    var passwordTextFieldtext: Observable<String> = Observable("")
+    var descriptiontextTextViewtext: Observable<String> = Observable("")
+        
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isCurrencyTextFieldHighLighted: Observable<Bool> = Observable(false)
