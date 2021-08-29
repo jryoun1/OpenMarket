@@ -124,6 +124,60 @@ final class ItemUploadViewModel {
         }
     }
     
+    func patch() {
+        guard let id = id else {
+            return
+        }
+        
+        let patchItemAPIRequest = PatchItemAPIRequest(id: id)
+        let apiRequestLoader = APIRequestLoader(apiReqeust: patchItemAPIRequest)
+        
+        var patchImageData: [Data] = []
+        var patchTitle: String? = nil
+        var patchCurrency: String? = nil
+        var patchPrice: Int? = nil
+        var patchDiscountedPrice: Int? = nil
+        var patchStock: Int? = nil
+        var patchDescription: String? = nil
+        
+        if title != originTitle {
+            patchTitle = title
+        }
+        if currency != originCurrency {
+            patchCurrency = currency
+        }
+        if price != originPrice {
+            patchPrice = price
+        }
+        if discountedPrice != originDiscountedPrice {
+            patchDiscountedPrice = discountedPrice
+        }
+        if stock != originStock {
+            patchStock = stock
+        }
+        if description != originDescription {
+            patchDescription = description
+        }
+        if imageData != originImageData {
+            patchImageData = imageData
+        }
+        
+        apiRequestLoader.loadAPIReqeust(requestData: ItemToUpload(title: patchTitle,
+                                                                  descriptions: patchDescription,
+                                                                  price: patchPrice,
+                                                                  currency: patchCurrency,
+                                                                  stock: patchStock,
+                                                                  discountedPrice: patchDiscountedPrice,
+                                                                  images: patchImageData,
+                                                                  password: password)) { [weak self] item, error in
+            guard let error = error else {
+                return
+            }
+            
+            self?.networkErrorMessage.value = error.localizedDescription
+        }
+    }
+    
     func checkItemToUploadInput() -> ItemToUploadInputStatus {
         if let imageCount = selectedImageData.value?.count {
             if  imageCount < 1 || imageCount > 5 {
