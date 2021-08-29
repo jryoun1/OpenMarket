@@ -85,3 +85,11 @@ final class ItemDetailViewController: UIViewController {
         return attributedString
     }
 }
+
+//MARK:- DetailViewConfigurable protocol
+extension ItemDetailViewController: DetailViewConfigurable {
+    func configure(id: Int) {
+        itemDetailViewModel = ItemDetailViewModel(id: id)
+        itemDetailViewModel?.fetchItem()
+    }
+}
