@@ -32,6 +32,7 @@ final class ItemUploadViewModel {
     private var stock: Int?
     private var password = ""
     private var description = ""
+    private var imageData = [Data]()
     
     private var itemToUpload = ItemToUpload() {
         didSet {
@@ -42,10 +43,11 @@ final class ItemUploadViewModel {
             stock = itemToUpload.stock ?? nil
             password = itemToUpload.password
             description = itemToUpload.descriptions!
+            imageData = itemToUpload.images ?? []
         }
     }
     
-    func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String) {
+    func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String, imageData: [Data]) {
         itemToUpload.title = title
         itemToUpload.currency = currency
         itemToUpload.price = price
@@ -53,6 +55,7 @@ final class ItemUploadViewModel {
         itemToUpload.stock = stock
         itemToUpload.password = password
         itemToUpload.descriptions = description
+        itemToUpload.images = imageData
     }
     
     func upload() {
@@ -70,7 +73,7 @@ final class ItemUploadViewModel {
                                          currency: self.currency,
                                          stock: stock,
                                          discountedPrice: self.discountedPrice,
-                                         images: self.selectedImageData.value,
+                                         images: self.imageData,
                                          password: self.password)
         
         
