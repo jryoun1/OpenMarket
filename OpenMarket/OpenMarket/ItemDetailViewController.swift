@@ -20,7 +20,14 @@ final class ItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureImageCollectionView()
         bindViewModel()
+    }
+    
+    private func configureImageCollectionView() {
+        imageCollectionView.delegate = self
+        imageCollectionView.dataSource = self
+        imageCollectionView.register(ItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailCollectionViewCell.identifier)
     }
     
     private func bindViewModel() {
