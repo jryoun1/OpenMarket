@@ -237,7 +237,7 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         
         return cell
@@ -278,7 +278,7 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.systemGray.cgColor
