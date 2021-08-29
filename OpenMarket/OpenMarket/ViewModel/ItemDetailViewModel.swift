@@ -8,5 +8,5 @@
 import UIKit
 
 final class ItemDetailViewModel {
-    
+    private let id: Int
 }
