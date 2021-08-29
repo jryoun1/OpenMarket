@@ -60,7 +60,7 @@ final class ItemUploadViewController: UIViewController {
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!,
                                                    imageData: itemUploadViewModel.selectedImageData.value ?? [])
-            checkItemToUploadInput()
+            checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
             return
         }
         
@@ -73,7 +73,7 @@ final class ItemUploadViewController: UIViewController {
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!,
                                                    imageData: itemUploadViewModel.selectedImageData.value ?? [])
-            checkItemToUploadInput()
+            checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
             return
         }
         
@@ -85,15 +85,28 @@ final class ItemUploadViewController: UIViewController {
                                                password: passwordTextfield.text!,
                                                description: descriptionTextView.text!,
                                                imageData: itemUploadViewModel.selectedImageData.value ?? [])
-        checkItemToUploadInput()
+        checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
     }
     
-    private func checkItemToUploadInput() {
-        switch itemUploadViewModel.checkItemToUploadInput() {
-        case .Correct:
-            itemUploadViewModel.post()
-            self.navigationController?.popViewController(animated: true)
-        case .Incorrect:
+    private func checkItemToUploadInput(type: HTTPMethod) {
+        switch type {
+        case .POST:
+            switch itemUploadViewModel.checkItemToUploadInput() {
+            case .Correct:
+                itemUploadViewModel.post()
+                self.navigationController?.popViewController(animated: true)
+            case .Incorrect:
+                return
+            }
+        case .PATCH:
+            switch itemUploadViewModel.checkItemToUploadInput() {
+            case .Correct:
+                itemUploadViewModel.patch()
+                self.navigationController?.popViewController(animated: true)
+            case .Incorrect:
+                return
+            }
+        default:
             return
         }
     }
