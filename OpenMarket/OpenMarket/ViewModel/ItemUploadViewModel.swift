@@ -16,7 +16,7 @@ final class ItemUploadViewModel {
     var stockTextFieldtext: Observable<String> = Observable("")
     var passwordTextFieldtext: Observable<String> = Observable("")
     var descriptiontextTextViewtext: Observable<String> = Observable("")
-        
+    
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isCurrencyTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -63,6 +63,27 @@ final class ItemUploadViewModel {
     private var originPassword = ""
     private var originDescription = ""
     private var originImageData = [Data]()
+    
+    init(itemToUpload: ItemToUpload? = nil, id: Int? = nil) {
+        self.id = id
+        originTitle = itemToUpload?.title ?? ""
+        originCurrency = itemToUpload?.currency ?? ""
+        originPrice = itemToUpload?.price
+        originDiscountedPrice = itemToUpload?.discountedPrice
+        originStock = itemToUpload?.stock
+        originPassword = itemToUpload?.password ?? ""
+        originDescription = itemToUpload?.descriptions ?? ""
+        originImageData = itemToUpload?.images ?? []
+        
+        titleTextFiledtext.value = originTitle
+        currencyTextFiledtext.value = originCurrency
+        priceTextFiledtext.value = originPrice?.description
+        discountedPriceTextFiledtext.value = originDiscountedPrice?.description
+        stockTextFieldtext.value = originStock?.description
+        passwordTextFieldtext.value = originPassword
+        descriptiontextTextViewtext.value = originDescription
+        selectedImageData.value = originImageData
+    }
     
     func updateItemToUpload(title: String, currency: String, price: Int?, discountedPrice: Int?, stock: Int?, password: String, description: String, imageData: [Data]) {
         itemToUpload.title = title
