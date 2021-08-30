@@ -8,14 +8,14 @@
 import Foundation
 
 struct ItemToUpload: Encodable {
-    let title: String?
-    let descriptions: String?
-    let price: Int?
-    let currency: String?
-    let stock: Int?
-    let discountedPrice: Int?
-    let images: [Data]?
-    let password: String
+    var title: String? = ""
+    var descriptions: String? = ""
+    var price: Int? = 0
+    var currency: String? = ""
+    var stock: Int? = 0
+    var discountedPrice: Int? = nil
+    var images: [Data]? = []
+    var password: String = ""
     
     enum CodingKeys: String, CodingKey {
         case title, descriptions, price, currency, stock, images

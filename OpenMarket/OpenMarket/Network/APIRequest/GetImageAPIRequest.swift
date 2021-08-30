@@ -18,7 +18,7 @@ struct GetImageAPIRequest: APIRequest {
     
     func parseResponse(data: Data) throws -> UIImage {
         guard let image = UIImage(data: data) else {
-            return UIImage(named: "AirPodMax2")!
+            return UIImage()
         }
         return image
     }

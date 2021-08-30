@@ -1,20 +1,20 @@
 //
-//  ItemCollectionViewCell.swift
+//  ItemTableViewCell.swift
 //  OpenMarket
 //
-//  Created by Yeon on 2021/08/18.
+//  Created by Yeon on 2021/08/09.
 //
 
 import UIKit
 
-final class ItemCollectionViewCell: UICollectionViewCell {
-    static let identifier = "ItemCollectionViewCell"
+final class ItemTableViewCell: UITableViewCell {
+    static let identifier = "ItemTableViewCell"
     @IBOutlet private var itemImageView: UIImageView!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var stockLabel: UILabel!
     @IBOutlet private var priceLabel: UILabel!
     @IBOutlet private var discountedPriceLabel: UILabel!
-    @IBOutlet private var verticalStackView: UIStackView!
+    @IBOutlet private var horizontalStackView: UIStackView!
     
     func configureCell(with viewModel: ItemListCellViewModel) {
         titleLabel.text = viewModel.title
@@ -28,19 +28,18 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         }
         
         if let stockString = viewModel.stock {
-            if stockString == "품절" {
+            stockLabel.textColor = .systemGray
+            stockLabel.text = stockString
+            
+            if stockString == ItemListViewString.soldOut {
                 stockLabel.textColor = .systemOrange
             }
-            else {
-                stockLabel.textColor = .systemGray
-            }
-            stockLabel.text = stockString
-        }
-        else {
-            stockLabel.text = "오류가 발생했습니다."
         }
         
         if let priceString = viewModel.price {
+            priceLabel.textColor = .systemGray
+            priceLabel.attributedText = NSAttributedString(string: priceString)
+            
             if let discountedPriceString = viewModel.discountedPrice {
                 discountedPriceLabel.isHidden = false
                 priceLabel.textColor = .systemRed
@@ -49,13 +48,6 @@ final class ItemCollectionViewCell: UICollectionViewCell {
                 discountedPriceLabel.textColor = .systemGray
                 discountedPriceLabel.text = discountedPriceString
             }
-            else {
-                priceLabel.textColor = .systemGray
-                priceLabel.attributedText = NSAttributedString(string: priceString)
-            }
-        }
-        else {
-            priceLabel.text = "오류가 발생하였습니다."
         }
     }
     

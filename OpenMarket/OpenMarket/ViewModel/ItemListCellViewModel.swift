@@ -33,11 +33,11 @@ struct ItemListCellViewModel {
     
     var stock: String? {
         if self.item.stock <= 0 {
-            return "품절"
+            return ItemListViewString.soldOut
         }
         else {
             if let stock = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: self.item.stock)) {
-                return "잔여수량: \(stock)"
+                return "\(ItemListViewString.remainingQuantity) \(stock)"
             }
             return nil
         }

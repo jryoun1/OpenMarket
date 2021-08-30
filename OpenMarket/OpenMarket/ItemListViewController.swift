@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ItemListViewController.swift
 //  OpenMarket
 //
 //  Created by Yeon on 2021/08/03.
@@ -7,12 +7,19 @@
 
 import UIKit
 
-final class HomeViewController: UIViewController {
-    private var currentPage: Int = 1
-    private var isPaging: Bool = false
-    private var hasNextPage: Bool = false
-    private var apiRequestLoader: APIRequestLoader<GetItemListAPIRequest>!
+protocol UploadViewConfigurable: AnyObject {
+    func configure(item: ItemToUpload?, id: Int?)
+}
+
+protocol DetailViewConfigurable: AnyObject {
+    func configure(id: Int)
+}
+
+final class ItemListViewController: UIViewController {
+    weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
+    weak var detailViewConfigurableDelegate: DetailViewConfigurable?
     private var itemListViewModel = ItemListViewModel()
+    
     private var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,8 +36,29 @@ final class HomeViewController: UIViewController {
         let nib = UINib(nibName: ItemCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         collectionView.register(ItemCollectionReusableFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ItemCollectionReusableFooterView.identifier)
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
+    
+    //MARK:- enum
+    private enum LoadingIndicatorState {
+        case start
+        case stop
+    }
+    
+    private enum SegmentControlType: Int, CustomStringConvertible {
+        case LIST = 0
+        case GRID = 1
+        
+        var description: String {
+            switch self {
+            case .LIST:
+                return "LIST"
+            case .GRID:
+                return "GRID"
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +66,7 @@ final class HomeViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
-        fetchData(page: currentPage)
+        itemListViewModel.fetchData(page: itemListViewModel.currentPage)
     }
     
     private func configureNavigationBar() {
@@ -46,6 +74,7 @@ final class HomeViewController: UIViewController {
         configureNavigationBarRightButton()
     }
     
+    //MARK:- NavigationBar Button
     private func configureNavigationBarRightButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(moveToItemUploadViewController))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.systemBlue
@@ -56,12 +85,14 @@ final class HomeViewController: UIViewController {
             return
         }
         
+        self.uploadViewConfigurableDelegate = itemUploadViewController
+        self.uploadViewConfigurableDelegate?.configure(item: nil, id: nil)
         self.navigationController?.pushViewController(itemUploadViewController, animated: true)
     }
     
     //MARK:- SegmentControl
     private func configureSegmentControl() {
-        let titles = ["LIST", "GRID"]
+        let titles = ["\(SegmentControlType.LIST)", "\(SegmentControlType.GRID)"]
         let segmentedControl: UISegmentedControl = UISegmentedControl(items: titles)
         segmentedControl.selectedSegmentTintColor = UIColor.systemBlue
         segmentedControl.backgroundColor = UIColor.white
@@ -83,11 +114,11 @@ final class HomeViewController: UIViewController {
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0:
+        case SegmentControlType.LIST.rawValue:
             itemCollectionView.isHidden = true
             itemTableView.isHidden = false
             itemTableView.reloadData()
-        case 1:
+        case SegmentControlType.GRID.rawValue:
             itemTableView.isHidden = true
             itemCollectionView.isHidden = false
             itemCollectionView.reloadData()
@@ -163,47 +194,22 @@ final class HomeViewController: UIViewController {
             }
         }
     }
-    
-    //MARK:- FetchData
-    private func fetchData(page: Int) {
-        let getItemListAPIRequest = GetItemListAPIRequest()
-        apiRequestLoader = APIRequestLoader(apiReqeust: getItemListAPIRequest)
-        
-        apiRequestLoader.loadAPIReqeust(requestData: page) { [self] itemList, error in
-            guard let itemList = itemList, itemList.items.count > 0 else {
-                self.hasNextPage = false
-                DispatchQueue.main.async {
-                    checkIsHiddenAndControlLoadingIndicator(state: .stop)
-                }
-                return
-            }
-            
-            self.hasNextPage = true
-            _ = itemList.items.compactMap({ item in
-                self.itemListViewModel.itemList.value?.append(ItemListCellViewModel(item))
-            })
-            
-            DispatchQueue.main.async {
-                checkIsHiddenAndControlLoadingIndicator(state: .stop)
-                checkIsHiddenAndReloadData()
-            }
-        }
-    }
 }
 
 //MARK:- Paging
-extension HomeViewController {
+extension ItemListViewController {
     private func beginPaging() {
-        isPaging = true
+        itemListViewModel.isPaging = true
         
         DispatchQueue.main.async {
             self.checkIsHiddenAndControlLoadingIndicator(state: .start)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.currentPage += 1
-            self.fetchData(page: self.currentPage)
-            self.isPaging = false
+            self.itemListViewModel.currentPage += 1
+            self.itemListViewModel.fetchData(page: self.itemListViewModel.currentPage)
+            self.itemListViewModel.isPaging = false
+            self.checkIsHiddenAndControlLoadingIndicator(state: .stop)
         }
     }
     
@@ -213,7 +219,7 @@ extension HomeViewController {
         let height = scrollView.frame.height
         
         if contentOffset_y > contentHeight - height {
-            if isPaging == false && hasNextPage {
+            if itemListViewModel.isPaging == false && itemListViewModel.hasNextPage {
                 beginPaging()
             }
         }
@@ -221,7 +227,7 @@ extension HomeViewController {
 }
 
 //MARK:- TableView Delegate, Datasource
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return itemListViewModel.numberOfSections
     }
@@ -236,7 +242,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         
         return cell
@@ -247,7 +253,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return UIView()
         }
         
-        footerView.contentView.backgroundColor = .white
+        footerView.contentView.backgroundColor = itemTableView.backgroundColor
         
         return footerView
     }
@@ -255,10 +261,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let itemDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.identifier) as? ItemDetailViewController else {
+            return
+        }
+        
+        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+            return
+        }
+        
+        self.detailViewConfigurableDelegate = itemDetailViewController
+        self.detailViewConfigurableDelegate?.configure(id: item.id)
+        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
+    }
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ItemListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemListViewModel.numberOfSections
     }
@@ -273,7 +294,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.systemGray.cgColor
@@ -322,5 +343,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: view.frame.size.height / 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let itemDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.identifier) as? ItemDetailViewController else {
+            return
+        }
+        
+        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+            return
+        }
+        
+        self.detailViewConfigurableDelegate = itemDetailViewController
+        self.detailViewConfigurableDelegate?.configure(id: item.id)
+        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
     }
 }
