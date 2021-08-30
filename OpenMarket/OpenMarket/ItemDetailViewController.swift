@@ -14,6 +14,14 @@ final class ItemDetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var discountedLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    private var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.hidesForSinglePage = true
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor.darkGray
+        return pageControl
+    }()
     
     static let identifier = "ItemDetailViewController"
     private var itemDetailViewModel: ItemDetailViewModel?
