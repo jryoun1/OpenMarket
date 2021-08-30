@@ -344,4 +344,18 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: view.frame.size.height / 25)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let itemDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.identifier) as? ItemDetailViewController else {
+            return
+        }
+        
+        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+            return
+        }
+        
+        self.detailViewConfigurableDelegate = itemDetailViewController
+        self.detailViewConfigurableDelegate?.configure(id: item.id)
+        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
+    }
 }
