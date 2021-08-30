@@ -100,6 +100,7 @@ final class ItemDetailViewController: UIViewController {
         itemDetailViewModel?.images.bind({ [weak self] images in
             DispatchQueue.main.async {
                 self?.imageCollectionView.reloadData()
+                self?.pageControl.numberOfPages = self?.itemDetailViewModel?.images.value?.count ?? 0
             }
         })
     }
