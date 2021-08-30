@@ -67,13 +67,18 @@ final class ItemListViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
+        registerNotificationCenter()
+        itemListViewModel.fetchData(page: itemListViewModel.currentPage)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        itemListViewModel.currentPage = 1
-        itemListViewModel.itemList.value?.removeAll()
-        itemListViewModel.fetchData(page: itemListViewModel.currentPage)
+        if itemListViewModel.isItemChanged {
+            itemListViewModel.currentPage = 1
+            itemListViewModel.itemList.value?.removeAll()
+            itemListViewModel.fetchData(page: itemListViewModel.currentPage)
+            itemListViewModel.isItemChanged = false
+        }
     }
     
     private func configureNavigationBar() {
@@ -201,6 +206,19 @@ final class ItemListViewController: UIViewController {
             }
         }
     }
+    
+    //MARK:- NotificationCenter
+    private func registerNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveItemDataChanged(_:)), name: NSNotification.Name.ItemDataChanged, object: nil)
+    }
+    
+    @objc private func didReceiveItemDataChanged(_ notification: Notification) {
+        itemListViewModel.isItemChanged = true
+    }
+}
+
+extension Notification.Name {
+    static let ItemDataChanged = Notification.Name("ItemDataChanged")
 }
 
 //MARK:- Paging
