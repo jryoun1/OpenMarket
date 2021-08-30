@@ -15,7 +15,7 @@ final class ItemUploadViewModel {
     var discountedPriceTextFiledtext: Observable<String> = Observable("")
     var stockTextFieldtext: Observable<String> = Observable("")
     var passwordTextFieldtext: Observable<String> = Observable("")
-    var descriptiontextTextViewtext: Observable<String> = Observable("")
+    var descriptionTextViewtext: Observable<String> = Observable("")
     
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -25,7 +25,7 @@ final class ItemUploadViewModel {
     var isStockTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isPasswordTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isDescriptionTextViewHighLighted: Observable<Bool> = Observable(false)
-    var networkErrorMessage: Observable<String?> = Observable(nil)
+    var networkingResult: Observable<OpenMarketError> = Observable(nil)
     
     enum ItemToUploadInputStatus {
         case Correct
@@ -81,7 +81,7 @@ final class ItemUploadViewModel {
         discountedPriceTextFiledtext.value = originDiscountedPrice?.description
         stockTextFieldtext.value = originStock?.description
         passwordTextFieldtext.value = originPassword
-        descriptiontextTextViewtext.value = originDescription
+        descriptionTextViewtext.value = originDescription
         selectedImageData.value = originImageData
     }
     
@@ -116,11 +116,11 @@ final class ItemUploadViewModel {
         
         
         apiRequestLoader.loadAPIReqeust(requestData: itemToUploads) { [weak self] item, error in
-            guard let error = error else {
-                return
+            if let error = error {
+                self?.networkingResult.value = error
             }
             
-            self?.networkErrorMessage.value = error.localizedDescription
+            self?.networkingResult.value = .successPOST
         }
     }
     
@@ -170,11 +170,11 @@ final class ItemUploadViewModel {
                                                                   discountedPrice: patchDiscountedPrice,
                                                                   images: patchImageData,
                                                                   password: password)) { [weak self] item, error in
-            guard let error = error else {
-                return
+            if let error = error {
+                self?.networkingResult.value = error
             }
             
-            self?.networkErrorMessage.value = error.localizedDescription
+            self?.networkingResult.value = .successPATCH
         }
     }
     

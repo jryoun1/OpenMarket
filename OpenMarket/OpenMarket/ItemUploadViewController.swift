@@ -152,7 +152,7 @@ final class ItemUploadViewController: UIViewController {
             self?.passwordTextfield.text = $0
         }
         
-        itemUploadViewModel.descriptiontextTextViewtext.bind { [weak self] in
+        itemUploadViewModel.descriptionTextViewtext.bind { [weak self] in
             if let description = $0, description.isEmpty {
                 self?.descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
                 self?.descriptionTextView.textColor = .systemGray3
