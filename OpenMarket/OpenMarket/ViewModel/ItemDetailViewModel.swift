@@ -15,8 +15,8 @@ final class ItemDetailViewModel {
     var discountedPriceLabeltext: Observable<String> = Observable("")
     var stockTextLabeltext: Observable<String> = Observable("")
     var descriptionLabeltext: Observable<String> = Observable("")
-    var errorText: Observable<String> = Observable("")
     var images: Observable<[UIImage]> = Observable([])
+    var networkingResult: Observable<OpenMarketError> = Observable(nil)
     
     init(id: Int) {
         self.id = id
@@ -28,7 +28,7 @@ final class ItemDetailViewModel {
         
         apiRequestLoader.loadAPIReqeust(requestData: id) { [weak self] item, error in
             if let error = error {
-                self?.errorText.value = error.localizedDescription
+                self?.networkingResult.value = error
             }
             
             guard let item = item else {
@@ -69,7 +69,7 @@ final class ItemDetailViewModel {
         
         apiRequestLoader.loadAPIReqeust(requestData: url) { [weak self] image, error in
             if let error = error {
-                self?.errorText.value = error.localizedDescription
+                self?.networkingResult.value = error
             }
             
             guard let image = image else {
