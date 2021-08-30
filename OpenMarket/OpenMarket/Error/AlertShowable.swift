@@ -17,3 +17,33 @@ enum AlertString {
 protocol AlertShowable {
     func showAlert(viewController: UIViewController, _ error: OpenMarketError)
 }
+
+extension AlertShowable {
+    func showAlert(viewController: UIViewController, _ error: OpenMarketError) {
+        var alert: UIAlertController
+        var okAction: UIAlertAction
+        
+        switch error {
+        case .successPOST:
+            alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+        case .successDELETE:
+            alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+        case .successPATCH:
+            alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+        case .notFound:
+            alert = UIAlertController(title: AlertString.passwordNotCorrectErrorAlertTitle, message: AlertString.passwordNotCorrectErrorMessage, preferredStyle: .alert)
+        default:
+            alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+        }
+        
+        okAction = UIAlertAction(title: AlertString.okButtonTitle, style: .default, handler: { _ in
+            guard let itemListViewController = viewController.navigationController?.viewControllers.filter({$0.isKind(of: ItemListViewController.self)}).first else {
+                return
+            }
+            viewController.navigationController?.popToViewController(itemListViewController, animated: true)
+        })
+        
+        alert.addAction(okAction)
+        viewController.present(alert, animated: true, completion: nil)
+    }
+}
