@@ -22,7 +22,7 @@ final class ItemDetailViewModel {
         self.id = id
     }
     
-    func fetchItem() {
+    func fetch() {
         let getItemAPIRequest = GetItemAPIRequest()
         let apiRequestLoader = APIRequestLoader(apiReqeust: getItemAPIRequest)
         
@@ -108,7 +108,7 @@ final class ItemDetailViewModel {
         return data
     }
     
-    func deleteItem(password: String) {
+    func delete(password: String) {
         let deleteItemAPIRequest = DeleteItemAPIReqeust(id: id)
         let apiRequestLoader = APIRequestLoader(apiReqeust: deleteItemAPIRequest)
         
