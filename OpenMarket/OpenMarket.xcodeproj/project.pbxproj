@@ -42,6 +42,7 @@
 		26A719A826DBD45600EE9816 /* ItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A719A726DBD45600EE9816 /* ItemDetailViewModel.swift */; };
 		26A719AA26DBF3E500EE9816 /* ItemDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A719A926DBF3E500EE9816 /* ItemDetailCollectionViewCell.swift */; };
 		26A719AC26DCBE2400EE9816 /* AlertShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A719AB26DCBE2300EE9816 /* AlertShowable.swift */; };
+		26A719AE26DD3A6000EE9816 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A719AD26DD3A6000EE9816 /* ImageCacheManager.swift */; };
 		26C5FE7B26B905D500A80210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7A26B905D500A80210 /* AppDelegate.swift */; };
 		26C5FE7D26B905D500A80210 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7C26B905D500A80210 /* SceneDelegate.swift */; };
 		26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */; };
@@ -113,6 +114,7 @@
 		26A719A726DBD45600EE9816 /* ItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewModel.swift; sourceTree = "<group>"; };
 		26A719A926DBF3E500EE9816 /* ItemDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		26A719AB26DCBE2300EE9816 /* AlertShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertShowable.swift; sourceTree = "<group>"; };
+		26A719AD26DD3A6000EE9816 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		26C5FE7726B905D500A80210 /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C5FE7A26B905D500A80210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26C5FE7C26B905D500A80210 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				2603605826C50D99002ADE85 /* CustomNumberFormatter.swift */,
 				2629ED0C26D487D600B69654 /* OpenMarketViewString.swift */,
 				26A7199C26D91E3500EE9816 /* ISO4217_CurrencyCode.swift */,
+				26A719AD26DD3A6000EE9816 /* ImageCacheManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				26C5FE7F26B905D500A80210 /* LaunchScreenViewController.swift in Sources */,
 				26C5FEB626B9A59B00A80210 /* ItemToDeletion.swift in Sources */,
 				26C5FEB426B9A44400A80210 /* ItemToUpload.swift in Sources */,
+				26A719AE26DD3A6000EE9816 /* ImageCacheManager.swift in Sources */,
 				26625BCE26D67FBF00544F31 /* ItemUploadViewModel.swift in Sources */,
 				2603606226CBD614002ADE85 /* ItemTableViewFooterView.swift in Sources */,
 				26A719AC26DCBE2400EE9816 /* AlertShowable.swift in Sources */,
