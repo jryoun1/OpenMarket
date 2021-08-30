@@ -117,3 +117,11 @@ extension ItemDetailViewController: DetailViewConfigurable {
         itemDetailViewModel?.fetchItem()
     }
 }
+
+//MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
+extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return itemDetailViewModel?.numberOfSections ?? 1
+    }
+
+}

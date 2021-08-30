@@ -79,3 +79,9 @@ final class ItemDetailViewModel {
         }
     }
 }
+
+extension ItemDetailViewModel {
+    var numberOfSections: Int {
+        return 1
+    }
+}
