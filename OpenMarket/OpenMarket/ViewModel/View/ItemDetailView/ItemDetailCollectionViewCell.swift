@@ -40,4 +40,9 @@ final class ItemDetailCollectionViewCell: UICollectionViewCell {
     func configure(image: UIImage) {
         self.itemImageView.image = image
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        itemImageView.image = nil
+    }
 }
