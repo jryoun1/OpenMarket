@@ -67,6 +67,12 @@ final class ItemDetailViewModel {
         let imageAPIRequest = GetImageAPIRequest()
         let apiRequestLoader = APIRequestLoader(apiReqeust: imageAPIRequest)
         
+        let cacheKey = NSString(string: url)
+        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) {
+            self.images.value?.append(cachedImage)
+            return
+        }
+        
         apiRequestLoader.loadAPIReqeust(requestData: url) { [weak self] image, error in
             if let error = error {
                 self?.networkingResult.value = error
@@ -76,6 +82,7 @@ final class ItemDetailViewModel {
                 return
             }
             
+            ImageCacheManager.shared.setObject(image, forKey: cacheKey)
             self?.images.value?.append(image)
         }
     }
