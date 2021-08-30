@@ -29,9 +29,15 @@ final class ItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureImageCollectionView()
         configurePageControl()
         bindViewModel()
+    }
+    
+    private func configureNavigationBar() {
+        self.title = ItemDetailViewString.openMarketAppTitle
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(showActionSheet))
     }
     
     private func configureImageCollectionView() {
