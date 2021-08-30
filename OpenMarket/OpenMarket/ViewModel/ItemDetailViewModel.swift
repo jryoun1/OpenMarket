@@ -9,6 +9,7 @@ import UIKit
 
 final class ItemDetailViewModel {
     private let id: Int
+    private var item: Item?
     var titleLabeltext: Observable<String> = Observable("")
     var priceLabeltext: Observable<String> = Observable("")
     var discountedPriceLabeltext: Observable<String> = Observable("")
@@ -33,7 +34,7 @@ final class ItemDetailViewModel {
             guard let item = item else {
                 return
             }
-            
+            self?.item = item
             self?.titleLabeltext.value = item.title
             
             let priceWithComma = CustomNumberFormatter.commaFormatter.string(from: NSNumber(value: item.price))!
