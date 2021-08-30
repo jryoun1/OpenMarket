@@ -26,3 +26,14 @@ enum ItemUploadViewString {
     static let descriptionEmptyMessage = "상세 설명을 입력해주세요"
     static let descriptionPlaceholder = "게시글 내용을 작성해주세요. (가품 및 판매금지품목은 게시가 제한될 수 있어요.)"
 }
+
+enum ItemDetailViewString {
+    static let openMarketAppTitle = "오픈 마켓"
+    static let deleteButtonTitle = "삭제"
+    static let patchButtonTitle = "수정"
+    static let cancelButtonTitle = "취소"
+    static let okButtonTitle = "확인"
+    static let deletAlertTitle = "해당 상품을 삭제하시겠습니까?"
+    static let deleteAlertMessage = "한번 삭제한 상품은 되돌릴 수 없습니다"
+    static let deleteAlertTextFieldPlaceholder = "등록할 때 입력한 비밀번호"
+}

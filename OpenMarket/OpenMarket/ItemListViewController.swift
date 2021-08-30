@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol UploadViewConfigurable: AnyObject {
+    func configure(item: ItemToUpload?, id: Int?)
+}
+
+protocol DetailViewConfigurable: AnyObject {
+    func configure(id: Int)
+}
+
 final class ItemListViewController: UIViewController {
+    weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
+    weak var detailViewConfigurableDelegate: DetailViewConfigurable?
     private var itemListViewModel = ItemListViewModel()
     
     private var itemTableView: UITableView = {
@@ -75,6 +85,8 @@ final class ItemListViewController: UIViewController {
             return
         }
         
+        self.uploadViewConfigurableDelegate = itemUploadViewController
+        self.uploadViewConfigurableDelegate?.configure(item: nil, id: nil)
         self.navigationController?.pushViewController(itemUploadViewController, animated: true)
     }
     
@@ -230,7 +242,7 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         
         return cell
@@ -252,6 +264,17 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        guard let itemDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.identifier) as? ItemDetailViewController else {
+            return
+        }
+        
+        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+            return
+        }
+        
+        self.detailViewConfigurableDelegate = itemDetailViewController
+        self.detailViewConfigurableDelegate?.configure(id: item.id)
+        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
     }
 }
 
@@ -271,7 +294,7 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: item)
+            cell.configureCell(with: ItemListCellViewModel(item))
         }
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.systemGray.cgColor
@@ -320,5 +343,19 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: view.frame.size.height / 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let itemDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: ItemDetailViewController.identifier) as? ItemDetailViewController else {
+            return
+        }
+        
+        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+            return
+        }
+        
+        self.detailViewConfigurableDelegate = itemDetailViewController
+        self.detailViewConfigurableDelegate?.configure(id: item.id)
+        self.navigationController?.pushViewController(itemDetailViewController, animated: true)
     }
 }
