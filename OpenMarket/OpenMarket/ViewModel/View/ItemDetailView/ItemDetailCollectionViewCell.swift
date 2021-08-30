@@ -36,4 +36,8 @@ final class ItemDetailCollectionViewCell: UICollectionViewCell {
             itemImageView.heightAnchor.constraint(equalToConstant: 300),
         ])
     }
+    
+    func configure(image: UIImage) {
+        self.itemImageView.image = image
+    }
 }
