@@ -5,6 +5,8 @@
 //  Created by Yeon on 2021/08/31.
 //
 
-import Foundation
+import UIKit
 
-
+final class ImageCacheManager {
+    
+}
