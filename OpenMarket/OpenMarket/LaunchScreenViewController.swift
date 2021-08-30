@@ -49,11 +49,11 @@ final class LaunchScreenViewController: UIViewController {
     }
     
     private func moveToHomeViewController() {
-        guard let homeViewController = self.storyboard?.instantiateViewController(identifier: "HomeViewController") else {
+        guard let itemListViewController = self.storyboard?.instantiateViewController(identifier: ItemListViewController.identifier) else {
             return
         }
         
-        let navigationController = UINavigationController(rootViewController: homeViewController)
+        let navigationController = UINavigationController(rootViewController: itemListViewController)
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
             navigationController.modalTransitionStyle = .crossDissolve
             navigationController.modalPresentationStyle = .fullScreen

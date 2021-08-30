@@ -27,7 +27,7 @@
         <!--Item List View Controller-->
         <scene sceneID="dJg-Ac-qMb">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="zdH-Yu-TfC" customClass="ItemListViewController" customModule="OpenMarket" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemListViewController" id="zdH-Yu-TfC" customClass="ItemListViewController" customModule="OpenMarket" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="37H-HN-wuq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

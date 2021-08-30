@@ -16,6 +16,7 @@ protocol DetailViewConfigurable: AnyObject {
 }
 
 final class ItemListViewController: UIViewController {
+    static let identifier = "ItemListViewController"
     weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     weak var detailViewConfigurableDelegate: DetailViewConfigurable?
     private var itemListViewModel = ItemListViewModel()
