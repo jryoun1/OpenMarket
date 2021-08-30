@@ -9,4 +9,9 @@ import UIKit
 
 final class ItemDetailCollectionViewCell: UICollectionViewCell {
     static let identifier = "ItemDetailCollectionViewCell"
+    private var itemImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 }
