@@ -29,6 +29,7 @@ final class ItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureImageCollectionView()
+        configurePageControl()
         bindViewModel()
     }
     
@@ -36,6 +37,14 @@ final class ItemDetailViewController: UIViewController {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         imageCollectionView.register(ItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailCollectionViewCell.identifier)
+    }
+    
+    private func configurePageControl() {
+        self.view.addSubview(pageControl)
+        NSLayoutConstraint.activate([
+            pageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 280)
+        ])
     }
     
     private func bindViewModel() {
