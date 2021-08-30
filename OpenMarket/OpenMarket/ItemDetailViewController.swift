@@ -25,6 +25,7 @@ final class ItemDetailViewController: UIViewController {
     
     static let identifier = "ItemDetailViewController"
     private var itemDetailViewModel: ItemDetailViewModel?
+    weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,7 +164,6 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
-//MARK:- passwordInputRequstAlert, AlertShowable protocol
 extension ItemDetailViewController: AlertShowable {
     private func showPasswordRequestAlert() {
         let alert = UIAlertController(title: ItemDetailViewString.deletAlertTitle, message: ItemDetailViewString.deleteAlertMessage, preferredStyle: .alert)
