@@ -17,9 +17,23 @@ final class ItemDetailCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func configureLayout() {
+        self.contentView.addSubview(itemImageView)
+        
+        NSLayoutConstraint.activate([
+            itemImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            itemImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            itemImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            itemImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            itemImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            itemImageView.heightAnchor.constraint(equalToConstant: 300),
+        ])
     }
 }
