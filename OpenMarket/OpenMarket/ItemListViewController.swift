@@ -66,6 +66,12 @@ final class ItemListViewController: UIViewController {
         configureItemTableView()
         configureItemCollectionView()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        itemListViewModel.currentPage = 1
+        itemListViewModel.itemList.value?.removeAll()
         itemListViewModel.fetchData(page: itemListViewModel.currentPage)
     }
     
