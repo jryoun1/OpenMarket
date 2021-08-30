@@ -6,5 +6,5 @@
 //
 
 enum OpenMarketAPI {
-    static let baseURL = "https://camp-open-market.herokuapp.com/"
+    static let baseURL = "https://camp-open-market-2.herokuapp.com/"
 }
