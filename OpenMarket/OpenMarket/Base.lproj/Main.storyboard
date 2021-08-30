@@ -345,7 +345,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="Bag-VN-BdA"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hHD-Fo-s3j">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hHD-Fo-s3j">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -392,6 +392,8 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="lsR-SH-Erk" secondAttribute="trailing" constant="10" id="D20-Ga-Y53"/>
                                             <constraint firstItem="lsR-SH-Erk" firstAttribute="leading" secondItem="PGT-TW-Xdk" secondAttribute="leading" constant="10" id="HHw-PM-wCF"/>
+                                            <constraint firstAttribute="trailing" secondItem="l3f-34-mc3" secondAttribute="trailing" id="SDj-00-7L1"/>
+                                            <constraint firstItem="l3f-34-mc3" firstAttribute="leading" secondItem="PGT-TW-Xdk" secondAttribute="leading" id="cXM-WQ-ZTO"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -418,7 +420,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="rsU-qe-g25" id="MeQ-d8-aPb"/>
                         <outlet property="discountedLabel" destination="KH2-2q-4MK" id="FOj-en-xUH"/>
-                        <outlet property="imageCollectionView" destination="l3f-34-mc3" id="03V-95-PnB"/>
+                        <outlet property="imageCollectionView" destination="l3f-34-mc3" id="c3M-9F-OBr"/>
                         <outlet property="priceLabel" destination="gTt-me-kXV" id="Hqy-SR-YUr"/>
                         <outlet property="stockLabel" destination="qEK-8S-TEq" id="nvB-oj-PJ5"/>
                         <outlet property="titleLabel" destination="WJx-iJ-aT0" id="VtE-Sq-JiA"/>
