@@ -107,6 +107,19 @@ final class ItemDetailViewModel {
         }
         return data
     }
+    
+    func deleteItem(password: String) {
+        let deleteItemAPIRequest = DeleteItemAPIReqeust(id: id)
+        let apiRequestLoader = APIRequestLoader(apiReqeust: deleteItemAPIRequest)
+        
+        apiRequestLoader.loadAPIReqeust(requestData: ItemToDeletion(password: password)) { [weak self] item, error in
+            if let error = error {
+                self?.networkingResult.value = error
+            }
+            
+            self?.networkingResult.value = .successDELETE
+        }
+    }
 }
 
 extension ItemDetailViewModel {
