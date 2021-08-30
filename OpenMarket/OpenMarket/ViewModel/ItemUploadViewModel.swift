@@ -25,7 +25,7 @@ final class ItemUploadViewModel {
     var isStockTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isPasswordTextFieldHighLighted: Observable<Bool> = Observable(false)
     var isDescriptionTextViewHighLighted: Observable<Bool> = Observable(false)
-    var networkErrorMessage: Observable<String?> = Observable(nil)
+    var networkingResult: Observable<OpenMarketError> = Observable(nil)
     
     enum ItemToUploadInputStatus {
         case Correct
@@ -116,11 +116,11 @@ final class ItemUploadViewModel {
         
         
         apiRequestLoader.loadAPIReqeust(requestData: itemToUploads) { [weak self] item, error in
-            guard let error = error else {
-                return
+            if let error = error {
+                self?.networkingResult.value = error
             }
             
-            self?.networkErrorMessage.value = error.localizedDescription
+            self?.networkingResult.value = .successPOST
         }
     }
     
@@ -170,11 +170,11 @@ final class ItemUploadViewModel {
                                                                   discountedPrice: patchDiscountedPrice,
                                                                   images: patchImageData,
                                                                   password: password)) { [weak self] item, error in
-            guard let error = error else {
-                return
+            if let error = error {
+                self?.networkingResult.value = error
             }
             
-            self?.networkErrorMessage.value = error.localizedDescription
+            self?.networkingResult.value = .successPATCH
         }
     }
     
