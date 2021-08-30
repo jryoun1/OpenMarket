@@ -152,3 +152,26 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         pageControl.currentPage = Int(scrollPos)
     }
 }
+
+//MARK:- passwordInputRequstAlert, AlertShowable protocol
+extension ItemDetailViewController: AlertShowable {
+    private func showPasswordRequestAlert() {
+        let alert = UIAlertController(title: ItemDetailViewString.deletAlertTitle, message: ItemDetailViewString.deleteAlertMessage, preferredStyle: .alert)
+        let ok = UIAlertAction(title: ItemDetailViewString.okButtonTitle, style: .destructive) { (ok) in
+            if let inputPassword = alert.textFields?.first?.text {
+                self.itemDetailViewModel?.delete(password: inputPassword)
+            }
+            return
+        }
+        let cancel = UIAlertAction(title: ItemDetailViewString.cancelButtonTitle, style: .cancel, handler: nil)
+        
+        alert.addTextField { textfield in
+            textfield.placeholder = ItemDetailViewString.deleteAlertTextFieldPlaceholder
+            textfield.isSecureTextEntry = true
+            textfield.textContentType = .password
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
