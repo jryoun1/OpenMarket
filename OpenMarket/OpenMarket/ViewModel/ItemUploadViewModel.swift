@@ -15,7 +15,7 @@ final class ItemUploadViewModel {
     var discountedPriceTextFiledtext: Observable<String> = Observable("")
     var stockTextFieldtext: Observable<String> = Observable("")
     var passwordTextFieldtext: Observable<String> = Observable("")
-    var descriptiontextTextViewtext: Observable<String> = Observable("")
+    var descriptionTextViewtext: Observable<String> = Observable("")
     
     var itemToUploadsInputErrorMessage: Observable<String> = Observable("")
     var isTitleTextFieldHighLighted: Observable<Bool> = Observable(false)
@@ -81,7 +81,7 @@ final class ItemUploadViewModel {
         discountedPriceTextFiledtext.value = originDiscountedPrice?.description
         stockTextFieldtext.value = originStock?.description
         passwordTextFieldtext.value = originPassword
-        descriptiontextTextViewtext.value = originDescription
+        descriptionTextViewtext.value = originDescription
         selectedImageData.value = originImageData
     }
     
