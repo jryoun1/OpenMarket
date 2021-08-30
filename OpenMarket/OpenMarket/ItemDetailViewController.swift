@@ -37,6 +37,8 @@ final class ItemDetailViewController: UIViewController {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         imageCollectionView.register(ItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: ItemDetailCollectionViewCell.identifier)
+        imageCollectionView.showsHorizontalScrollIndicator = false
+        imageCollectionView.isPagingEnabled = true
     }
     
     private func configurePageControl() {
