@@ -103,6 +103,16 @@ final class ItemDetailViewController: UIViewController {
                 self?.pageControl.numberOfPages = self?.itemDetailViewModel?.images.value?.count ?? 0
             }
         })
+        
+        itemDetailViewModel?.networkingResult.bind({ [weak self] error in
+            guard let error = error else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.showAlert(viewController: self!, error)
+            }
+        })
     }
     
     private func changeToStrikethroughStyle(string: String) -> NSMutableAttributedString {
@@ -117,7 +127,7 @@ final class ItemDetailViewController: UIViewController {
 extension ItemDetailViewController: DetailViewConfigurable {
     func configure(id: Int) {
         itemDetailViewModel = ItemDetailViewModel(id: id)
-        itemDetailViewModel?.fetchItem()
+        itemDetailViewModel?.fetch()
     }
 }
 
