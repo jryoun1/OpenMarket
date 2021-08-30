@@ -123,5 +123,8 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemDetailViewModel?.numberOfSections ?? 1
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return itemDetailViewModel?.images.value?.count ?? 0
+    }    
 }
