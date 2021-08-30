@@ -126,5 +126,17 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemDetailViewModel?.images.value?.count ?? 0
-    }    
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let detailViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemDetailCollectionViewCell.identifier, for: indexPath) as? ItemDetailCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        if let image = self.itemDetailViewModel?.images.value?[indexPath.row] {
+            detailViewCell.configure(image: image)
+        }
+        
+        return detailViewCell
+    }
 }
