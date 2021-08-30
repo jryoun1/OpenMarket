@@ -139,4 +139,8 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         
         return detailViewCell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 300)
+    }
 }
