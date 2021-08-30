@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ItemUploadViewController: UIViewController {
+final class ItemUploadViewController: UIViewController, AlertShowable {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var imageCollectionView: UICollectionView!
@@ -94,7 +94,6 @@ final class ItemUploadViewController: UIViewController {
             switch itemUploadViewModel.checkItemToUploadInput() {
             case .Correct:
                 itemUploadViewModel.post()
-                self.navigationController?.popViewController(animated: true)
             case .Incorrect:
                 return
             }
@@ -102,7 +101,6 @@ final class ItemUploadViewController: UIViewController {
             switch itemUploadViewModel.checkItemToUploadInput() {
             case .Correct:
                 itemUploadViewModel.patch()
-                self.navigationController?.popViewController(animated: true)
             case .Incorrect:
                 return
             }
@@ -152,7 +150,7 @@ final class ItemUploadViewController: UIViewController {
             self?.passwordTextfield.text = $0
         }
         
-        itemUploadViewModel.descriptiontextTextViewtext.bind { [weak self] in
+        itemUploadViewModel.descriptionTextViewtext.bind { [weak self] in
             if let description = $0, description.isEmpty {
                 self?.descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
                 self?.descriptionTextView.textColor = .systemGray3
@@ -192,9 +190,14 @@ final class ItemUploadViewController: UIViewController {
             if let bool = $0, bool { self?.highlightTextView((self?.descriptionTextView)!) }
         }
         
-        itemUploadViewModel.networkErrorMessage.bind {
-            guard let errorMessage = $0 else { return }
-            //TODO:- Handle if network error occured (e.g. AlertController)
+        itemUploadViewModel.networkingResult.bind { [weak self] error in
+            guard let error = error else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.showAlert(viewController: self!, error)
+            }
         }
     }
     

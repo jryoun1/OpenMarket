@@ -25,12 +25,50 @@ final class ItemDetailViewController: UIViewController {
     
     static let identifier = "ItemDetailViewController"
     private var itemDetailViewModel: ItemDetailViewModel?
+    weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         configureImageCollectionView()
         configurePageControl()
         bindViewModel()
+    }
+    
+    private func configureNavigationBar() {
+        self.title = ItemDetailViewString.openMarketAppTitle
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(showActionSheetAlert(_:)))
+    }
+    
+    @objc private func showActionSheetAlert(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: ItemDetailViewString.cancelButtonTitle, style: .cancel, handler: nil)
+        let fix = UIAlertAction(title: ItemDetailViewString.patchButtonTitle, style: .default) { [weak self] _ in
+            let result = self?.itemDetailViewModel?.prepareItemToUpload(password: "")
+            guard let itemUploadViewController = self?.storyboard?.instantiateViewController(withIdentifier: ItemUploadViewController.identifier) as? ItemUploadViewController else {
+                return
+            }
+            
+            self?.uploadViewConfigurableDelegate = itemUploadViewController
+            self?.uploadViewConfigurableDelegate?.configure(item: result?.item, id: result?.id)
+            self?.navigationController?.pushViewController(itemUploadViewController, animated: true)
+        }
+        let delete = UIAlertAction(title: ItemDetailViewString.deleteButtonTitle, style: .destructive) { [weak self] _ in
+            self?.showPasswordRequestAlert()
+        }
+        
+        alert.addAction(fix)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        if traitCollection.userInterfaceIdiom == .phone {
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            alert.popoverPresentationController?.barButtonItem = sender
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func configureImageCollectionView() {
@@ -103,6 +141,16 @@ final class ItemDetailViewController: UIViewController {
                 self?.pageControl.numberOfPages = self?.itemDetailViewModel?.images.value?.count ?? 0
             }
         })
+        
+        itemDetailViewModel?.networkingResult.bind({ [weak self] error in
+            guard let error = error else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.showAlert(viewController: self!, error)
+            }
+        })
     }
     
     private func changeToStrikethroughStyle(string: String) -> NSMutableAttributedString {
@@ -117,7 +165,7 @@ final class ItemDetailViewController: UIViewController {
 extension ItemDetailViewController: DetailViewConfigurable {
     func configure(id: Int) {
         itemDetailViewModel = ItemDetailViewModel(id: id)
-        itemDetailViewModel?.fetchItem()
+        itemDetailViewModel?.fetch()
     }
 }
 
@@ -150,5 +198,27 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollPos = scrollView.contentOffset.x / view.frame.width
         pageControl.currentPage = Int(scrollPos)
+    }
+}
+
+extension ItemDetailViewController: AlertShowable {
+    private func showPasswordRequestAlert() {
+        let alert = UIAlertController(title: ItemDetailViewString.deletAlertTitle, message: ItemDetailViewString.deleteAlertMessage, preferredStyle: .alert)
+        let ok = UIAlertAction(title: ItemDetailViewString.okButtonTitle, style: .destructive) { (ok) in
+            if let inputPassword = alert.textFields?.first?.text {
+                self.itemDetailViewModel?.delete(password: inputPassword)
+            }
+            return
+        }
+        let cancel = UIAlertAction(title: ItemDetailViewString.cancelButtonTitle, style: .cancel, handler: nil)
+        
+        alert.addTextField { textfield in
+            textfield.placeholder = ItemDetailViewString.deleteAlertTextFieldPlaceholder
+            textfield.isSecureTextEntry = true
+            textfield.textContentType = .password
+        }
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
 }
