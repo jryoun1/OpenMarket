@@ -79,6 +79,27 @@ final class ItemDetailViewModel {
             self?.images.value?.append(image)
         }
     }
+    
+    func prepareItemToUpload(password: String) -> (id: Int, item: ItemToUpload) {
+        var imagedata = [Data]()
+        if let images = self.images.value {
+            for itemImage in images {
+                if let image = UIImageToDataType(image: itemImage) {
+                    imagedata.append(image)
+                }
+            }
+        }
+        
+        let item = ItemToUpload(title: self.item?.title,
+                                descriptions: self.item?.descriptions,
+                                price: self.item?.price,
+                                currency: self.item?.currency,
+                                stock: self.item?.stock,
+                                discountedPrice: self.item?.discountedPrice,
+                                images: imagedata,
+                                password: password)
+        return (id, item)
+    }
 }
 
 extension ItemDetailViewModel {
