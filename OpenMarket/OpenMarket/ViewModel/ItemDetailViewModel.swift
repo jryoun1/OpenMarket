@@ -100,6 +100,13 @@ final class ItemDetailViewModel {
                                 password: password)
         return (id, item)
     }
+    
+    private func UIImageToDataType(image: UIImage) -> Data? {
+        guard let data = image.jpegData(compressionQuality: 1.0) else {
+            return nil
+        }
+        return data
+    }
 }
 
 extension ItemDetailViewModel {
