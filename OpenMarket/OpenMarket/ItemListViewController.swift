@@ -65,6 +65,7 @@ final class ItemListViewController: UIViewController {
         configureNavigationBar()
         configureItemTableView()
         configureItemCollectionView()
+        configureRefreshControl()
         bindViewModel()
         registerNotificationCenter()
         itemListViewModel.fetchData(page: itemListViewModel.currentPage)
@@ -163,6 +164,19 @@ final class ItemListViewController: UIViewController {
             itemCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             itemCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func configureRefreshControl() {
+        let refreshForTableView = UIRefreshControl()
+        refreshForTableView.addTarget(self, action: #selector(updateData(_:)), for: .valueChanged)
+        refreshForTableView.tintColor = UIColor.systemGray
+        
+        let refreshForCollectionView = UIRefreshControl()
+        refreshForCollectionView.addTarget(self, action: #selector(updateData(_:)), for: .valueChanged)
+        refreshForCollectionView.tintColor = UIColor.systemGray
+        
+        self.itemCollectionView.refreshControl = refreshForTableView
+        self.itemTableView.refreshControl = refreshForCollectionView
     }
     
     //MARK:- bindViewModel
