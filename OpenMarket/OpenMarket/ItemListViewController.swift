@@ -168,15 +168,23 @@ final class ItemListViewController: UIViewController {
     
     private func configureRefreshControl() {
         let refreshForTableView = UIRefreshControl()
-        refreshForTableView.addTarget(self, action: #selector(updateData(_:)), for: .valueChanged)
+        refreshForTableView.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         refreshForTableView.tintColor = UIColor.systemGray
         
         let refreshForCollectionView = UIRefreshControl()
-        refreshForCollectionView.addTarget(self, action: #selector(updateData(_:)), for: .valueChanged)
+        refreshForCollectionView.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         refreshForCollectionView.tintColor = UIColor.systemGray
         
         self.itemCollectionView.refreshControl = refreshForTableView
         self.itemTableView.refreshControl = refreshForCollectionView
+    }
+    
+    @objc private func refreshData(_ sender: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            sender.endRefreshing()
+            self.itemListViewModel.currentPage = 1
+            self.itemListViewModel.fetchData(page: self.itemListViewModel.currentPage)
+        }
     }
     
     //MARK:- bindViewModel
