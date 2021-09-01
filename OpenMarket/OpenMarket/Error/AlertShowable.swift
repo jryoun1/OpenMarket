@@ -22,14 +22,18 @@ extension AlertShowable {
     func showAlert(viewController: UIViewController, _ error: OpenMarketError) {
         var alert: UIAlertController
         var okAction: UIAlertAction
+        var isNetworkSuccess: Bool = false
         
         switch error {
         case .successPOST:
             alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+            isNetworkSuccess = true
         case .successDELETE:
             alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+            isNetworkSuccess = true
         case .successPATCH:
             alert = UIAlertController(title: AlertString.normalTitle, message: error.localizedDescription, preferredStyle: .alert)
+            isNetworkSuccess = true
         case .notFound:
             alert = UIAlertController(title: AlertString.passwordNotCorrectErrorAlertTitle, message: AlertString.passwordNotCorrectErrorMessage, preferredStyle: .alert)
         default:
@@ -40,6 +44,9 @@ extension AlertShowable {
             guard let itemListViewController = viewController.navigationController?.viewControllers.filter({$0.isKind(of: ItemListViewController.self)}).first else {
                 return
             }
+            if isNetworkSuccess {
+                NotificationCenter.default.post(name: .ItemDataChanged, object: nil)
+            }            
             viewController.navigationController?.popToViewController(itemListViewController, animated: true)
         })
         

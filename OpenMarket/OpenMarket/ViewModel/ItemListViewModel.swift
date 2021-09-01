@@ -12,6 +12,7 @@ final class ItemListViewModel {
     var currentPage: Int = 1
     var isPaging: Bool = false
     var hasNextPage: Bool = false
+    var isItemChanged: Bool = false
     var itemList: Observable<[Item]> = Observable([])
     
     func fetchData(page: Int) {
