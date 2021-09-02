@@ -281,6 +281,17 @@
 			path = ItemDetailView;
 			sourceTree = "<group>";
 		};
+		26B8195E26E09D6B00634272 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */,
+				26C5FEB126B972E700A80210 /* ItemListViewController.swift */,
+				2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */,
+				26A719A526DBC2CF00EE9816 /* ItemDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		26C5FE6E26B905D500A80210 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +317,7 @@
 		26C5FE7926B905D500A80210 /* OpenMarket */ = {
 			isa = PBXGroup;
 			children = (
+				26B8195E26E09D6B00634272 /* ViewController */,
 				2603606026C519A6002ADE85 /* Utilities */,
 				2603605E26C5196B002ADE85 /* ViewModel */,
 				2666EB7426BE729C0046D14F /* Error */,
@@ -314,10 +326,6 @@
 				26C5FEAA26B911A500A80210 /* Model */,
 				26C5FE7A26B905D500A80210 /* AppDelegate.swift */,
 				26C5FE7C26B905D500A80210 /* SceneDelegate.swift */,
-				26A719A526DBC2CF00EE9816 /* ItemDetailViewController.swift */,
-				2603606D26CF9B6D002ADE85 /* ItemUploadViewController.swift */,
-				26C5FEB126B972E700A80210 /* ItemListViewController.swift */,
-				26C5FE7E26B905D500A80210 /* LaunchScreenViewController.swift */,
 				26C5FE8026B905D500A80210 /* Main.storyboard */,
 				26C5FE8326B905D600A80210 /* Assets.xcassets */,
 				26C5FE8526B905D600A80210 /* LaunchScreen.storyboard */,
