@@ -1,16 +1,20 @@
 PODS:
   - BSImagePicker (3.3.1)
+  - SkeletonView (1.24.4)
 
 DEPENDENCIES:
   - BSImagePicker (~> 3.1)
+  - SkeletonView
 
 SPEC REPOS:
   trunk:
     - BSImagePicker
+    - SkeletonView
 
 SPEC CHECKSUMS:
   BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
+  SkeletonView: c8632f212fcce7b7ba742c3d4a5af3596b5fa5ae
 
-PODFILE CHECKSUM: e9ddc485513702ed7c6d675b400f83c29f9e326b
+PODFILE CHECKSUM: 7367ae42d6434e1a61de7dd9ff218be314a20d25
 
 COCOAPODS: 1.10.1

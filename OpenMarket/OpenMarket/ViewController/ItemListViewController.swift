@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 protocol UploadViewConfigurable: AnyObject {
     func configure(item: ItemToUpload?, id: Int?)
@@ -24,6 +25,7 @@ final class ItemListViewController: UIViewController {
     private var itemTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isSkeletonable = true
         let nib = UINib(nibName: ItemTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: ItemTableViewCell.identifier)
         tableView.register(ItemTableViewFooterView.self, forHeaderFooterViewReuseIdentifier: ItemTableViewFooterView.identifier)
@@ -33,6 +35,7 @@ final class ItemListViewController: UIViewController {
     private var itemCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.isSkeletonable = true
         let nib = UINib(nibName: ItemCollectionViewCell.identifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         collectionView.register(ItemCollectionReusableFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ItemCollectionReusableFooterView.identifier)
@@ -65,6 +68,7 @@ final class ItemListViewController: UIViewController {
         configureNavigationBar()
         configureItemTableView()
         configureItemCollectionView()
+        configureSkeletonView()
         configureRefreshControl()
         bindViewModel()
         registerNotificationCenter()
@@ -192,6 +196,11 @@ final class ItemListViewController: UIViewController {
         itemListViewModel.itemList.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.checkIsHiddenAndReloadData()
+                
+                if self?.itemListViewModel.itemList.value?.count ?? 0 > 19 {
+                    self?.itemTableView.stopSkeletonAnimation()
+                    self?.itemTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+                }
             }
         }
     }
@@ -226,6 +235,11 @@ final class ItemListViewController: UIViewController {
                 footerView.stopLoading()
             }
         }
+    }
+    
+    private func configureSkeletonView() {
+        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+        self.itemTableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .lightGray), animation: animation, transition: .crossDissolve(0.5))
     }
     
     //MARK:- NotificationCenter
@@ -273,7 +287,7 @@ extension ItemListViewController {
 }
 
 //MARK:- TableView Delegate, Datasource
-extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return itemListViewModel.numberOfSections
     }
@@ -321,6 +335,15 @@ extension ItemListViewController: UITableViewDelegate, UITableViewDataSource {
         self.detailViewConfigurableDelegate = itemDetailViewController
         self.detailViewConfigurableDelegate?.configure(id: item.id)
         self.navigationController?.pushViewController(itemDetailViewController, animated: true)
+    }
+    
+    //MARK:- skeletonView
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return ItemTableViewCell.identifier
     }
 }
 
