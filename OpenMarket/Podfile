@@ -8,6 +8,7 @@ target 'OpenMarket' do
   # Pods for OpenMarket
   pod "BSImagePicker", "~> 3.1"
 
+  pod 'SkeletonView'
 
   target 'OpenMarketTests' do
     inherit! :search_paths
