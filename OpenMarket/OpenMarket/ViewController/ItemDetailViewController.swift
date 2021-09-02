@@ -37,7 +37,7 @@ final class ItemDetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         self.title = ItemDetailViewString.openMarketAppTitle
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(showActionSheetAlert(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(showActionSheetAlert(_:)))
     }
     
     @objc private func showActionSheetAlert(_ sender: UIBarButtonItem) {
