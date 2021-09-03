@@ -319,7 +319,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
-//MARK:- DeleteImage protocol
+//MARK:- ImageDeletable protocol
 extension ItemUploadViewController: ImageDeletable {
     func delete(index: Int) {
         _ = viewModel.selectedImageData.value?.remove(at: index)
