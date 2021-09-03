@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol DeleteImage: AnyObject {
+protocol ImageDeletable: AnyObject {
     func delete(index: Int)
 }
 
@@ -15,7 +15,7 @@ final class ItemUploadCollectionViewCell: UICollectionViewCell {
     static let identifier = "ItemUploadCollectionViewCell"
     @IBOutlet private weak var itemImageView: UIImageView!
     @IBOutlet private weak var deleteButton: UIButton!
-    weak var deleteImageDelegate: DeleteImage?
+    weak var deleteImageDelegate: ImageDeletable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
