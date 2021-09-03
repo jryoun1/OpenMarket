@@ -20,7 +20,7 @@ final class ItemListViewController: UIViewController {
     static let identifier = "ItemListViewController"
     weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     weak var detailViewConfigurableDelegate: DetailViewConfigurable?
-    private var itemListViewModel = ItemListViewModel()
+    private var viewModel = ItemListViewModel()
     
     private var itemTableView: UITableView = {
         let tableView = UITableView()
@@ -72,16 +72,16 @@ final class ItemListViewController: UIViewController {
         configureRefreshControl()
         bindViewModel()
         registerNotificationCenter()
-        itemListViewModel.fetchData(page: itemListViewModel.currentPage)
+        viewModel.fetchData(page: viewModel.currentPage)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if itemListViewModel.isItemChanged {
-            itemListViewModel.currentPage = 1
-            itemListViewModel.itemList.value?.removeAll()
-            itemListViewModel.fetchData(page: itemListViewModel.currentPage)
-            itemListViewModel.isItemChanged = false
+        if viewModel.isItemChanged {
+            viewModel.currentPage = 1
+            viewModel.itemList.value?.removeAll()
+            viewModel.fetchData(page: viewModel.currentPage)
+            viewModel.isItemChanged = false
         }
     }
     
@@ -186,18 +186,18 @@ final class ItemListViewController: UIViewController {
     @objc private func refreshData(_ sender: UIRefreshControl) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             sender.endRefreshing()
-            self.itemListViewModel.currentPage = 1
-            self.itemListViewModel.fetchData(page: self.itemListViewModel.currentPage)
+            self.viewModel.currentPage = 1
+            self.viewModel.fetchData(page: self.viewModel.currentPage)
         }
     }
     
     //MARK:- bindViewModel
     private func bindViewModel() {
-        itemListViewModel.itemList.bind { [weak self] _ in
+        viewModel.itemList.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.checkIsHiddenAndReloadData()
                 
-                if self?.itemListViewModel.itemList.value?.count ?? 0 > 19 {
+                if self?.viewModel.itemList.value?.count ?? 0 > 19 {
                     self?.itemTableView.stopSkeletonAnimation()
                     self?.itemTableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
                 }
@@ -248,7 +248,7 @@ final class ItemListViewController: UIViewController {
     }
     
     @objc private func didReceiveItemDataChanged(_ notification: Notification) {
-        itemListViewModel.isItemChanged = true
+        viewModel.isItemChanged = true
     }
 }
 
@@ -259,16 +259,16 @@ extension Notification.Name {
 //MARK:- Paging
 extension ItemListViewController {
     private func beginPaging() {
-        itemListViewModel.isPaging = true
+        viewModel.isPaging = true
         
         DispatchQueue.main.async {
             self.checkIsHiddenAndControlLoadingIndicator(state: .start)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.itemListViewModel.currentPage += 1
-            self.itemListViewModel.fetchData(page: self.itemListViewModel.currentPage)
-            self.itemListViewModel.isPaging = false
+            self.viewModel.currentPage += 1
+            self.viewModel.fetchData(page: self.viewModel.currentPage)
+            self.viewModel.isPaging = false
             self.checkIsHiddenAndControlLoadingIndicator(state: .stop)
         }
     }
@@ -279,7 +279,7 @@ extension ItemListViewController {
         let height = scrollView.frame.height
         
         if contentOffset_y > contentHeight - height {
-            if itemListViewModel.isPaging == false && itemListViewModel.hasNextPage {
+            if viewModel.isPaging == false && viewModel.hasNextPage {
                 beginPaging()
             }
         }
@@ -289,11 +289,11 @@ extension ItemListViewController {
 //MARK:- TableView Delegate, Datasource
 extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return itemListViewModel.numberOfSections
+        return viewModel.numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemListViewModel.itemList.value?.count ?? 0
+        return viewModel.itemList.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -301,7 +301,7 @@ extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSour
             return ItemTableViewCell()
         }
         
-        if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
+        if let item = self.viewModel.itemList.value?[indexPath.row] {
             cell.configureCell(with: ItemListCellViewModel(item))
         }
         
@@ -328,7 +328,7 @@ extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSour
             return
         }
         
-        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+        guard let item = self.viewModel.itemList.value?[indexPath.row] else {
             return
         }
         
@@ -350,11 +350,11 @@ extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSour
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
 extension ItemListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return itemListViewModel.numberOfSections
+        return viewModel.numberOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemListViewModel.itemList.value?.count ?? 0
+        return viewModel.itemList.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -362,7 +362,7 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         
-        if let item = self.itemListViewModel.itemList.value?[indexPath.row] {
+        if let item = self.viewModel.itemList.value?[indexPath.row] {
             cell.configureCell(with: ItemListCellViewModel(item))
         }
         cell.layer.borderWidth = 1
@@ -419,7 +419,7 @@ extension ItemListViewController: UICollectionViewDelegate, UICollectionViewData
             return
         }
         
-        guard let item = self.itemListViewModel.itemList.value?[indexPath.row] else {
+        guard let item = self.viewModel.itemList.value?[indexPath.row] else {
             return
         }
         

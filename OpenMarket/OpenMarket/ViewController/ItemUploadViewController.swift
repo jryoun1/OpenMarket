@@ -20,7 +20,7 @@ final class ItemUploadViewController: UIViewController, AlertShowable {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     static let identifier = "ItemUploadViewController"
-    private var itemUploadViewModel = ItemUploadViewModel()
+    private var viewModel = ItemUploadViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,55 +52,55 @@ final class ItemUploadViewController: UIViewController, AlertShowable {
     
     @objc private func uploadItemToServer(_ sender: UIBarButtonItem) {
         guard let priceText = priceTextField.text, !priceText.isEmpty else {
-            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+            viewModel.updateItemToUpload(title: titleTextField.text!,
                                                    currency: currencyTextField.text!,
                                                    price: nil,
                                                    discountedPrice: nil,
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!,
-                                                   imageData: itemUploadViewModel.selectedImageData.value ?? [])
+                                                   imageData: viewModel.selectedImageData.value ?? [])
             checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
             return
         }
         
         guard let stockText = stockTextField.text, !stockText.isEmpty else {
-            itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+            viewModel.updateItemToUpload(title: titleTextField.text!,
                                                    currency: currencyTextField.text!,
                                                    price: Int(priceText)!,
                                                    discountedPrice: nil,
                                                    stock: nil,
                                                    password: passwordTextfield.text!,
                                                    description: descriptionTextView.text!,
-                                                   imageData: itemUploadViewModel.selectedImageData.value ?? [])
+                                                   imageData: viewModel.selectedImageData.value ?? [])
             checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
             return
         }
         
-        itemUploadViewModel.updateItemToUpload(title: titleTextField.text!,
+        viewModel.updateItemToUpload(title: titleTextField.text!,
                                                currency: currencyTextField.text!,
                                                price: Int(priceText)!,
                                                discountedPrice: Int(discountedPriceTextField.text!),
                                                stock: Int(stockText)!,
                                                password: passwordTextfield.text!,
                                                description: descriptionTextView.text!,
-                                               imageData: itemUploadViewModel.selectedImageData.value ?? [])
+                                               imageData: viewModel.selectedImageData.value ?? [])
         checkItemToUploadInput(type: HTTPMethod(rawValue: sender.title!)!)
     }
     
     private func checkItemToUploadInput(type: HTTPMethod) {
         switch type {
         case .POST:
-            switch itemUploadViewModel.checkItemToUploadInput() {
+            switch viewModel.checkItemToUploadInput() {
             case .Correct:
-                itemUploadViewModel.post()
+                viewModel.post()
             case .Incorrect:
                 return
             }
         case .PATCH:
-            switch itemUploadViewModel.checkItemToUploadInput() {
+            switch viewModel.checkItemToUploadInput() {
             case .Correct:
-                itemUploadViewModel.patch()
+                viewModel.patch()
             case .Incorrect:
                 return
             }
@@ -120,37 +120,37 @@ final class ItemUploadViewController: UIViewController, AlertShowable {
     }
     
     private func bindViewModel() {
-        itemUploadViewModel.selectedImageData.bind({ [weak self] _ in
+        viewModel.selectedImageData.bind({ [weak self] _ in
             DispatchQueue.main.async {
                 self?.imageCollectionView.reloadData()
             }
         })
         
-        itemUploadViewModel.titleTextFiledtext.bind { [weak self] in
+        viewModel.titleTextFiledtext.bind { [weak self] in
             self?.titleTextField.text = $0
         }
         
-        itemUploadViewModel.currencyTextFiledtext.bind { [weak self] in
+        viewModel.currencyTextFiledtext.bind { [weak self] in
             self?.currencyTextField.text = $0
         }
         
-        itemUploadViewModel.priceTextFiledtext.bind { [weak self] in
+        viewModel.priceTextFiledtext.bind { [weak self] in
             self?.priceTextField.text = $0
         }
         
-        itemUploadViewModel.discountedPriceTextFiledtext.bind { [weak self] in
+        viewModel.discountedPriceTextFiledtext.bind { [weak self] in
             self?.discountedPriceTextField.text = $0
         }
         
-        itemUploadViewModel.stockTextFieldtext.bind { [weak self] in
+        viewModel.stockTextFieldtext.bind { [weak self] in
             self?.stockTextField.text = $0
         }
         
-        itemUploadViewModel.passwordTextFieldtext.bind { [weak self] in
+        viewModel.passwordTextFieldtext.bind { [weak self] in
             self?.passwordTextfield.text = $0
         }
         
-        itemUploadViewModel.descriptionTextViewtext.bind { [weak self] in
+        viewModel.descriptionTextViewtext.bind { [weak self] in
             if let description = $0, description.isEmpty {
                 self?.descriptionTextView.text = ItemUploadViewString.descriptionPlaceholder
                 self?.descriptionTextView.textColor = .systemGray3
@@ -161,36 +161,36 @@ final class ItemUploadViewController: UIViewController, AlertShowable {
             }
         }
         
-        itemUploadViewModel.itemToUploadsInputErrorMessage.bind { [weak self] in
+        viewModel.itemToUploadsInputErrorMessage.bind { [weak self] in
             self?.errorMessageLabel.isHidden = false
             self?.errorMessageLabel.text = $0
         }
         
-        itemUploadViewModel.isTitleTextFieldHighLighted.bind { [weak self] in
+        viewModel.isTitleTextFieldHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextField((self?.titleTextField)!) }
         }
         
-        itemUploadViewModel.isCurrencyTextFieldHighLighted.bind { [weak self] in
+        viewModel.isCurrencyTextFieldHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextField((self?.currencyTextField)!) }
         }
         
-        itemUploadViewModel.isPriceTextFieldHighLighted.bind { [weak self] in
+        viewModel.isPriceTextFieldHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextField((self?.priceTextField)!) }
         }
         
-        itemUploadViewModel.isStockTextFieldHighLighted.bind { [weak self] in
+        viewModel.isStockTextFieldHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextField((self?.stockTextField)!) }
         }
         
-        itemUploadViewModel.isPasswordTextFieldHighLighted.bind { [weak self] in
+        viewModel.isPasswordTextFieldHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextField((self?.passwordTextfield)!) }
         }
         
-        itemUploadViewModel.isDescriptionTextViewHighLighted.bind { [weak self] in
+        viewModel.isDescriptionTextViewHighLighted.bind { [weak self] in
             if let bool = $0, bool { self?.highlightTextView((self?.descriptionTextView)!) }
         }
         
-        itemUploadViewModel.networkingResult.bind { [weak self] error in
+        viewModel.networkingResult.bind { [weak self] error in
             guard let error = error else {
                 return
             }
@@ -272,11 +272,11 @@ final class ItemUploadViewController: UIViewController, AlertShowable {
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
 extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return itemUploadViewModel.numberOfSections
+        return viewModel.numberOfSections
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemUploadViewModel.selectedImageData.value?.count ?? 0
+        return viewModel.selectedImageData.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -285,7 +285,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         cell.deleteImageDelegate = self
         
-        if let data = itemUploadViewModel.selectedImageData.value?[indexPath.row] {
+        if let data = viewModel.selectedImageData.value?[indexPath.row] {
             cell.tag = indexPath.row
             cell.configure(data: data)
         }
@@ -303,7 +303,7 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
                 return UICollectionReusableView()
             }
             headerView.selectedImageDataUpdatableDelegate = self
-            headerView.configure(data: itemUploadViewModel.selectedImageData.value?.count ?? 0)
+            headerView.configure(data: viewModel.selectedImageData.value?.count ?? 0)
             
             return headerView
         }
@@ -322,14 +322,14 @@ extension ItemUploadViewController: UICollectionViewDelegate, UICollectionViewDa
 //MARK:- DeleteImage protocol
 extension ItemUploadViewController: DeleteImage {
     func delete(index: Int) {
-        _ = itemUploadViewModel.selectedImageData.value?.remove(at: index)
+        _ = viewModel.selectedImageData.value?.remove(at: index)
     }
 }
 
 //MARK:- SelectedImageDataUpdatable protocol
 extension ItemUploadViewController: SelectedImageDataUpdatable {
     func update(data: [Data]) {
-        _ = itemUploadViewModel.selectedImageData.value?.append(contentsOf: data)
+        _ = viewModel.selectedImageData.value?.append(contentsOf: data)
     }
 }
 
@@ -338,7 +338,7 @@ extension ItemUploadViewController: UploadViewConfigurable {
     func configure(item: ItemToUpload?, id: Int?) {
         if let _ = item, let id = id {
             self.configureNavigationBar(httpMethod: .PATCH)
-            self.itemUploadViewModel = ItemUploadViewModel(itemToUpload: item, id: id)
+            self.viewModel = ItemUploadViewModel(itemToUpload: item, id: id)
         }
         else {
             self.configureNavigationBar(httpMethod: .POST)

@@ -24,7 +24,7 @@ final class ItemDetailViewController: UIViewController {
     }()
     
     static let identifier = "ItemDetailViewController"
-    private var itemDetailViewModel: ItemDetailViewModel?
+    private var viewModel: ItemDetailViewModel?
     weak var uploadViewConfigurableDelegate: UploadViewConfigurable?
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ final class ItemDetailViewController: UIViewController {
         
         let cancel = UIAlertAction(title: ItemDetailViewString.cancelButtonTitle, style: .cancel, handler: nil)
         let fix = UIAlertAction(title: ItemDetailViewString.patchButtonTitle, style: .default) { [weak self] _ in
-            let result = self?.itemDetailViewModel?.prepareItemToUpload(password: "")
+            let result = self?.viewModel?.prepareItemToUpload(password: "")
             guard let itemUploadViewController = self?.storyboard?.instantiateViewController(withIdentifier: ItemUploadViewController.identifier) as? ItemUploadViewController else {
                 return
             }
@@ -88,13 +88,13 @@ final class ItemDetailViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        itemDetailViewModel?.titleLabeltext.bind({ [weak self] text in
+        viewModel?.titleLabeltext.bind({ [weak self] text in
             DispatchQueue.main.async {
                 self?.titleLabel.text = text
             }
         })
         
-        itemDetailViewModel?.stockTextLabeltext.bind({ [weak self] text in
+        viewModel?.stockTextLabeltext.bind({ [weak self] text in
             DispatchQueue.main.async {
                 if text == ItemListViewString.soldOut {
                     self?.stockLabel.textColor = .systemOrange
@@ -106,13 +106,13 @@ final class ItemDetailViewController: UIViewController {
             }
         })
         
-        itemDetailViewModel?.priceLabeltext.bind({ [weak self] text in
+        viewModel?.priceLabeltext.bind({ [weak self] text in
             DispatchQueue.main.async {
                 self?.priceLabel.attributedText = NSAttributedString(string: text ?? "")
             }
         })
         
-        itemDetailViewModel?.discountedPriceLabeltext.bind({ [weak self] text in
+        viewModel?.discountedPriceLabeltext.bind({ [weak self] text in
             if let text = text, !text.isEmpty {
                 DispatchQueue.main.async {
                     self?.discountedLabel.isHidden = false
@@ -129,20 +129,20 @@ final class ItemDetailViewController: UIViewController {
             }
         })
         
-        itemDetailViewModel?.descriptionLabeltext.bind({ [weak self] text in
+        viewModel?.descriptionLabeltext.bind({ [weak self] text in
             DispatchQueue.main.async {
                 self?.descriptionLabel.text = text
             }
         })
         
-        itemDetailViewModel?.images.bind({ [weak self] images in
+        viewModel?.images.bind({ [weak self] images in
             DispatchQueue.main.async {
                 self?.imageCollectionView.reloadData()
-                self?.pageControl.numberOfPages = self?.itemDetailViewModel?.images.value?.count ?? 0
+                self?.pageControl.numberOfPages = self?.viewModel?.images.value?.count ?? 0
             }
         })
         
-        itemDetailViewModel?.networkingResult.bind({ [weak self] error in
+        viewModel?.networkingResult.bind({ [weak self] error in
             guard let error = error else {
                 return
             }
@@ -164,19 +164,19 @@ final class ItemDetailViewController: UIViewController {
 //MARK:- DetailViewConfigurable protocol
 extension ItemDetailViewController: DetailViewConfigurable {
     func configure(id: Int) {
-        itemDetailViewModel = ItemDetailViewModel(id: id)
-        itemDetailViewModel?.fetch()
+        viewModel = ItemDetailViewModel(id: id)
+        viewModel?.fetch()
     }
 }
 
 //MARK:- CollectionView Delegate, DataSource, DelegateFlowLayout
 extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return itemDetailViewModel?.numberOfSections ?? 1
+        return viewModel?.numberOfSections ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemDetailViewModel?.images.value?.count ?? 0
+        return viewModel?.images.value?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,7 +184,7 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             return UICollectionViewCell()
         }
         
-        if let image = self.itemDetailViewModel?.images.value?[indexPath.row] {
+        if let image = self.viewModel?.images.value?[indexPath.row] {
             detailViewCell.configure(image: image)
         }
         
@@ -206,7 +206,7 @@ extension ItemDetailViewController: AlertShowable {
         let alert = UIAlertController(title: ItemDetailViewString.deletAlertTitle, message: ItemDetailViewString.deleteAlertMessage, preferredStyle: .alert)
         let ok = UIAlertAction(title: ItemDetailViewString.okButtonTitle, style: .destructive) { (ok) in
             if let inputPassword = alert.textFields?.first?.text {
-                self.itemDetailViewModel?.delete(password: inputPassword)
+                self.viewModel?.delete(password: inputPassword)
             }
             return
         }
