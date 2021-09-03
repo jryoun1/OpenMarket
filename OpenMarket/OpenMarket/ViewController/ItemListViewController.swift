@@ -92,7 +92,7 @@ final class ItemListViewController: UIViewController {
     
     //MARK:- NavigationBar Button
     private func configureNavigationBarRightButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(moveToItemUploadViewController))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(moveToItemUploadViewController))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.systemBlue
     }
     
