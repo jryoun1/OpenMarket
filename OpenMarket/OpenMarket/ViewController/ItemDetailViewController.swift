@@ -82,8 +82,8 @@ final class ItemDetailViewController: UIViewController {
     private func configurePageControl() {
         self.view.addSubview(pageControl)
         NSLayoutConstraint.activate([
-            pageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            pageControl.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 280)
+            pageControl.centerXAnchor.constraint(equalTo: self.imageCollectionView.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: self.imageCollectionView.safeAreaLayoutGuide.topAnchor, constant: 280)
         ])
     }
     
