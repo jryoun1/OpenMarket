@@ -6,6 +6,5 @@
 //
 
 struct ItemToDeletion: Encodable {
-    let id: Int
     let password: String
 }

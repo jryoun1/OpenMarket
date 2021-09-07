@@ -35,7 +35,15 @@ final class APIRequestLoader<T: APIRequest> {
                 
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200...299).contains(httpResponse.statusCode) else {
-                    return completion(nil, .failToNetworkCommunication)
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if httpResponse.statusCode == 400 {
+                            return completion(nil, .badRequest)
+                        }
+                        else if httpResponse.statusCode == 404 {
+                            return completion(nil, .notFound)
+                        }
+                    }
+                    return
                 }
                 
                 guard let data = data else {
