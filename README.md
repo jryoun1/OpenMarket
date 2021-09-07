@@ -60,7 +60,7 @@ LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를
 
 사용자가 원하는 경우에는 데이터를 refresh 가능
 
-
+<br>
 
 ## 설계 및 구현
 
@@ -73,7 +73,7 @@ LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를
 - `ItemUploadViewController` : **상품을 등록**할 수 있는 ViewController 
 - `ItemDetailViewController` : ItemListViewController에서 특정 상품을 선택하면 **상세 정보를 보여주며**, 오른쪽 위의 버튼을 누르면 **상품을 수정하거나 삭제**할 수 있는 ViewController
 
-
+<br>
 
 ### MVVM DesignPattern 적용
 
@@ -87,11 +87,9 @@ LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를
 - `ItemListViewController` : ItemTableView, ItemCollectionView를 가지고 있고, ItemListViewModel 타입인 `viewModel` property를 가지고 있으며, viewModel의 `itemList` 의 값이 변할 때 마다 화면도 그에 맞게 업데이트를 하게 된다.
 - `Observable` : 제네릭 클래스이며 **관찰하고 싶은 대상에 대해서 ViewModel에서 Observable type으로 선언**한 뒤, **값이 바뀌었을 때 처리에 대해서 View에서 bind를 작성**해주면 된다. 
 
-
-
 ##### ItemUploadViewController & ItemUploadViewModel - MVVM
 
-<img src="images/ItemUploadViewController.png" align="left">
+<img src="images/ItemUploadViewController.png" align="left"> <br clear="left"/>
 
 - `ItemToUpload` : 서버에 데이터를 업로드 할 수 있는 **Encodable을 채택한 Model**
 - `ItemUploadViewModel` : **사용자의 사진 선택과, 상품에 대한 내용들을 제대로 입력했는지 확인**하기 위한 Observable property들과, ItemDetailViewController에서 **수정 버튼을 클릭하여 온 경우에 기존의 값들을 화면에 표시해주기 위한** Observable property를 가지고 있다. 또한 실제로 상품을 HTTP Method인 **POST, PATCH를 하는 메서드**를 가지고 있다.
@@ -99,21 +97,18 @@ LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를
 - `ItemUploadCollectionReusableHeaderView` : collectionView의 headerView로 사진 선택을 할 수 있는 버튼을 넣어준다.
 - `ItemUploadViewController` : ImageCollectionView를 가지고 있으며, ItemUploadViewModel 타입인 `viewModel` property를 가지고 있다. viewModel의 Observable property 값들이 변할 때 마다 **bind 메서드에서 처리한 대로 화면도 업데이트 된다.** `ItemListViewController `에서 + 버튼을 통해서 들어오는 경우와 `ItemDetailViewController` 에서 수정 버튼을 통해서 들어오는 경우에 네비게이션 바와 버튼의 타이틀이 다르고, 서버로의 데이터 전송 방법이 POST, PATCH로 다르다.
 
-
-
 ##### ItemDetailViewController & ItemDetailViewModel - MVVM
 
-<img src="images/ItemDetailViewController.png" align="left">
+<img src="images/ItemDetailViewController.png" align="left"> <br clear="left"/>
 
 - `Item` : 상세 정보를 보여주기 위해서 **Decodable을 채택한 Model**
 - `ItemToUpload` : **수정**을 선택하는 경우에는 사용하는 **Encodable을 채택한 Model** 
 - `ItemToDeletion` : **삭제**를 선택하는 경우 사용하는 **Encodable을 채택한 Model** 
-
 - `ItemDetailViewModel` : **서버로부터 상품의 정보를 받아서 화면에 보여주기 위한** Observable property들을 가지고 있다. 또한 서버로부터 **데이터를 받아오고, 삭제 요청을 보내는 메서드**를 가지고 있다.
 - `ItemDetailCollectionViewCell` : 상품 이미지들이 여러 개인 경우에는 collectionView와 page control을 사용해서 좌/우로 스크롤하여 이미지를 확인할 수 있다. 
 - `ItemDetailViewController` : ImageCollectionView를 가지고 있으며, ItemDetailViewModel 타입인 `viewModel` property를 가지고 있다. viewModel의 Observable property들의 값에 변화가 있을 때, **bind 메서드에 의해서 처리한대로 화면이 업데이트 된다.** 
 
-
+<br>
 
 ### View간의 Data 전송 - Delegate 사용
 
@@ -121,7 +116,7 @@ LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를
 
 ViewController와 ViewController, View 간의 데이터를 backward로 받기 위해서 delegate protocol을 구현하여 사용하였다. 
 
-
+<br>
 
 ### 역할 분배
 
@@ -171,13 +166,16 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 | `ImageCacheManager`     | **이미지 캐싱을 위해서 사용하는 singleton class**            |
 | `ISO4217_CurrencyCode`  | ISO4217; 통화의 이름을 정의하기 위한 통화의 종류를 가지는 enum |
 
+<br>
 
-
-### SkeletonView
-
+### SkeletionView
 > SkeletonView third-party 라이브러리 사용
-
-`Skeleton View` : Loading 되는 동안의 실제로 보여질 View와 비슷한 형태의 View를 의미
+<details>
+  <summary> SkeletonView 사용 이유 및 방법 </summary>
+  
+  <br>
+  
+  `Skeleton View` : Loading 되는 동안의 실제로 보여질 View와 비슷한 형태의 View를 의미
 
 - `사용 이유` : 사용자가 데이터가 로딩되는 동안에 빈 페이지를 보여주는 것보다 skeletion view를 통해 로딩되고 있다는 것을 보여주면 **App이 더 반응적이고 빠르다고 느끼기 때문에 사용**한다. 또한 기존의 loading spinner보다는 **컨텐츠의 대략적인 형태를 보여주기 때문에** 사용자로 하여금 App이 진행되고 있다고 느끼게 한다. 
 - `사용 방법` : [SkeletionView 라이브러리](https://github.com/Juanpe/SkeletonView) 를 사용
@@ -187,14 +185,19 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 - `고려할 만한 사항`
   - `SkeletionView 사용할 화면` : OpenMarketApp에서는 맨 처음 데이터를 받아와서 보여주는 화면에서의 로딩이 있을 수 있기 때문에 해당 화면에만 SkeletionView를 적용
   - `SkeletionView가 매번 보여져야하는가에 대한 고민` : 맨 처음 이후에 데이터를 다시 받아오거나 할 때는 SkeletionView를 사용하지 않았습니다. 그 이유는 맨 처음에 앱에 들어왔을 때에는 어떠한 컨텐츠가 나올지 모르기 때문에 컨텐츠의 형태를 예상할 수 있는 SkeletionView를 사용하는 것이 사용성을 높여줄 수 있다고 생각합니다. 그러나 앱을 사용하는 도중에 데이터를 다시 다운 받는 경우에는 컨텐츠가 어떠한 형태인지 이미 알고 있기 때문에 굳이 SkeletionView를 사용하여 기존의 데이터들을 가리지 않고, indicator를 사용하여 로딩중임을 표시하도록 하였습니다.   
+</details>
 
-
+<br>
 
 ### Pagination(=Paging)
+> ScrollViewDidScroll() 메서드 사용
 
-> ScrollViewDidScroll()를 사용
-
-- `사용 이유` : tableview나 collectionview를 사용할 때, 서버에서 많은 리스트 데이터를 받아올 때 한 번에 모든 데이터를 받아오면 기기와 서버에게 부담이 되므로 일정량의 리스트 데이터만 보내주고 스크롤을 내렸을 때 추가로 리스트 데이터를 보내주기 위해서 사용
+<details>
+  <summary> Pagination 사용 이유 및 방법  </summary>
+  
+  <br>
+  
+  - `사용 이유` : tableview나 collectionview를 사용할 때, 서버에서 많은 리스트 데이터를 받아올 때 한 번에 모든 데이터를 받아오면 기기와 서버에게 부담이 되므로 일정량의 리스트 데이터만 보내주고 스크롤을 내렸을 때 추가로 리스트 데이터를 보내주기 위해서 사용
 
 - `구현 방법` : `ScrollYOffset` 을 활용하여 구현
 
@@ -203,18 +206,24 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - 2️⃣ scrollView의 `contentSize.height` 구하기 <br>`contentSize.height` = scrollView 내 content의 크기 (현재 tableview에 들어있는 cell들의 개수에 따른 높이)
 
   - 3️⃣ scrollView의 `frame.height` 구하기 <br>
-
     `frame.height` = 화면의 세로 높이
 
-  - 1️⃣ > 2️⃣ - 3️⃣ 경우에 paging 수행
+  - 1️⃣ > 2️⃣ - 3️⃣ 조건을 만족하는 경우에 paging 수행
 
+</details>
 
+<br>
 
 ### 이미지 여러 장 선택하기
 
 > BSImagePicker third-party 라이브러리 사용
 
-`BSImagePicker` : iOS에서 여러 장의 사진을 선택하기 위해서 사용하는 서드파티 라이브러리
+<details>
+  <summary> BSImagePicker 사용 이유 및 방법  </summary>
+  
+  <br>
+  
+`BSImagePicker` : iOS에서 여러 장의 사진을 선택하기 위해서 사용하는 서드파티 [라이브러리](https://github.com/mikaoj/BSImagePicker)
 
 - `사용 이유` : Swift에서는 `UIImagePickerController` 를 제공하여 이미지를 선택할 수 있다. 그러나 `UIImagePickerController` 에서 여러 장을 선택하는 방법은 이미지를 한 장씩 여러 번 선택해야했다. 이는 여러 장의 사진을 선택할 때 매번 `UIImagePickerController` 를 띄우는 것은 비효율적이라고 생각했다. 검색 결과 iOS14 이상에서부터는 적용가능한 `PHPickerViewController` 가 있지만 iOS 14 이상에서만 사용가능해서 외부 라이브러리를 사용하기로 결정했다. 
 - `기능` : 여러 장 선택 / 전체화면 preview / 앨범 전환 / images, Live Photo, video 선택 가능 
@@ -224,12 +233,18 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - `BSImagePicker` 를 import 하고, `ImagePickerController` 생성
   - `presentImagePicker()` 메서드에서 finished 부분 구현 <br> 이때 이미지는 `PHAsset` 타입이므로, 이를 `UIImage` 타입으로 변환하기 위해서 `PHImageManager` 사용
 
+</details>
 
+<br>
 
 ### 통화 종류 선택하기
-
 > PickerView를 사용
 
+<details>
+  <summary> PickerView 사용 이유 및 방법  </summary>
+  
+  <br>
+  
 `PickerView` :  사용자가 하나 이상의 선택지 가운데 하나를 선택해야하는 경우 사용하는 view
 
 - `사용 이유` : OpenMarketApp 내부에서 사용자가 **상품을 등록하거나, 수정하는 화면에서 통화를 선택할 때** pickerview를 사용하였다. 이유는 통화의 경우에는 서버에서 ISO4217를 따르기 때문에 정해진 통화 문자열을 서버로 전송해야한다. 그러나 **사용자가 ISO4217에 해당하는 통화명을 모를 수 있기 때문에** 실제로 사용하는 통화의 이름을 영어로 표기하고, 해당 통화를 선택했을 때 ISO4217에 대응하는 통화명이 반환되도록 구현하였다.
@@ -238,12 +253,18 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - `UIPickerView` 를 `UITextfield` 의 inputView로 정의
   - pickerView의 delegate, dataSource를 설정하고 필요한 메서드를 구현
 
+</details>
 
+<br>
 
 ### Page Control 사용해서 이미지 넘기기
-
 > CollectionView & PageControl 사용해서 구현
 
+<details>
+  <summary> PageControl 사용한 부분 및 방법  </summary>
+  
+  <br>
+  
 `PageControl` : 페이징을 하는 화면이 있을 때, 페이지를 표시하는 수평으로 이뤄진 점들을 표시하는 컨트롤
 
 - `사용 부분` : 상품 상세 정보 화면에서 여러 개의 이미지가 있을 때 이를 좌/우로 스크롤 할 때 페이지를 표시하기 위해서 사용
@@ -253,7 +274,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - collectionView의 `isPagingEnable` 을 true로 설정
   - `scrollViewDidScroll` 함수에서 pageControl의 `currentPage` 를 설정하는 로직 작성
 
+</details>
 
+<br>
 
 ## Trouble shooting
 
@@ -265,7 +288,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 4️⃣ [이미지 한 번에 여러 개 선택하는 방법](#이미지-한-번에-여러-개-선택하는-방법)
 
-5️⃣ [ItemListViewController에서의 새로운 데이터를 받아와서 reload해야하는 경우](#ItemListViewController에서의-새로운-데이터를-받아와서-reload해야하는 경우)
+5️⃣ [ItemListViewController에서의 새로운 데이터를 받아와서 reload하는 경우](#ItemListViewController에서의-새로운-데이터를-받아와서-reload하는-경우)
+
+<br>
 
 ### 단위 테스트 가능하도록 모델 및 네트워킹 담당 타입의 구현
 
@@ -319,7 +344,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
     }
     ```
 
-      
+<br>      
 
 ### 시작 화면에서 애니메이션 넣기
 
@@ -328,7 +353,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 - 해결 방법
   - 위의 문제가 발생한 원인은 **LauchScreen에서는 Custom Class 및 Attributes 배치가 불가**하다. 즉, LauchScreen은 **static한 상태**이기 때문에  당근 마켓 앱처럼 animation이 동작하기 위해서는 gif 형태의 image를 넣어서 LaunchScreen에서 사용하는 방법이나, Inital ViewController를 Launch Screen 이후에 띄우면서 애니메이션을 추가하고 이후에 다른 ViewController로 넘어가는 방법을 사용할 수 있다. 이번 프로젝트에서는 `LaunchScreenViewController` 를 initial ViewController로 사용하여 애니메이션을 추가하고 `ItemListViewController` 로 넘어가는 방법으로 구현하였다. 
 
-
+<br>
 
 ### ItemListViewController에서 tableview와 collectionview에서 스크롤의 버벅임과 이미지가 제대로 들어가지 않는 문제
 
@@ -338,7 +363,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - 이러한 문제의 원인은 상품의 이미지를 서버로부터 받아오는 과정에 사용자가 스크롤을 움직이게 되면, 다른 cell에 받아온 이미지가 들어가는 경우가 생기기 때문이다. 또한 스크롤이 버벅거리는 문제 역시도 서버로부터 데이터를 받아와서 imageview에 넣는 비동기 과정에서 스크롤을 내리는 것 속도보다 많은 시간이 소요되기 때문이다. 
   - 따라서 이를 해결하는 방법에는 `cellForItemAt()` , `cellForRowAt()` 메서드에서 **image를 넣으려고 하는 cell의 index와 현재 dequeue한 reusableCell의 index를 비교해서 같은 경우에만 넣어주도록 하면 된다**. 그리고 또 다른 방법은 **이미지를 캐싱**하여 한 번 다운 받은 이미지의 경우에는 바로 사용할 수 있도록 하여서 스크롤이 버벅거리거나, 이미지가 잘못들어가는 경우를 해결할 수 있다. 
 
-
+<br>
 
 ### 이미지 한 번에 여러 개 선택하는 방법
 
@@ -386,9 +411,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
     }
     ```
 
+<br>
 
-
-### ItemListViewController에서의 새로운 데이터를 받아와서 reload해야하는 경우
+### ItemListViewController에서의 새로운 데이터를 받아와서 reload하는 경우
 
 - 문제 상황
 
@@ -403,8 +428,6 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
         viewModel.fetchData(page: viewModel.currentPage)
     }
     ```
-
-    
 
 - 해결 방법
 
@@ -426,7 +449,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
     }
     ```
 
-
+<br>
 
 ## 관련 학습 내용
 
@@ -434,8 +457,6 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 - `적용 이유` : 기존의 [날씨 앱 프로젝트](https://github.com/jryoun1/WeatherApp) 에서는 MVC 디자인 패턴을 사용했었다. 이때 다양한 로직들을 Controller에서 처리하다보니 Controller가 massive하게 되었고, 이를 해결할 방법에 대해서 알아보다가 MVVM 디자인 패턴에 대해서 공부하게 되었고 이번 OpenMarketApp 프로젝트에 적용하게 되었다. 
 - `적용 결과` : MVVM 디자인 패턴은 MVC 디자인 패턴과는 다르게 **View에 업데이트 할 데이터를 ViewModel을 통해서 처리함**으로써 기존에 Controller가 처리는 하는 것들을 방지해 Controller가 커지는 것을 막을 수 있었고, 또한 view와 model사이의 독립성을 가질 수 있었다. 
-
-
 
 #### 역할
 
@@ -450,16 +471,12 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - View에 실제로 보여질 데이터로 Model의 데이터를 가공하는 역할
   - View가 유저 인터렉션을 보내주면 이에 알맞는 작업을 처하고 View를 변경
 
-
-
 #### 데이터 바인딩
 
 - View가 변하게 될 때, **Model과 UI요소(View) 간의 싱크를 맞춰주는 것**
 - View와 로직이 분리되어 있어도 한 쪽이 바뀌면, 다른 쪽도 업데이트가 이루어져 **데이터의 일관성을 유지하도록 해주는 것**이다.
 - View가 자신이 변화하기 위해서 **감지해야 할 필요가 있는 ViewModel의 요소를 감지 대상으로 설정**하고, **요소에 변화가 생기면 스스로 변화함**
 - 방법 : KVO / Delegation / Property Observer / Combine 
-
-
 
 #### 장점
 
@@ -473,7 +490,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 [👉🏻 MVVM Design Pattern에 대한 학습 블로그로 가기](https://jryoun1.github.io/design%20pattern/MVVM/)
 
-
+<br>
 
 ### Launch Screen
 
@@ -487,7 +504,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 따라서 시작 화면에서 indicator가 돌아가는 Launch Screen을 만들기 위해서는 Inital ViewController를 Launch Screen 이후에 띄우면서 애니메이션을 추가하고 이후에 다른 ViewController로 넘어가도록 하는 방법을 채택한다. 
 
-
+<br>
 
 ### HTTP
 
@@ -502,8 +519,6 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 `HTTP(request, response)` 는 위의 그림과 같이 4개의 파트로 나눌 수 있으며 Message Body에 들어가는 타입을 HTTP Header의 Content-Type 필드에 명시해 줄 수 있다. 해당 필드에 들어갈 수 있는 타입 중 하나가 **multipart**이다.  
 
-
-
 #### Form이란
 
 > 입력 양식 전체를 감싸는 태그를 의미한다. 
@@ -517,8 +532,6 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
   - `text/plain` : **공백문자는 "+" 기호로 변환**하지만 **나머지 문자는 모두 인코딩되지 않음**을 명시
   - `multipart/form-data` : **모든 문자를 인코딩하지 않음**을 명시 / 주로 **파일이나 이미지**를 서버로 전송할 때 사용
 
-
-
 #### Multipart , Multipart/form-data
 
 > HTTP Header에 Message Body에 들어갈 데이터 타입을 정의하는 Content-type의 필드 중에서 MIME(Multipurpose Internet Mail Extensions) 타입 중의 하나이다.
@@ -531,8 +544,6 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 - 첫 번째 boundary 전에 나오는 내용은 MIME을 지원하지 않는 클라이언트를 위해 제공
 - boundary를 선택하는 것은 클라이언트의 몫 (주로 무작위 문자(UUID)를 선택해서 메시지 본문과의 충돌을 피함)
 
-
-
 #### HTTP 통신 규약
 
 - `Content-Type` : multipart/form-data로 지정되어야함
@@ -543,7 +554,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 [👉🏻 HTTP multipart/form-data에 대한 학습 블로그로 가기](https://jryoun1.github.io/swift/Multipartformdata/)
 
-
+<br>
 
 ## URLSession Unit Test
 
@@ -553,7 +564,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 [👉🏻 URLSession Unit Test에 대한 학습 블로그로 가기](https://jryoun1.github.io/swift/NetworkingUnitTestInSwift/) 
 
-
+<br>
 
 ## 현재 뷰 컨트롤러 가져오는 방법
 
@@ -579,9 +590,7 @@ extension UIWindow {
     }
 }
 ```
-
 위의 extension에서의 구현을 활용하면 기기에서 보이는 현재 viewController를 가져올 수 있다. 그러나 이때 `keyWindow` 가 iOS 13이상부터 **multiple scenes을 지원하는 app**에서는 여러 개의 scene이 있을 수 있고, **이때 연결된 모든 scene들의 key window를 반환**하기 때문에 deprecated되었다. 따라서 이를 버전 혹은 기기에 따라 처리해주어야한다. 
-
 ```swift
 extension UIWindow {
     static var key: UIWindow? {
@@ -594,10 +603,9 @@ extension UIWindow {
     }
 }
 ```
-
 따라서 iOS 13 이상 그리고 이전 버전에 대해서 key라는 변수를 사용할 수 있도록 구현해주었다.
 
-
+<br>
 
 ## UINavigationController에서 원하는 ViewController로 이동
 
