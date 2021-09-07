@@ -13,7 +13,12 @@
 - [Trouble shooting](#Trouble-shooting)
 - [관련 학습 내용](#관련-학습-내용)
 
+<p>
+  <img src="images/total1.gif" width="320" height="620">
+  <img src="images/total2.gif" width="320" height="620">
+</p>
 
+<br>
 
 ## 기능
 
@@ -26,39 +31,76 @@
 
 ### 상품 목록
 
-서버로부터 상품 목록을 받아오며 LIST, GRID 형태를 선택하여 볼 수 있다. 또한 스크롤을 아래로 내려서 서버에 등록된 상품들을 확인할 수 있다.
+> 서버로부터 상품 목록을 받아오며 LIST, GRID 형태를 선택하여 볼 수 있다. 
+>
+> 또한 스크롤을 아래로 내려서 서버에 등록된 상품들을 확인할 수 있다.
 
+<p>
+  <img src="images/datafetch.gif" width="300" height="620" align = "left"> <br clear="left"/>
+</p>
 
+<br>
 
 ### 상품 상세 정보
 
-LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를 확인할 수 있다. 
+>  LIST, GRID 상태에서 상품을 선택하면 상품에 대한 상세 정보를 확인할 수 있다. (왼쪽: LIST / 오른쪽: GRID)
 
+<p>
+  <img src="images/tableViewDetailView.gif" width="300" height="620">
+  <img src="images/collectionViewDetailView.gif" width="300" height="620">
+</p>
 
+<br>
 
 ### 상품 등록
 
-사용자로부터 입력 사항들을 입력 받고, 등록버튼을 눌렀을 때 필수 입력 사항들이 입력되지 않으면 요구한다. 전부 입력된 경우에는 등록 완료 창이 뜬다.
+> 사용자로부터 입력 사항들을 입력 받고, 등록 버튼을 눌렀을 때 필수 입력 사항들이 입력되지 않으면 요구한다. 
+>
+> 전부 입력된 경우에는 등록 완료 창이 뜬다.
 
+<p>
+  <img src="images/postItem.gif" width="320" height="620" align = "left"> <br clear="left"/>
+</p>
 
+<br>
 
 ### 상품 수정
 
-필수 입력 사항들이 전부 입력되고 비밀번호가 일치하는 경우에는 수정 완료 창이 뜨고, 비밀번호가 일치하지 않는 경우에는 비밀번호가 달라서 수정할 수 없다는 창이 뜬다.
+> 필수 입력 사항들이 전부 입력되고 비밀번호가 일치하는 경우에는 수정 완료 창이 뜬다. (왼쪽) 
+>
+> 비밀번호가 일치하지 않는 경우에는 비밀번호가 달라서 수정할 수 없다는 창이 뜬다. (오른쪽)
 
+<p>
+  <img src="images/patchItemSuccess.gif" width="320" height="620">
+  <img src="images/patchItemFail.gif" width="300" height="620">
+</p>
 
+<br>
 
 ### 상품 삭제
 
-비밀번호가 일치하는 경우에는 삭제 완료 창이 뜨고, 비밀번호가 일치하지 않는 경우에는 비밀번호가 달라서 삭제할 수 없다는 창이 뜬다.
+> 비밀번호가 일치하는 경우에는 삭제 완료 창이 뜬다. (왼쪽)
+>
+> 비밀번호가 일치하지 않는 경우에는 비밀번호가 달라서 삭제할 수 없다는 창이 뜬다. (오른쪽)
 
+<p>
+  <img src="images/deleteItemSuccess.gif" width="300" height="620">
+  <img src="images/deleteItemFail.gif" width="300" height="620">
+</p>
 
+<br>
 
 ### 추가 기능 
 
-서버로부터 이미지를 받아올 때, 사용자에게 데이터를 받아온다는 것을 더욱 반응적으로 알려주기 위해서 skeleton view 적용
+> OpenMarketApp 시작할 때 loading animation 화면 구현
+>
+> 서버로부터 이미지를 받아올 때, 사용자에게 데이터를 받아온다는 것을 더욱 반응적으로 알려주기 위해서 skeleton view 적용
+>
+> 사용자가 원하는 경우에는 데이터를 refresh 가능
 
-사용자가 원하는 경우에는 데이터를 refresh 가능
+<p>
+  <img src="images/additionalFunc.gif" width="300" height="620" align = "left"> <br clear="left"/>
+</p>
 
 <br>
 
@@ -172,9 +214,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 > SkeletonView third-party 라이브러리 사용
 <details>
   <summary> SkeletonView 사용 이유 및 방법 </summary>
-  
+
   <br>
-  
+
   `Skeleton View` : Loading 되는 동안의 실제로 보여질 View와 비슷한 형태의 View를 의미
 
 - `사용 이유` : 사용자가 데이터가 로딩되는 동안에 빈 페이지를 보여주는 것보다 skeletion view를 통해 로딩되고 있다는 것을 보여주면 **App이 더 반응적이고 빠르다고 느끼기 때문에 사용**한다. 또한 기존의 loading spinner보다는 **컨텐츠의 대략적인 형태를 보여주기 때문에** 사용자로 하여금 App이 진행되고 있다고 느끼게 한다. 
@@ -185,7 +227,7 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 - `고려할 만한 사항`
   - `SkeletionView 사용할 화면` : OpenMarketApp에서는 맨 처음 데이터를 받아와서 보여주는 화면에서의 로딩이 있을 수 있기 때문에 해당 화면에만 SkeletionView를 적용
   - `SkeletionView가 매번 보여져야하는가에 대한 고민` : 맨 처음 이후에 데이터를 다시 받아오거나 할 때는 SkeletionView를 사용하지 않았습니다. 그 이유는 맨 처음에 앱에 들어왔을 때에는 어떠한 컨텐츠가 나올지 모르기 때문에 컨텐츠의 형태를 예상할 수 있는 SkeletionView를 사용하는 것이 사용성을 높여줄 수 있다고 생각합니다. 그러나 앱을 사용하는 도중에 데이터를 다시 다운 받는 경우에는 컨텐츠가 어떠한 형태인지 이미 알고 있기 때문에 굳이 SkeletionView를 사용하여 기존의 데이터들을 가리지 않고, indicator를 사용하여 로딩중임을 표시하도록 하였습니다.   
-</details>
+  </details>
 
 <br>
 
@@ -194,9 +236,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 <details>
   <summary> Pagination 사용 이유 및 방법  </summary>
-  
+
   <br>
-  
+
   - `사용 이유` : tableview나 collectionview를 사용할 때, 서버에서 많은 리스트 데이터를 받아올 때 한 번에 모든 데이터를 받아오면 기기와 서버에게 부담이 되므로 일정량의 리스트 데이터만 보내주고 스크롤을 내렸을 때 추가로 리스트 데이터를 보내주기 위해서 사용
 
 - `구현 방법` : `ScrollYOffset` 을 활용하여 구현
@@ -220,9 +262,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 <details>
   <summary> BSImagePicker 사용 이유 및 방법  </summary>
-  
+
   <br>
-  
+
 `BSImagePicker` : iOS에서 여러 장의 사진을 선택하기 위해서 사용하는 서드파티 [라이브러리](https://github.com/mikaoj/BSImagePicker)
 
 - `사용 이유` : Swift에서는 `UIImagePickerController` 를 제공하여 이미지를 선택할 수 있다. 그러나 `UIImagePickerController` 에서 여러 장을 선택하는 방법은 이미지를 한 장씩 여러 번 선택해야했다. 이는 여러 장의 사진을 선택할 때 매번 `UIImagePickerController` 를 띄우는 것은 비효율적이라고 생각했다. 검색 결과 iOS14 이상에서부터는 적용가능한 `PHPickerViewController` 가 있지만 iOS 14 이상에서만 사용가능해서 외부 라이브러리를 사용하기로 결정했다. 
@@ -242,9 +284,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 <details>
   <summary> PickerView 사용 이유 및 방법  </summary>
-  
+
   <br>
-  
+
 `PickerView` :  사용자가 하나 이상의 선택지 가운데 하나를 선택해야하는 경우 사용하는 view
 
 - `사용 이유` : OpenMarketApp 내부에서 사용자가 **상품을 등록하거나, 수정하는 화면에서 통화를 선택할 때** pickerview를 사용하였다. 이유는 통화의 경우에는 서버에서 ISO4217를 따르기 때문에 정해진 통화 문자열을 서버로 전송해야한다. 그러나 **사용자가 ISO4217에 해당하는 통화명을 모를 수 있기 때문에** 실제로 사용하는 통화의 이름을 영어로 표기하고, 해당 통화를 선택했을 때 ISO4217에 대응하는 통화명이 반환되도록 구현하였다.
@@ -262,9 +304,9 @@ ViewController와 ViewController, View 간의 데이터를 backward로 받기 �
 
 <details>
   <summary> PageControl 사용한 부분 및 방법  </summary>
-  
+
   <br>
-  
+
 `PageControl` : 페이징을 하는 화면이 있을 때, 페이지를 표시하는 수평으로 이뤄진 점들을 표시하는 컨트롤
 
 - `사용 부분` : 상품 상세 정보 화면에서 여러 개의 이미지가 있을 때 이를 좌/우로 스크롤 할 때 페이지를 표시하기 위해서 사용
