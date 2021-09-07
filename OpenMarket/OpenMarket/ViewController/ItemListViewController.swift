@@ -301,8 +301,13 @@ extension ItemListViewController: UITableViewDelegate, SkeletonTableViewDataSour
             return ItemTableViewCell()
         }
         
-        if let item = self.viewModel.itemList.value?[indexPath.row] {
-            cell.configureCell(with: ItemListCellViewModel(item))
+        DispatchQueue.main.async {
+            if let index: IndexPath = tableView.indexPath(for: cell) ,
+               let item = self.viewModel.itemList.value?[indexPath.row] {
+                if index.row == indexPath.row {
+                    cell.configureCell(with: ItemListCellViewModel(item))
+                }
+            }
         }
         
         return cell
