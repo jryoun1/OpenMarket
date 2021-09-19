@@ -195,6 +195,14 @@ extension ItemDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         return CGSize(width: UIScreen.main.bounds.width, height: 300)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollPos = scrollView.contentOffset.x / view.frame.width
         pageControl.currentPage = Int(scrollPos)
